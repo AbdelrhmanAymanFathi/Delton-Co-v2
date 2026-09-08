@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80",
+    "ar": {
+      "badge": "ديلتون لإدارة المرافق المتكاملة",
+      "title": "شريكك الاستراتيجي في إدارة وتشغيل المنشآت",
+      "description": "نضمن لكم بيئة عمل فعالة ومستدامة تدعم أهداف استثماراتكم وتساهم في نجاح مؤسساتكم بأعلى معايير الجودة في جمهورية مصر العربية.",
+      "ctaPrimary": "طلب عرض سعر",
+      "ctaPrimaryLink": "#contact",
+      "ctaSecondary": "استكشف خدماتنا",
+      "ctaSecondaryLink": "#services"
+    },
+    "en": {
+      "badge": "Delton Integrated FM Solutions",
+      "title": "Your Strategic Partner in Integrated Facility Management",
+      "description": "Ensuring an efficient, sustainable work environment that preserves your investment objectives and accelerates corporate success across Egypt with world-class standards.",
+      "ctaPrimary": "Request a Quote",
+      "ctaPrimaryLink": "#contact",
+      "ctaSecondary": "Explore Services",
+      "ctaSecondaryLink": "#services"
+    }
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80",
+    "ar": {
+      "badge": "الإدارة والصيانة الفنية الشاملة",
+      "title": "حلول هندسية وصيانة متكاملة لكافة المباني والفروع",
+      "description": "صيانة دورية وطارئة للتكييفات، الكهرباء، والسباكة عبر فنيين مقيمين أو حسب الطلب، بالإضافة لأعمال المقاولات والتجديدات للمباني الإدارية.",
+      "ctaPrimary": "تفاصيل الصيانة",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "تواصل معنا",
+      "ctaSecondaryLink": "#contact"
+    },
+    "en": {
+      "badge": "Comprehensive Technical Maintenance",
+      "title": "Engineering & Facility Maintenance for Corporate Buildings",
+      "description": "24/7 preventive & reactive maintenance for HVAC, electrical, and plumbing systems with resident or on-demand certified technicians, plus turnkey renovations.",
+      "ctaPrimary": "Maintenance Details",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "Contact Us",
+      "ctaSecondaryLink": "#contact"
+    }
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1600&q=80",
+    "ar": {
+      "badge": "خدمات النظافة والتعقيم الفندقي",
+      "title": "أعلى معايير النظافة للواجهات وماكينات الصراف الآلي",
+      "description": "فرق عمل متخصصة وإشراف دقيق لنظافة المباني الداخلية والواجهات الخارجية، وخدمة تطهير ماكينات الـ ATM للبنوك الكبرى بأحدث المواد المعتمدة.",
+      "ctaPrimary": "خدمات النظافة",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "طلب خدمة",
+      "ctaSecondaryLink": "#contact"
+    },
+    "en": {
+      "badge": "Commercial Cleaning & Facade Sanitization",
+      "title": "Pristine Facade Care & ATM Sanitization Services",
+      "description": "Dedicated teams and supervisors delivering superior internal/exterior hygiene, high-rise facade cleaning, and specialized ATM care across bank branches.",
+      "ctaPrimary": "Cleaning Services",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "Request Service",
+      "ctaSecondaryLink": "#contact"
+    }
+  },
+  {
+    "id": 4,
+    "image": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=80",
+    "ar": {
+      "badge": "التوريدات، التوظيف والضيافة",
+      "title": "إسناد وتشغيل متكامل يغطي كافة احتياجات منشأتك",
+      "description": "توريد الأثاث المكتبي ومستلزمات التشغيل، توظيف وتوريد العمالة المتخصصة (Outsourcing)، وإدارة متكاملة لخدمات الضيافة والكافيتريا وتنسيق المسطحات الخضراء.",
+      "ctaPrimary": "حلول التشغيل",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "تواصل مع المبيعات",
+      "ctaSecondaryLink": "#contact"
+    },
+    "en": {
+      "badge": "Supplies, Outsourcing & Hospitality",
+      "title": "Comprehensive Operations & Specialized Manpower Outsourcing",
+      "description": "Turnkey operational supplies, office furnishings, specialized personnel outsourcing, professional cafeteria management, and landscape architecture.",
+      "ctaPrimary": "Operational Solutions",
+      "ctaPrimaryLink": "#services",
+      "ctaSecondary": "Contact Sales",
+      "ctaSecondaryLink": "#contact"
+    }
+  }
+]

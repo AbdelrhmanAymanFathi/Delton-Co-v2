@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080E1A" />
+      <stop offset="50%" stop-color="#0F1E36" />
+      <stop offset="100%" stop-color="#0A1220" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="75%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#C9A227" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#C9A227" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#C9A227" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bgGrad)" />
+  <rect width="1920" height="1080" fill="url(#grid)" />
+  <circle cx="1400" cy="450" r="550" fill="url(#goldGlow)" />
+  <circle cx="300" cy="800" r="400" fill="url(#goldGlow)" opacity="0.6" />
+  
+  <!-- Architectural Lines -->
+  <g opacity="0.15" stroke="#C9A227" stroke-width="2" fill="none">
+    <polygon points="1200,900 1450,200 1700,900" />
+    <polygon points="1300,900 1450,350 1600,900" />
+    <line x1="1000" y1="750" x2="1800" y2="750" />
+    <line x1="1100" y1="600" x2="1750" y2="600" />
+    <line x1="1200" y1="450" x2="1700" y2="450" />
+  </g>
+  
+  <!-- Glowing Hexagon Crest Backdrop -->
+  <g transform="translate(1350, 420)" opacity="0.12">
+    <polygon points="0,-180 156,-90 156,90 0,180 -156,90 -156,-90" fill="none" stroke="#C9A227" stroke-width="4" />
+    <polygon points="0,-140 121,-70 121,70 0,140 -121,70 -121,-70" fill="none" stroke="#D4AF37" stroke-width="2" />
+  </g>
+</svg>

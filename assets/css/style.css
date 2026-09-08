@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Delton Facility Management - Main Stylesheet
+   Brand Colors: Gold (#C9A227) & Deep Navy (#0B132B)
+   Dual-Direction: RTL (Cairo) & LTR (Poppins)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --gold-primary: #C9A227;
+  --gold-hover: #B58F1E;
+  --gold-light: #F7EFCF;
+  --gold-glow: rgba(201, 162, 39, 0.35);
+  --navy-dark: #0B132B;
+  --navy-card: #111C38;
+  --navy-surface: #172445;
+  --navy-border: #1F3059;
+  --navy-darker: #060B18;
+  --text-light: #F8FAFC;
+  --text-muted: #94A3B8;
+  --radius-card: 16px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base direction & fonts */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--navy-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.65;
+}
+
+[dir="ltr"] body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23345C;
+  border-radius: 5px;
+  border: 2px solid var(--navy-darker);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Gold Gradient Utilities */
+.text-gold {
+  color: var(--gold-primary);
+}
+
+.bg-gold {
+  background-color: var(--gold-primary);
+}
+
+.border-gold {
+  border-color: var(--gold-primary);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FDE68A 0%, #C9A227 50%, #997516 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-gold {
+  background: linear-gradient(135deg, #DFB739 0%, #C9A227 60%, #A88118 100%);
+}
+
+.border-gold-glow {
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  box-shadow: 0 0 15px rgba(201, 162, 39, 0.15);
+}
+
+.border-gold-glow:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 25px rgba(201, 162, 39, 0.35);
+}
+
+/* Navbar Blur & Scrolled State */
+.navbar-fixed {
+  transition: var(--transition-smooth);
+}
+
+.navbar-scrolled {
+  background-color: rgba(11, 19, 43, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+/* Hero Section & Swiper Slider */
+.hero-slider {
+  width: 100%;
+  height: 90vh;
+  min-height: 600px;
+  max-height: 850px;
+}
+
+@media (max-width: 768px) {
+  .hero-slider {
+    height: 85vh;
+    min-height: 520px;
+  }
+}
+
+.swiper-slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  transition: transform 7s ease-out;
+}
+
+.swiper-slide-active .slide-bg {
+  transform: scale(1);
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 11, 24, 0.92) 0%,
+    rgba(11, 19, 43, 0.85) 50%,
+    rgba(17, 28, 56, 0.78) 100%
+  );
+}
+
+/* Swiper Custom Navigation & Pagination */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50%;
+  background: rgba(17, 28, 56, 0.8);
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: var(--gold-primary) !important;
+  backdrop-filter: blur(6px);
+  transition: var(--transition-smooth);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--gold-primary);
+  color: var(--navy-dark) !important;
+  box-shadow: 0 0 20px var(--gold-glow);
+  transform: scale(1.08);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #64748B !important;
+  opacity: 0.6;
+  transition: var(--transition-smooth);
+}
+
+.swiper-pagination-bullet-active {
+  width: 32px;
+  border-radius: 6px;
+  background: var(--gold-primary) !important;
+  opacity: 1;
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+/* Service Card Hover & Interactions */
+.service-card {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: var(--radius-card);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201, 162, 39, 0.6);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 162, 39, 0.15);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+/* Client Logo Card */
+.client-card {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  border-radius: 12px;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.client-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(201, 162, 39, 0.15);
+}
+
+/* Modal Popup Styling */
+.modal-backdrop {
+  background: rgba(6, 11, 24, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: #0D1733;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(201, 162, 39, 0.15);
+  border-radius: 20px;
+}
+
+/* Floating WhatsApp Button */
+.btn-whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 99;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+  transition: var(--transition-smooth);
+}
+
+[dir="ltr"] .btn-whatsapp-float {
+  left: auto;
+  right: 28px;
+}
+
+.btn-whatsapp-float:hover {
+  transform: scale(1.1) rotate(8deg);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+  color: #FFFFFF;
+}
+
+/* Back To Top Button */
+.btn-back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 98;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(17, 28, 56, 0.9);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  color: var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+  opacity: 0;
+  visibility: hidden;
+}
+
+[dir="ltr"] .btn-back-to-top {
+  right: auto;
+  left: 28px;
+}
+
+.btn-back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-back-to-top:hover {
+  background: var(--gold-primary);
+  color: var(--navy-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px var(--gold-glow);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-menu {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[dir="rtl"] .mobile-menu {
+  transform: translateX(100%);
+}
+
+[dir="rtl"] .mobile-menu.active {
+  transform: translateX(0);
+}
+
+[dir="ltr"] .mobile-menu {
+  transform: translateX(-100%);
+}
+
+[dir="ltr"] .mobile-menu.active {
+  transform: translateX(0);
+}
+
+/* Stat Counter Card */
+.stat-card {
+  background: linear-gradient(145deg, rgba(17, 28, 56, 0.8), rgba(11, 19, 43, 0.95));
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+}
+
+/* Animation helpers */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}

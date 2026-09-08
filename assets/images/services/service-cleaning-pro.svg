@@ -1,0 +1,38 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="120" y1="80" x2="1040" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07152B"/>
+      <stop offset="1" stop-color="#132D52"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="250" y1="120" x2="900" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7D679"/>
+      <stop offset="0.5" stop-color="#D4A83A"/>
+      <stop offset="1" stop-color="#A8770C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="820" rx="42" fill="url(#bg1)"/>
+  <circle cx="1040" cy="110" r="180" fill="#F0C75B" opacity="0.08"/>
+  <circle cx="180" cy="660" r="220" fill="#F0C75B" opacity="0.08"/>
+  <g opacity="0.18">
+    <path d="M160 610H1040" stroke="#F7D679" stroke-width="8" stroke-linecap="round"/>
+    <path d="M160 650H1040" stroke="#F7D679" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <rect x="160" y="160" width="410" height="410" rx="36" fill="#0D1E3B" stroke="#305189" stroke-width="2"/>
+  <rect x="200" y="200" width="330" height="280" rx="24" fill="#132B4B"/>
+  <path d="M266 402C266 351.8 307.8 310 358 310H512C562.2 310 604 351.8 604 402V404H266V402Z" fill="url(#gold)" opacity="0.18"/>
+  <path d="M306 396C306 354.1 339.1 320 381 320H479C520.9 320 554 354.1 554 396V398H306V396Z" fill="url(#gold)"/>
+  <rect x="218" y="234" width="170" height="30" rx="15" fill="#D6A93B" opacity="0.9"/>
+  <rect x="218" y="282" width="214" height="18" rx="9" fill="#E7C978" opacity="0.8"/>
+  <rect x="218" y="320" width="240" height="18" rx="9" fill="#E7C978" opacity="0.8"/>
+  <circle cx="682" cy="404" r="126" fill="#152F58" stroke="#D4A83A" stroke-width="8"/>
+  <path d="M640 404H724" stroke="#F7D679" stroke-width="12" stroke-linecap="round"/>
+  <path d="M682 346V462" stroke="#F7D679" stroke-width="12" stroke-linecap="round"/>
+  <path d="M626 460L682 404L738 348" stroke="#F7D679" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <path d="M820 250L930 250" stroke="#E6C15C" stroke-width="16" stroke-linecap="round"/>
+  <path d="M820 320L980 320" stroke="#E6C15C" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  <path d="M820 390L930 390" stroke="#E6C15C" stroke-width="16" stroke-linecap="round"/>
+  <path d="M820 460L945 460" stroke="#E6C15C" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  <path d="M820 530L990 530" stroke="#E6C15C" stroke-width="16" stroke-linecap="round"/>
+  <text x="160" y="650" fill="#F7D679" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700">CLEANING &amp; SANITIZATION</text>
+  <text x="160" y="708" fill="#E8EDF8" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="6">DELTON FM</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad_service-maintenance" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B2430" />
+      <stop offset="100%" stop-color="#2D3748" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A227" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#C9A227" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#grad_service-maintenance)" />
+  <circle cx="400" cy="250" r="280" fill="url(#goldGlow)" />
+  
+  <!-- Subtle decorative rings -->
+  <circle cx="400" cy="220" r="160" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4" />
+  <circle cx="400" cy="220" r="120" fill="#0B132B" fill-opacity="0.7" stroke="#C9A227" stroke-width="2" />
+  
+  <!-- Central Icon Container -->
+  <g transform="translate(352, 172) scale(4)">
+    <path fill="none" stroke="#C9A227" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+  </g>
+  
+  <!-- Title Badge -->
+  <rect x="150" y="370" width="500" height="50" rx="25" fill="#0B132B" fill-opacity="0.85" stroke="#C9A227" stroke-width="1.5" />
+  <text x="400" y="402" fill="#FFFFFF" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Technical Facility Maintenance</text>
+  <text x="400" y="450" fill="#C9A227" font-family="sans-serif" font-size="13" font-weight="600" text-anchor="middle" letter-spacing="1.5">HVAC, Electrical, Plumbing & Contracting</text>
+</svg>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شركة ديلتون لخدمات وإدارة المنشآت ش.م.م | Delton FM Solutions</title>
+  <meta name="description" content="ديلتون: شريكك الاستراتيجي في إدارة المنشآت المتكاملة في مصر. خدمات النظافة والتعقيم، الصيانة الفنية، المسطحات الخضراء، التوريدات والتوظيف، وإدارة الضيافة.">
+  <meta name="keywords" content="إدارة مرافق, صيانة مباني, نظافة واجهات, صيانة ATM, لاندسكيب, توظيف عمالة, مصر, Delton, Facility Management">
+  <meta name="author" content="Delton for Services & Facility Management">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Delton for Services & Facility Management S.A.E">
+  <meta property="og:description" content="Integrated Facility Management Solutions across Egypt.">
+  <meta property="og:image" content="assets/images/logo.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Google Fonts: Cairo (Arabic) & Poppins (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              400: '#E6C86E',
+              500: '#C9A227',
+              600: '#B58F1E',
+              700: '#8C6E12'
+            },
+            navy: {
+              800: '#111C38',
+              900: '#0B132B',
+              950: '#060B18'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#0B132B] text-slate-100 selection:bg-[#C9A227] selection:text-[#0B132B]">
+
+  <!-- Top Bar (Pre-Header) -->
+  <div class="bg-[#060B18] border-b border-slate-800/80 text-xs py-2.5 px-4 hidden md:block">
+    <div class="container mx-auto flex items-center justify-between">
+      
+      <!-- Contact Info -->
+      <div class="flex items-center gap-6 text-slate-300">
+        <a href="tel:01102668966" class="hover:text-[#C9A227] transition flex items-center gap-2">
+          <i class="fa-solid fa-phone text-[#C9A227]"></i>
+          <span dir="ltr">01102668966</span>
+        </a>
+        <a href="mailto:info@delton-eg.com" class="hover:text-[#C9A227] transition flex items-center gap-2">
+          <i class="fa-solid fa-envelope text-[#C9A227]"></i>
+          <span>info@delton-eg.com</span>
+        </a>
+        <span class="text-slate-400 hidden lg:flex items-center gap-2">
+          <i class="fa-regular fa-clock text-[#C9A227]"></i>
+          <span data-i18n="topbar.hours">الأحد - الخميس: 8:30 ص - 5:00 م (دعم الطوارئ 24/7)</span>
+        </span>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-4">
+        <!-- Download Profile Link -->
+        <a id="profileDownloadLink" href="Delton-profile ar 2026.pdf" download="Delton-profile ar 2026.pdf" 
+           class="text-xs text-yellow-400 hover:text-white transition flex items-center gap-1.5 font-semibold bg-yellow-500/10 hover:bg-yellow-500/20 px-3 py-1 rounded-full border border-yellow-500/30">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span data-i18n="nav.profileDownload">تحميل البروفايل (PDF)</span>
+        </a>
+
+        <!-- Language Switcher -->
+        <button id="langToggleBtn" 
+                class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1 text-xs font-semibold">
+          <i class="fa-solid fa-globe text-yellow-500"></i>
+          <span>English</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sticky Main Navbar -->
+  <nav id="mainNavbar" class="navbar-fixed sticky top-0 left-0 w-full z-40 bg-[#0B132B]/90 backdrop-blur-md border-b border-slate-800/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="flex items-center gap-3 group">
+        <img src="assets/images/logo.png" alt="Delton Logo" class="h-12 sm:h-14 w-auto object-contain filter drop-shadow">
+        <div class="hidden sm:block">
+          <span class="block text-lg font-black tracking-wide text-white group-hover:text-[#C9A227] transition">DELTON</span>
+          <span class="block text-[10px] text-[#C9A227] font-semibold tracking-wider uppercase">Facility Management</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-200">
+        <a href="#home" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.home">الرئيسية</a>
+        <a href="#about" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.about">عن ديلتون</a>
+        <a href="#services" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.services">خدماتنا</a>
+        <a href="#why-us" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.whyUs">لماذا تختارنا</a>
+        <a href="#clients" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.clients">شركاء النجاح</a>
+        <a href="#contact" class="hover:text-[#C9A227] transition py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#C9A227] after:transition-all" data-i18n="nav.contact">اتصل بنا</a>
+      </div>
+
+      <!-- Right Action CTA -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="#contact" class="px-6 py-2.5 rounded-xl font-bold bg-gradient-gold text-[#0B132B] hover:shadow-lg hover:shadow-yellow-500/25 transition duration-300 transform hover:-translate-y-0.5 text-xs uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-file-signature"></i>
+          <span data-i18n="nav.quoteBtn">طلب عرض سعر</span>
+        </a>
+      </div>
+
+      <!-- Mobile Controls (Hamburger + Language) -->
+      <div class="flex lg:hidden items-center gap-3">
+        <button id="langToggleBtnMobile" class="px-2.5 py-1 rounded-lg bg-slate-800 text-xs font-semibold text-yellow-400 border border-slate-700">
+          EN
+        </button>
+        <button id="mobileMenuToggle" class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center text-lg border border-slate-700 focus:outline-none" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileDrawerBackdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+  <div id="mobileDrawer" class="mobile-menu fixed top-0 bottom-0 w-80 max-w-[85vw] bg-[#0B132B] border-l rtl:border-l-0 rtl:border-r border-slate-800 z-50 p-6 flex flex-col justify-between overflow-y-auto">
+    
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <img src="assets/images/logo.png" alt="Delton" class="h-10 w-auto">
+          <div>
+            <span class="block text-base font-extrabold text-white">DELTON</span>
+            <span class="block text-[9px] text-[#C9A227] uppercase">Facility Management</span>
+          </div>
+        </div>
+        <button id="mobileMenuClose" class="w-9 h-9 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-base">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Nav Links -->
+      <div class="py-6 flex flex-col space-y-4 text-base font-semibold text-slate-200">
+        <a href="#home" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.home">الرئيسية</a>
+        <a href="#about" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.about">عن ديلتون</a>
+        <a href="#services" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.services">خدماتنا</a>
+        <a href="#why-us" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.whyUs">لماذا تختارنا</a>
+        <a href="#clients" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.clients">شركاء النجاح</a>
+        <a href="#contact" class="mobile-nav-link hover:text-[#C9A227] transition" data-i18n="nav.contact">اتصل بنا</a>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Footer -->
+    <div class="pt-6 border-t border-slate-800 space-y-4">
+      <a href="#contact" class="mobile-nav-link w-full py-3 rounded-xl font-bold bg-gradient-gold text-[#0B132B] text-center block text-sm shadow-lg">
+        <span data-i18n="nav.quoteBtn">طلب عرض سعر</span>
+      </a>
+
+      <div class="text-xs text-slate-400 space-y-2">
+        <p><i class="fa-solid fa-phone text-[#C9A227] mr-1 ml-1"></i> <span dir="ltr">01102668966</span></p>
+        <p><i class="fa-solid fa-envelope text-[#C9A227] mr-1 ml-1"></i> info@delton-eg.com</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hero Slider Section -->
+  <section id="home" class="relative w-full overflow-hidden">
+    <div class="swiper hero-slider">
+      <div class="swiper-wrapper" id="heroSwiperWrapper">
+        <!-- Injected dynamically from admin/slider.json via assets/js/slider.js -->
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="swiper-button-next hero-btn-next !hidden md:!flex"></div>
+      <div class="swiper-button-prev hero-btn-prev !hidden md:!flex"></div>
+
+      <!-- Pagination Bullets -->
+      <div class="swiper-pagination hero-pagination !bottom-8"></div>
+    </div>
+  </section>
+
+  <!-- Metrics Highlight Strip (Floating) -->
+  <section class="relative z-20 -mt-10 px-4 sm:px-6 lg:px-12">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- Metric 1 -->
+        <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="0">
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">2019</div>
+          <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item1.label">سنة التأسيس</div>
+          <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item1.desc">شركة مساهمة مصرية رائدة</div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">+18</div>
+          <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item2.label">شراكات استراتيجية</div>
+          <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item2.desc">بنوك ومؤسسات سيادية وكبرى</div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">24/7</div>
+          <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item3.label">جاهزية ودعم فني</div>
+          <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item3.desc">فرق مقيمة واستجابة فورية</div>
+        </div>
+
+        <!-- Metric 4 -->
+        <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">100%</div>
+          <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item4.label">تغطية جغرافية</div>
+          <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item4.desc">كافة أنحاء جمهورية مصر العربية</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="py-24 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left / Arabic Right Content Column -->
+        <div class="lg:col-span-7 space-y-6" data-aos="fade-right">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-xs font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-building-circle-check"></i>
+            <span data-i18n="about.badge">نبذة عن ديلتون</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight" data-i18n="about.title">
+            ريادة في تقديم حلول إدارة المنشآت المتكاملة
+          </h2>
+
+          <p class="text-lg text-yellow-100/90 font-medium leading-relaxed" data-i18n="about.lead">
+            تأسست شركة ديلتون عام 2019 كشركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت، مستهدفةً كافة المؤسسات والشركات الكبرى في جمهورية مصر العربية.
+          </p>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="about.p1">
+            نحن ندرك بعمق متطلبات وتحديات تشغيل المباني الإدارية والفروع الحيوية، لذا نضمن لشركائنا بيئة عمل فعالة، آمنة ومستدامة تدعم وتحافظ على أهداف استثماراتهم وتساهم مباشرة في تعزيز إنتاجية ونجاح مؤسساتهم.
+          </p>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="about.p2">
+            سواء كنتم بحاجة إلى إدارة تشغيلية شاملة لكامل المنشأة أو حلول تخصصية محددة، فإننا نمتلك الكفاءة الفنية والكوادر المؤهلة لتصميم وتنفيذ الحل الأمثل وفق اتفاقيات مستوى الخدمة (SLA) الصارمة.
+          </p>
+
+          <!-- Pillars List -->
+          <div class="pt-2 space-y-3">
+            <h4 class="text-sm font-bold text-white" data-i18n="about.pillarsTitle">أبرز ركائز تميزنا التشغيلي:</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-300">
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#C9A227] flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span>
+                <span data-i18n="about.pillar1">فريق هندسي وفني معتمد مقيم أو عند الطلب</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#C9A227] flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span>
+                <span data-i18n="about.pillar2">التزام كامل بمعايير السلامة والصحة المهنية (HSE)</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#C9A227] flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span>
+                <span data-i18n="about.pillar3">تقنيات ومعدات أوروبية حديثة لضمان أعلى جودة</span>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#C9A227] flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span>
+                <span data-i18n="about.pillar4">إشراف دوري وتقارير تشغيلية رقمية شفافة</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Downloads -->
+          <div class="pt-4 flex flex-wrap items-center gap-4">
+            <a href="Delton-profile ar 2026.pdf" download="Delton-profile ar 2026.pdf" 
+               class="px-6 py-3 rounded-xl bg-gradient-gold text-[#0B132B] font-bold text-xs sm:text-sm shadow-lg hover:shadow-yellow-500/20 transition flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf text-base"></i>
+              <span data-i18n="about.downloadAr">تحميل البروفايل بالعربية (PDF)</span>
+            </a>
+
+            <a href="Delton-profile EN 2026.pdf" download="Delton-profile EN 2026.pdf" 
+               class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm border border-slate-700 hover:border-[#C9A227] transition flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf text-base text-[#C9A227]"></i>
+              <span data-i18n="about.downloadEn">تحميل البروفايل بالإنجليزية (PDF)</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right / Arabic Left Visual Column -->
+        <div class="lg:col-span-5" data-aos="fade-left">
+          <div class="relative">
+            <!-- Decorative Glow -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 to-blue-600/20 rounded-3xl blur-2xl opacity-50"></div>
+            
+            <!-- Card Container -->
+            <div class="relative rounded-2xl bg-[#111C38] border border-[#1F3059] p-6 sm:p-8 shadow-2xl space-y-6">
+              
+              <!-- Company Crest / Logo -->
+              <div class="w-full flex items-center justify-center py-6 border-b border-slate-700/80">
+                <img src="assets/images/logo.png" alt="Delton S.A.E" class="h-28 w-auto object-contain filter drop-shadow-lg">
+              </div>
+
+              <!-- Info Box -->
+              <div class="space-y-4 text-xs sm:text-sm text-slate-300">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <span class="text-slate-400">الشكل القانوني:</span>
+                  <span class="font-bold text-white">شركة مساهمة مصرية (ش.م.م)</span>
+                </div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <span class="text-slate-400">تاريخ التأسيس:</span>
+                  <span class="font-bold text-yellow-400">2019</span>
+                </div>
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <span class="text-slate-400">المقر الرئيسي:</span>
+                  <span class="font-bold text-white">زهراء المعادي، القاهرة</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">نطاق العمليات:</span>
+                  <span class="font-bold text-emerald-400">كافة محافظات جمهورية مصر العربية</span>
+                </div>
+              </div>
+
+              <!-- Quote Badge -->
+              <div class="p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-xs text-yellow-200 leading-relaxed text-center font-medium">
+                "نضمن لكم بيئة عمل فعالة تدعم وتحافظ على أهداف استثماراتكم وتساهم في نجاح مؤسساتكم."
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services Section (Interactive with Modal) -->
+  <section id="services" class="py-24 px-4 sm:px-6 lg:px-12 bg-[#091024] relative border-y border-slate-800/80">
+    <div class="container mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <span data-i18n="services.badge">محفظة الخدمات</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white" data-i18n="services.title">
+          حلول شاملة ومتكاملة لإدارة المنشآت (FM Solutions)
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed" data-i18n="services.subtitle">
+          نقدم حلولاً متكاملة لإدارة المرافق، يمكننا توفيرها بشكل جزئي أو كلي بحسب احتياجات مؤسستكم وطبيعة عملياتكم.
+        </p>
+      </div>
+
+      <!-- Services Grid (5 Categories populated by main.js) -->
+      <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Injected via main.js renderServicesSection() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Services Modal Dialog -->
+  <div id="serviceModal" class="modal-backdrop fixed inset-0 z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="modal-content w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 my-8 relative">
+      <div id="serviceModalContent">
+        <!-- Injected dynamically on card click via openServiceModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us Section -->
+  <section id="why-us" class="py-24 px-4 sm:px-6 lg:px-12 relative">
+    <div class="container mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span data-i18n="whyUs.badge">لماذا ديلتون؟</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white" data-i18n="whyUs.title">
+          معايير استثنائية تجعلنا خيار كبرى البنوك والمؤسسات
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed" data-i18n="whyUs.subtitle">
+          نحن لا نقدم مجرد خدمات اعتيادية، بل نبني شراكات نجاح طويلة الأمد ترتكز على الشفافية والالتزام.
+        </p>
+      </div>
+
+      <!-- Why Us Cards Grid -->
+      <div id="whyUsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Injected dynamically via renderWhyUsSection() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Strategic Partners & Clients Section -->
+  <section id="clients" class="py-24 px-4 sm:px-6 lg:px-12 bg-[#091024] relative border-y border-slate-800/80">
+    <div class="container mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-12" data-aos="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-handshake"></i>
+          <span data-i18n="clients.badge">شركاء المسيرة</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white" data-i18n="clients.title">
+          شركاء النجاح وقائمة الشراكات الاستراتيجية
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed" data-i18n="clients.subtitle">
+          تعتبر قائمة عملائنا شهادة حية على جودة خدماتنا وثقة كبرى الكيانات في إمكانياتنا التشغيلية.
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-12" data-aos="fade-up">
+        <button onclick="setClientFilter('all')" data-filter="all" class="client-filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <span data-i18n="clients.filterAll">جميع القطاعات</span>
+        </button>
+        <button onclick="setClientFilter('banking')" data-filter="banking" class="client-filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-building-columns mr-1 ml-1 text-xs"></i>
+          <span data-i18n="clients.filterBanking">القطاع المصرفي والمالي</span>
+        </button>
+        <button onclick="setClientFilter('corporate')" data-filter="corporate" class="client-filter-btn px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-industry mr-1 ml-1 text-xs"></i>
+          <span data-i18n="clients.filterCorporate">المؤسسات الكبرى والصناعية</span>
+        </button>
+      </div>
+
+      <!-- Clients Grid (18 partners) -->
+      <div id="clientsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+        <!-- Injected via renderClientsSection() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact" class="py-24 px-4 sm:px-6 lg:px-12 relative">
+    <div class="container mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16" data-aos="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-xs font-bold uppercase tracking-wider">
+          <i class="fa-solid fa-headset"></i>
+          <span data-i18n="contact.badge">تواصل معنا</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white" data-i18n="contact.title">
+          جاهزون لخدمتكم ومناقشة احتياجات منشأتكم
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed" data-i18n="contact.subtitle">
+          يسعدنا الرد على استفساراتكم وترتيب زيارة معاينة ميدانية لمقر مؤسستكم لتقديم عرض فني ومالي مفصل.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left / Arabic Right: Contact Details & Google Map -->
+        <div class="lg:col-span-5 space-y-6" data-aos="fade-right">
+          
+          <!-- Details Card -->
+          <div class="p-6 sm:p-8 rounded-2xl bg-[#111C38] border border-slate-800 space-y-6 shadow-xl">
+            <h3 class="text-xl font-bold text-white mb-4 pb-3 border-b border-slate-700/80">
+              بيانات التواصل المباشر
+            </h3>
+
+            <!-- Address -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-xl shrink-0">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.addressTitle">العنوان الرئيسي:</h4>
+                <p class="text-sm font-semibold text-white leading-relaxed" data-i18n="contact.address">
+                  2120 St Elarqam, El Meraag, Zahraa Elmaadi, Cairo, Egypt
+                </p>
+              </div>
+            </div>
+
+            <!-- Phones -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-xl shrink-0">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.phoneTitle">أرقام الهاتف المباشرة:</h4>
+                <div class="space-y-1 text-sm font-semibold text-white" dir="ltr">
+                  <a href="tel:01102668966" class="block hover:text-[#C9A227] transition">01102668966</a>
+                  <a href="tel:01123544717" class="block hover:text-[#C9A227] transition">01123544717</a>
+                  <a href="tel:01123545516" class="block hover:text-[#C9A227] transition">01123545516</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-xl shrink-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.emailTitle">البريد الإلكتروني:</h4>
+                <a href="mailto:info@delton-eg.com" class="text-sm font-semibold text-yellow-400 hover:text-white transition">
+                  info@delton-eg.com
+                </a>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-xl shrink-0">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.hoursTitle">أوقات العمل الرسمية:</h4>
+                <p class="text-xs text-slate-300" data-i18n="topbar.hours">
+                  الأحد - الخميس: 8:30 ص - 5:00 م (دعم الطوارئ 24/7)
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Google Maps Embed -->
+          <div class="rounded-2xl overflow-hidden border border-slate-800 h-64 shadow-xl">
+            <iframe 
+              src="https://maps.google.com/maps?q=El+Meraag,+Zahraa+El+Maadi,+Cairo,+Egypt&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Delton Location Map">
+            </iframe>
+          </div>
+
+        </div>
+
+        <!-- Right / Arabic Left: Contact & RFQ Form -->
+        <div class="lg:col-span-7" data-aos="fade-left">
+          <div class="p-6 sm:p-10 rounded-2xl bg-[#111C38] border border-slate-800 shadow-2xl space-y-6">
+            
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-2" data-i18n="contact.form.title">
+                طلب عرض سعر أو استشارة
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-400">
+                املأ النموذج وسيتواصل معك مهندس معتمد من قطاع التسويق والمبيعات خلال 24 ساعة.
+              </p>
+            </div>
+
+            <!-- Toast Notification Box -->
+            <div id="formToast" class="hidden p-4 rounded-xl text-sm font-semibold transition">
+              <span id="formToastMsg"></span>
+            </div>
+
+            <form id="deltonContactForm" class="space-y-4">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Name -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.nameLabel">الاسم بالكامل *</label>
+                  <input type="text" id="contactName" required data-i18n-placeholder="contact.form.namePlaceholder" placeholder="مثال: م. أحمد عبد الرحمن" 
+                         class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition">
+                </div>
+
+                <!-- Company -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.companyLabel">اسم الشركة / المؤسسة *</label>
+                  <input type="text" id="contactCompany" required data-i18n-placeholder="contact.form.companyPlaceholder" placeholder="مثال: البنك الأهلي / مجموعة الفطيم" 
+                         class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Phone -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.phoneLabel">رقم الهاتف / الواتساب *</label>
+                  <input type="tel" id="contactPhone" required placeholder="010xxxxxxxx" 
+                         class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition" dir="ltr">
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.emailLabel">البريد الإلكتروني المهني *</label>
+                  <input type="email" id="contactEmail" required placeholder="name@company.com" 
+                         class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition" dir="ltr">
+                </div>
+              </div>
+
+              <!-- Service Selection Dropdown -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.serviceLabel">الخدمة المطلوبة *</label>
+                <select id="contactServiceSelect" required 
+                        class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition">
+                  <option value="" disabled selected data-i18n="contact.form.selectServicePlaceholder">-- اختر الخدمة المطلوبة --</option>
+                  <option value="all" data-i18n="contact.form.allServicesOpt">حلول متكاملة لكامل المنشأة (Comprehensive FM)</option>
+                  <option value="cleaning" data-i18n="contact.form.cleaningOpt">خدمات النظافة والتعقيم والواجهات</option>
+                  <option value="maintenance" data-i18n="contact.form.maintenanceOpt">الإدارة والصيانة الفنية والمقاولات</option>
+                  <option value="landscaping" data-i18n="contact.form.landscapingOpt">تنسيق وعناية المسطحات الخضراء</option>
+                  <option value="supplies" data-i18n="contact.form.suppliesOpt">التوريدات التشغيلية وتوظيف العمالة</option>
+                  <option value="hospitality" data-i18n="contact.form.hospitalityOpt">إدارة خدمات الضيافة والبوفيه</option>
+                  <option value="other" data-i18n="contact.form.otherOpt">أخرى (تُحدد في الرسالة)</option>
+                </select>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.messageLabel">تفاصيل الاحتياج أو المشروع *</label>
+                <textarea id="contactMessage" rows="4" required data-i18n-placeholder="contact.form.messagePlaceholder" placeholder="يرجى توضيح حجم المقر، طبيعة المنشأة، الخدمات المطلوبة والموقع الجغرافي..." 
+                          class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#C9A227] transition"></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="w-full py-4 rounded-xl font-bold bg-gradient-gold text-[#0B132B] hover:shadow-xl hover:shadow-yellow-500/20 transition duration-300 transform hover:-translate-y-0.5 text-sm uppercase tracking-wider flex items-center justify-center gap-2">
+                <span data-i18n="contact.form.submitBtn">إرسال طلب العرض الفني</span>
+                <i class="fa-solid fa-paper-plane text-sm"></i>
+              </button>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Professional Footer -->
+  <footer class="bg-[#060B18] border-t border-slate-800/80 pt-16 pb-12 px-4 sm:px-6 lg:px-12 text-slate-400 text-xs">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+        
+        <!-- Brand Summary -->
+        <div class="lg:col-span-4 space-y-4">
+          <img src="assets/images/logo-footer.png" alt="Delton Facility Management" class="h-14 w-auto object-contain">
+          <p class="text-slate-300 leading-relaxed" data-i18n="footer.aboutText">
+            شركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت لكافة المؤسسات والشركات في جمهورية مصر العربية.
+          </p>
+          <div class="pt-2 flex items-center gap-3">
+            <a href="https://wa.me/201102668966" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-[#25D366] hover:text-white text-slate-300 flex items-center justify-center text-sm transition">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="mailto:info@delton-eg.com" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-yellow-500 hover:text-slate-900 text-slate-300 flex items-center justify-center text-sm transition">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="tel:01102668966" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-yellow-500 hover:text-slate-900 text-slate-300 flex items-center justify-center text-sm transition">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+            <a href="http://www.delton-eg.com" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-yellow-500 hover:text-slate-900 text-slate-300 flex items-center justify-center text-sm transition">
+              <i class="fa-solid fa-globe"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="lg:col-span-2 space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4" data-i18n="footer.quickLinks">روابط سريعة</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#home" class="hover:text-[#C9A227] transition" data-i18n="nav.home">الرئيسية</a></li>
+            <li><a href="#about" class="hover:text-[#C9A227] transition" data-i18n="nav.about">عن ديلتون</a></li>
+            <li><a href="#services" class="hover:text-[#C9A227] transition" data-i18n="nav.services">خدماتنا</a></li>
+            <li><a href="#why-us" class="hover:text-[#C9A227] transition" data-i18n="nav.whyUs">لماذا تختارنا</a></li>
+            <li><a href="#clients" class="hover:text-[#C9A227] transition" data-i18n="nav.clients">شركاء النجاح</a></li>
+            <li><a href="#contact" class="hover:text-[#C9A227] transition" data-i18n="nav.contact">اتصل بنا</a></li>
+          </ul>
+        </div>
+
+        <!-- Core Services -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4" data-i18n="footer.ourServices">خدماتنا الأساسية</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#services" onclick="openServiceModal('cleaning')" class="hover:text-[#C9A227] transition">نظافة المباني والواجهات وماكينات ATM</a></li>
+            <li><a href="#services" onclick="openServiceModal('maintenance')" class="hover:text-[#C9A227] transition">الصيانة الكهروميكانيكية والمقاولات</a></li>
+            <li><a href="#services" onclick="openServiceModal('landscaping')" class="hover:text-[#C9A227] transition">تنسيق ورعاية المسطحات الخضراء</a></li>
+            <li><a href="#services" onclick="openServiceModal('supplies')" class="hover:text-[#C9A227] transition">التوريدات والتوظيف (Outsourcing)</a></li>
+            <li><a href="#services" onclick="openServiceModal('hospitality')" class="hover:text-[#C9A227] transition">إدارة خدمات الضيافة والكافيتريا</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4" data-i18n="footer.contactInfo">بيانات التواصل</h4>
+          <p class="leading-relaxed">2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة</p>
+          <p dir="ltr" class="text-right rtl:text-right ltr:text-left text-white font-semibold">01102668966 / 01123544717</p>
+          <p class="text-yellow-400">info@delton-eg.com</p>
+          <p class="text-slate-500">www.delton-eg.com</p>
+          <div class="pt-2">
+            <a href="admin/index.php" class="text-[11px] text-slate-500 hover:text-yellow-400 transition flex items-center gap-1">
+              <i class="fa-solid fa-lock text-[10px]"></i>
+              <span data-i18n="footer.adminPortal">بوابة الإدارة</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright & Bottom Line -->
+      <div class="pt-8 flex flex-wrap items-center justify-between gap-4 text-[11px]">
+        <p data-i18n="footer.copyright">© 2026 شركة ديلتون لخدمات وإدارة المنشآت ش.م.م. جميع الحقوق محفوظة.</p>
+        <p class="text-slate-500">Delton for Services & Facility Management S.A.E</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp CTA Button -->
+  <a href="https://wa.me/201102668966?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%AF%D9%8A%D9%84%D8%AA%D9%88%D9%86%20%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A2%D8%AA" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     class="btn-whatsapp-float" 
+     aria-label="Contact Delton on WhatsApp" 
+     title="تواصل معنا عبر واتساب">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" class="btn-back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- External Libraries (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Delton Application Scripts -->
+  <script src="assets/js/translations.js"></script>
+  <script src="assets/js/slider.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

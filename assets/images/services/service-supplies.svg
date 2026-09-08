@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad_service-supplies" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B" />
+      <stop offset="100%" stop-color="#312E81" />
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C9A227" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#C9A227" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#grad_service-supplies)" />
+  <circle cx="400" cy="250" r="280" fill="url(#goldGlow)" />
+  
+  <!-- Subtle decorative rings -->
+  <circle cx="400" cy="220" r="160" fill="none" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4" />
+  <circle cx="400" cy="220" r="120" fill="#0B132B" fill-opacity="0.7" stroke="#C9A227" stroke-width="2" />
+  
+  <!-- Central Icon Container -->
+  <g transform="translate(352, 172) scale(4)">
+    <path fill="none" stroke="#C9A227" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+  </g>
+  
+  <!-- Title Badge -->
+  <rect x="150" y="370" width="500" height="50" rx="25" fill="#0B132B" fill-opacity="0.85" stroke="#C9A227" stroke-width="1.5" />
+  <text x="400" y="402" fill="#FFFFFF" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Operational Supplies & Outsourcing</text>
+  <text x="400" y="450" fill="#C9A227" font-family="sans-serif" font-size="13" font-weight="600" text-anchor="middle" letter-spacing="1.5">Office Furniture, Materials & Staffing</text>
+</svg>

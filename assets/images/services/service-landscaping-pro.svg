@@ -1,0 +1,29 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="100" y1="80" x2="1100" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1A2E"/>
+      <stop offset="1" stop-color="#173B36"/>
+    </linearGradient>
+    <linearGradient id="gold3" x1="220" y1="150" x2="1010" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFE9A5"/>
+      <stop offset="0.5" stop-color="#D8B860"/>
+      <stop offset="1" stop-color="#8BAE52"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="820" rx="42" fill="url(#bg3)"/>
+  <circle cx="950" cy="180" r="180" fill="#C9D56D" opacity="0.08"/>
+  <circle cx="200" cy="650" r="210" fill="#C9D56D" opacity="0.08"/>
+  <path d="M150 620H1050" stroke="#D9C76C" stroke-width="8" stroke-linecap="round" opacity="0.2"/>
+  <path d="M176 564C252 524 294 454 324 392C356 326 394 286 454 270C524 252 593 292 616 356C643 430 625 488 560 548C520 586 484 610 434 626C370 646 260 612 176 564Z" fill="#183F39" stroke="#D8B860" stroke-width="8"/>
+  <path d="M324 514C388 476 434 424 458 378C490 314 546 286 600 302C650 316 694 356 714 410C740 480 736 540 686 584C626 638 546 653 458 620C412 603 364 580 324 514Z" fill="#204E46" stroke="#D8B860" stroke-width="8"/>
+  <path d="M260 560C292 470 344 404 400 360" stroke="#F2E39C" stroke-width="14" stroke-linecap="round"/>
+  <path d="M470 292L500 242L536 294" stroke="#F2E39C" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M544 332L610 250L668 332" stroke="#F2E39C" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M652 366L724 282L794 372" stroke="#F2E39C" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="702" y="256" width="220" height="220" rx="28" fill="#122F2B" stroke="#D8B860" stroke-width="8"/>
+  <path d="M756 408V314" stroke="#F4E9AE" stroke-width="14" stroke-linecap="round"/>
+  <path d="M756 366H810" stroke="#F4E9AE" stroke-width="14" stroke-linecap="round"/>
+  <path d="M782 436C782 468.5 753.5 494 720 494H698C664.5 494 636 468.5 636 436V378C636 345.5 664.5 320 698 320H720C753.5 320 782 345.5 782 378V436Z" fill="#F0D77B" opacity="0.18"/>
+  <text x="160" y="654" fill="#F3E3A1" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">LANDSCAPING &amp; GREENERY</text>
+  <text x="160" y="704" fill="#EAF0FA" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="6">DELTON FM</text>
+</svg>

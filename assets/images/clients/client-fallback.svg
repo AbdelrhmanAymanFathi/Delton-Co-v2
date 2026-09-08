@@ -1,0 +1,26 @@
+<svg width="640" height="320" viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B132B"/>
+      <stop offset="0.55" stop-color="#11213F"/>
+      <stop offset="1" stop-color="#1F3059"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="90" y1="30" x2="540" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7D56D"/>
+      <stop offset="0.5" stop-color="#C9A227"/>
+      <stop offset="1" stop-color="#A77B00"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="320" rx="28" fill="url(#bg)"/>
+  <g opacity="0.18">
+    <circle cx="120" cy="86" r="150" fill="#C9A227"/>
+    <circle cx="540" cy="260" r="180" fill="#C9A227"/>
+  </g>
+  <rect x="96" y="52" width="448" height="216" rx="22" fill="#0F1B33" stroke="#2D456F"/>
+  <rect x="132" y="90" width="102" height="102" rx="18" fill="url(#gold)"/>
+  <path d="M168 113L192 136L168 159L144 136L168 113Z" fill="#0B132B" opacity="0.85"/>
+  <path d="M150 149H186V167H150V149Z" fill="#0B132B" opacity="0.9"/>
+  <text x="268" y="138" fill="#F8FAFC" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">DELTON</text>
+  <text x="268" y="185" fill="#C9A227" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="5">FACILITY MANAGEMENT</text>
+  <rect x="268" y="212" width="182" height="8" rx="4" fill="url(#gold)"/>
+</svg>

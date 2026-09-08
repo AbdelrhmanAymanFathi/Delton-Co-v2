@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محرر السلايدر (Static Edition) | Delton Slider Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #0B132B; color: #F8FAFC; }
+    .gold-gradient { background: linear-gradient(135deg, #DFB739 0%, #C9A227 60%, #A88118 100%); }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+
+  <!-- Header -->
+  <header class="max-w-5xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/40 flex items-center justify-center text-[#C9A227] text-2xl">
+        <i class="fa-solid fa-sliders"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl font-extrabold text-white">محرر السلايدر (النسخة الثابتة Static)</h1>
+        <p class="text-xs text-[#C9A227] font-semibold">Delton Facility Management - Local / Static CMS</p>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <button onclick="downloadSliderJson()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg flex items-center gap-2 transition hover:-translate-y-0.5">
+        <i class="fa-solid fa-download"></i>
+        <span>تحميل ملف slider.json المحدث</span>
+      </button>
+      <a href="../index.html" target="_blank" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+        <i class="fa-solid fa-arrow-up-right-from-square text-[#C9A227]"></i>
+        <span>معاينة الموقع</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Tip Alert -->
+  <div class="max-w-5xl mx-auto mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-200 text-xs leading-relaxed flex items-start gap-3">
+    <i class="fa-solid fa-circle-info text-base mt-0.5 text-blue-400"></i>
+    <div>
+      <p class="font-bold mb-1">كيفية تطبيق التعديلات:</p>
+      <p>تقوم هذه الصفحة بتعديل الشرائح محلياً. بعد الانتهاء اضغط على <strong>"تحميل ملف slider.json المحدث"</strong>، ثم قم برفع الملف الناتج إلى مجلد <code class="bg-blue-900/60 px-1 rounded text-yellow-300">public_html/admin/</code> على استضافة HostGator ليظهر فوراً لجميع زوار الموقع.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard Main Content -->
+  <main class="max-w-5xl mx-auto space-y-8">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2">
+        <i class="fa-solid fa-layer-group text-[#C9A227]"></i>
+        <span id="slideCountLabel">الشرائح الحالية</span>
+      </h2>
+      <button onclick="openAddModal()" class="px-5 py-2.5 rounded-xl gold-gradient text-[#0B132B] font-bold text-sm shadow-lg flex items-center gap-2 transition hover:-translate-y-0.5">
+        <i class="fa-solid fa-plus"></i>
+        <span>إضافة شريحة جديدة</span>
+      </button>
+    </div>
+
+    <!-- Slides Grid -->
+    <div id="slidesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Injected via JS -->
+    </div>
+  </main>
+
+  <!-- Slide Modal -->
+  <div id="slideModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#0D1733] border border-slate-700 w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl my-8">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-slate-700 mb-6">
+        <h3 id="modalTitle" class="text-lg font-bold text-white">تعديل الشريحة</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="slideForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+        <input type="hidden" id="formSlideId">
+
+        <!-- Image source -->
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+          <label class="block text-xs font-bold text-[#C9A227]">مسار أو رابط الصورة (Image URL / Path):</label>
+          <input type="text" id="formImageUrl" required placeholder="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+        </div>
+
+        <!-- Arabic Details -->
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <h4 class="text-xs font-bold text-yellow-400">المحتوى باللغة العربية</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">الوسم العلوي (Badge):</label>
+              <input type="text" id="formArBadge" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">العنوان الرئيسي:</label>
+              <input type="text" id="formArTitle" required class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">الوصف:</label>
+            <textarea id="formArDesc" rows="2" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]"></textarea>
+          </div>
+        </div>
+
+        <!-- English Details -->
+        <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-3" dir="ltr">
+          <h4 class="text-xs font-bold text-yellow-400">English Content</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Top Badge:</label>
+              <input type="text" id="formEnBadge" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Main Title:</label>
+              <input type="text" id="formEnTitle" required class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Description:</label>
+            <textarea id="formEnDesc" rows="2" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]"></textarea>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-700">
+          <button type="button" onclick="closeModal()" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 transition">
+            إلغاء
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg transition">
+            حفظ التعديل
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let localSlides = [];
+
+    async function loadSlides() {
+      const stored = localStorage.getItem('delton_custom_slides');
+      if (stored) {
+        try {
+          localSlides = JSON.parse(stored);
+          render();
+          return;
+        } catch(e) {}
+      }
+
+      try {
+        const res = await fetch('slider.json');
+        if (res.ok) {
+          localSlides = await res.json();
+          render();
+          return;
+        }
+      } catch(e) {}
+
+      // Fallback
+      localSlides = [
+        {
+          id: 1,
+          image: "assets/images/hero/hero-1.svg",
+          ar: { badge: "ديلتون لإدارة المرافق المتكاملة", title: "شريكك الاستراتيجي في إدارة وتشغيل المنشآت", description: "نضمن لكم بيئة عمل فعالة ومستدامة تدعم استثماراتكم." },
+          en: { badge: "Delton Integrated FM Solutions", title: "Your Strategic Partner in Integrated Facility Management", description: "Ensuring an efficient, sustainable work environment." }
+        }
+      ];
+      render();
+    }
+
+    function render() {
+      document.getElementById('slideCountLabel').textContent = `الشرائح الحالية (${localSlides.length})`;
+      const grid = document.getElementById('slidesGrid');
+      grid.innerHTML = localSlides.map((s, idx) => `
+        <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition flex flex-col justify-between shadow-xl">
+          <div>
+            <div class="w-full h-40 rounded-xl overflow-hidden mb-4 border border-slate-800 relative bg-slate-900">
+              <img src="../${s.image}" alt="Slide" class="w-full h-full object-cover">
+              <div class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-bold text-[#C9A227] border border-yellow-500/30">
+                شريحة رقم ${idx + 1}
+              </div>
+            </div>
+            <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-md bg-yellow-500/10 text-[#C9A227] mb-2">
+              ${s.ar?.badge || 'وسم'}
+            </span>
+            <h3 class="text-base font-bold text-white mb-2 leading-snug">${s.ar?.title || ''}</h3>
+            <p class="text-xs text-slate-400 line-clamp-2 mb-2">${s.ar?.description || ''}</p>
+            <p class="text-[11px] text-slate-500 italic">EN: ${s.en?.title || ''}</p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-slate-700/60 flex items-center justify-between">
+            <button onclick="openEditModal(${s.id})" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-pen-to-square text-[#C9A227]"></i>
+              <span>تعديل</span>
+            </button>
+            <button onclick="deleteSlide(${s.id})" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs font-semibold border border-red-500/30 flex items-center gap-1 transition">
+              <i class="fa-solid fa-trash"></i>
+              <span>حذف</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openAddModal() {
+      document.getElementById('modalTitle').textContent = 'إضافة شريحة جديدة';
+      document.getElementById('formSlideId').value = '';
+      document.getElementById('formImageUrl').value = 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80';
+      document.getElementById('formArBadge').value = '';
+      document.getElementById('formArTitle').value = '';
+      document.getElementById('formArDesc').value = '';
+      document.getElementById('formEnBadge').value = '';
+      document.getElementById('formEnTitle').value = '';
+      document.getElementById('formEnDesc').value = '';
+      document.getElementById('slideModal').classList.remove('hidden');
+    }
+
+    function openEditModal(id) {
+      const s = localSlides.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('modalTitle').textContent = 'تعديل الشريحة';
+      document.getElementById('formSlideId').value = s.id;
+      document.getElementById('formImageUrl').value = s.image || '';
+      document.getElementById('formArBadge').value = s.ar?.badge || '';
+      document.getElementById('formArTitle').value = s.ar?.title || '';
+      document.getElementById('formArDesc').value = s.ar?.description || '';
+      document.getElementById('formEnBadge').value = s.en?.badge || '';
+      document.getElementById('formEnTitle').value = s.en?.title || '';
+      document.getElementById('formEnDesc').value = s.en?.description || '';
+      document.getElementById('slideModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('slideModal').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('formSlideId').value;
+      const img = document.getElementById('formImageUrl').value;
+      const arBadge = document.getElementById('formArBadge').value;
+      const arTitle = document.getElementById('formArTitle').value;
+      const arDesc = document.getElementById('formArDesc').value;
+      const enBadge = document.getElementById('formEnBadge').value;
+      const enTitle = document.getElementById('formEnTitle').value;
+      const enDesc = document.getElementById('formEnDesc').value;
+
+      const slideObj = {
+        id: id ? parseInt(id) : (localSlides.length ? Math.max(...localSlides.map(x=>x.id)) + 1 : 1),
+        image: img,
+        ar: { badge: arBadge, title: arTitle, description: arDesc, ctaPrimary: 'طلب عرض سعر', ctaPrimaryLink: '#contact', ctaSecondary: 'استكشف خدماتنا', ctaSecondaryLink: '#services' },
+        en: { badge: enBadge, title: enTitle, description: enDesc, ctaPrimary: 'Request a Quote', ctaPrimaryLink: '#contact', ctaSecondary: 'Explore Services', ctaSecondaryLink: '#services' }
+      };
+
+      if (id) {
+        const idx = localSlides.findIndex(x => x.id === parseInt(id));
+        if (idx !== -1) localSlides[idx] = slideObj;
+      } else {
+        localSlides.push(slideObj);
+      }
+
+      localStorage.setItem('delton_custom_slides', JSON.stringify(localSlides));
+      closeModal();
+      render();
+    }
+
+    function deleteSlide(id) {
+      if (!confirm('هل أنت متأكد من حذف هذه الشريحة؟')) return;
+      localSlides = localSlides.filter(x => x.id !== id);
+      localStorage.setItem('delton_custom_slides', JSON.stringify(localSlides));
+      render();
+    }
+
+    function downloadSliderJson() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(localSlides, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "slider.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSlides);
+  </script>
+</body>
+</html>
