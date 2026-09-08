@@ -55,9 +55,34 @@ const translations = {
       requestService: "طلب هذه الخدمة الآن",
       items: [
         {
+          id: "maintenance",
+          icon: "fa-screwdriver-wrench",
+          image: "assets/images/services/service-maintenance.jpg",
+          gallery: [
+            "assets/images/services/service-maintenance.jpg",
+            "assets/images/services/service-maintenance-2.jpg"
+          ],
+          title: "الإدارة والصيانة الفنية",
+          shortDesc: "صيانة شاملة للتكييفات، الكهرباء، والسباكة عبر فنيين مقيمين أو حسب الطلب لضمان استمرارية التشغيل.",
+          modalTitle: "الإدارة والتشغيل وحلول الصيانة الهندسية المتكاملة",
+          overview: "نضمن استمرارية أعمالكم دون انقطاع عبر برامج الصيانة الوقائية والتصحيحية لكافة الأنظمة الكهروميكانيكية، مدعومة بفرق هندسية وفنية معتمدة تلبي أعلى معايير الجودة والسلامة.",
+          tasks: [
+            "صيانة منظومات التكييف بكافة أنواعها (Chillers, VRV/VRF, Package, Split).",
+            "صيانة اللوحات الكهربائية، المولدات، شبكات الإنارة، وأنظمة التيار الخفيف (Low Current).",
+            "إصلاح وصيانة شبكات السباكة، مضخات المياه، خطوط الصرف، ومصائد الشحوم.",
+            "توفير أطقم فنية مقيمة (Resident Technicians) في الموقع أو فرق دعم سريع حسب الطلب 24/7.",
+            "إجراء الفحوصات الدورية والاختبارات الوقائية المجدولة للأجهزة والمعدات الحيوية."
+          ],
+          equipment: "أجهزة فحص حراري دقيقة، قطع غيار أصلية، فرق صيانة متنقلة ومجهزة بالكامل."
+        },
+        {
           id: "cleaning",
           icon: "fa-broom",
-          image: "assets/images/services/service-cleaning-pro.svg",
+          image: "assets/images/services/service-cleaning.jpg",
+          gallery: [
+            "assets/images/services/service-cleaning.jpg",
+            "assets/images/services/service-cleaning-2.jpg"
+          ],
           title: "خدمات النظافة والتعقيم المتكاملة",
           shortDesc: "نظافة داخلية وخارجية شاملة للمباني والواجهات، وتنظيف متخصص لماكينات الصراف الآلي (ATM).",
           modalTitle: "خدمات النظافة الشاملة، الواجهات وماكينات الصراف الآلي",
@@ -72,26 +97,13 @@ const translations = {
           equipment: "ماكينات Kärcher ألمانية، رافعات هيدروليكية، مواد تعقيم ومطهرات معتمدة صحياً."
         },
         {
-          id: "maintenance",
-          icon: "fa-screwdriver-wrench",
-          image: "assets/images/services/service-maintenance-pro.svg",
-          title: "الإدارة والصيانة الفنية والمقاولات",
-          shortDesc: "صيانة شاملة للتكييفات، الكهرباء، والسباكة (فنيين مقيمين أو حسب الطلب) وأعمال التجديدات.",
-          modalTitle: "حلول الصيانة الهندسية، المقاولات والتجديدات",
-          overview: "نضمن استمرارية أعمالكم دون انقطاع عبر برامج الصيانة الوقائية والتصحيحية لكافة الأنظمة الكهروميكانيكية، بالإضافة لتنفيذ التجديدات المعمارية والتشطيبات للمباني الإدارية والفروع.",
-          tasks: [
-            "صيانة منظومات التكييف بكافة أنواعها (Chillers, VRV/VRF, Package, Split).",
-            "صيانة اللوحات الكهربائية، المولدات، شبكات الإنارة، وأنظمة التيار الخفيف (Low Current).",
-            "إصلاح وصيانة شبكات السباكة، مضخات المياه، خطوط الصرف، ومصائد الشحوم.",
-            "توفير أطقم فنية مقيمة (Resident Technicians) في الموقع أو فرق دعم سريع حسب الطلب 24/7.",
-            "تنفيذ أعمال المقاولات المتكاملة، التجديدات، والتشطيبات الديكورية للمقرات والفروع الجديدة."
-          ],
-          equipment: "أجهزة فحص حراري دقيقة، قطع غيار أصلية، فرق صيانة متنقلة ومجهزة بالكامل."
-        },
-        {
           id: "landscaping",
           icon: "fa-tree",
-          image: "assets/images/services/service-landscaping-pro.svg",
+          image: "assets/images/services/service-landscaping.jpg",
+          gallery: [
+            "assets/images/services/service-landscaping.jpg",
+            "assets/images/services/service-landscaping-2.jpg"
+          ],
           title: "تنسيق وعناية المسطحات الخضراء",
           shortDesc: "إنشاء وتصميم المسطحات الخضراء والعناية والمتابعة الدورية بها داخل وخارج المنشأة.",
           modalTitle: "تصميم، إنشاء والعناية الدورية بالمسطحات الخضراء",
@@ -108,7 +120,11 @@ const translations = {
         {
           id: "supplies",
           icon: "fa-boxes-packing",
-          image: "assets/images/services/service-supplies-pro.svg",
+          image: "assets/images/services/service-supplies.jpg",
+          gallery: [
+            "assets/images/services/service-supplies.jpg",
+            "assets/images/services/service-supplies-2.jpg"
+          ],
           title: "التوريدات التشغيلية والتوظيف (Outsourcing)",
           shortDesc: "توريد الأثاث المكتبي ومستلزمات النظافة والبوفيه، وتوظيف وتوريد العمالة المتخصصة للشركات.",
           modalTitle: "التوريدات التشغيلية الشاملة وإسناد الكوادر البشرية",
@@ -125,7 +141,11 @@ const translations = {
         {
           id: "hospitality",
           icon: "fa-mug-hot",
-          image: "assets/images/services/service-hospitality-pro.svg",
+          image: "assets/images/services/service-hospitality.jpg",
+          gallery: [
+            "assets/images/services/service-hospitality.jpg",
+            "assets/images/services/service-hospitality-2.jpg"
+          ],
           title: "إدارة خدمات الضيافة والبوفيه",
           shortDesc: "إدارة متكاملة للمطابخ والكافيتريات وتوفير عمال المطبخ والخامات وفق أعلى معايير الجودة.",
           modalTitle: "إدارة المطابخ والكافيتريات وخدمات الضيافة المؤسسية",
@@ -138,6 +158,27 @@ const translations = {
             "تطبيق معايير السلامة الغذائية العالمية (HACCP) والنظافة الفائقة لكافة الأدوات."
           ],
           equipment: "معدات طهي وإعداد ستانلس ستيل معتمدة، ماكينات قهوة إيطالية احترافية."
+        },
+        {
+          id: "renovation",
+          icon: "fa-building",
+          image: "assets/images/services/service-renovation.jpg",
+          gallery: [
+            "assets/images/services/service-renovation.jpg",
+            "assets/images/services/service-renovation-2.jpg"
+          ],
+          title: "أعمال المقاولات والتجديدات",
+          shortDesc: "تنفيذ أعمال المقاولات المتكاملة والتجديدات للمباني الإدارية والفروع التجارية وفق أعلى المواصفات.",
+          modalTitle: "أعمال المقاولات والتجديدات والتشطيبات المعمارية",
+          overview: "فريق هندسي متخصص في تنفيذ أعمال المقاولات الشاملة والتجديدات وإعادة تهيئة المقرات الإدارية والفروع المصرفية والتجارية، مع الالتزام التام بالجداول الزمنية والمواصفات القياسية.",
+          tasks: [
+            "تنفيذ أعمال المقاولات المتكاملة والإنشاءات التكميلية لمنشأتكم.",
+            "التجديدات المعمارية والتشطيبات الداخلية المخططة وفقاً لمتطلبات التشغيل.",
+            "تعديل وتجهيز المساحات المكتبية والقواطع والأسقف المعلقة والأرضيات.",
+            "أعمال العزل المائي والحراري والدهانات الديكورية المقاومة للعوامل الجوية.",
+            "إدارة مراحل المشروع والتسليم بأعلى معايير الجودة وضمان الأعمال."
+          ],
+          equipment: "معدات بناء وتشطيب متطورة، خامات معتمدة طبقاً للمواصفات القياسية المصرية."
         }
       ]
     },
@@ -224,6 +265,7 @@ const translations = {
         landscapingOpt: "تنسيق وعناية المسطحات الخضراء",
         suppliesOpt: "التوريدات التشغيلية وتوظيف العمالة",
         hospitalityOpt: "إدارة خدمات الضيافة والبوفيه",
+        renovationOpt: "أعمال المقاولات والتجديدات",
         otherOpt: "أخرى (تُحدد في الرسالة)",
         messageLabel: "تفاصيل الاحتياج أو المشروع *",
         messagePlaceholder: "يرجى توضيح حجم المقر، طبيعة المنشأة، الخدمات المطلوبة والموقع الجغرافي...",
@@ -237,6 +279,12 @@ const translations = {
       aboutText: "شركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت لكافة المؤسسات والشركات في جمهورية مصر العربية.",
       quickLinks: "روابط سريعة",
       ourServices: "خدماتنا الأساسية",
+      srvMaintenance: "الإدارة والصيانة الفنية",
+      srvCleaning: "خدمات النظافة والتعقيم والواجهات",
+      srvLandscaping: "تنسيق وعناية المسطحات الخضراء",
+      srvSupplies: "التوريدات التشغيلية والتوظيف (Outsourcing)",
+      srvHospitality: "إدارة خدمات الضيافة والبوفيه",
+      srvRenovation: "أعمال المقاولات والتجديدات",
       contactInfo: "بيانات التواصل",
       copyright: "© 2026 شركة ديلتون لخدمات وإدارة المنشآت ش.م.م. جميع الحقوق محفوظة.",
       adminPortal: "بوابة الإدارة",
@@ -297,45 +345,57 @@ const translations = {
       requestService: "Request This Service Now",
       items: [
         {
+          id: "maintenance",
+          icon: "fa-screwdriver-wrench",
+          image: "assets/images/services/service-maintenance.jpg",
+          gallery: [
+            "assets/images/services/service-maintenance.jpg",
+            "assets/images/services/service-maintenance-2.jpg"
+          ],
+          title: "Technical Management & Maintenance",
+          shortDesc: "Air conditioning, electrical, and plumbing maintenance with resident or on-demand certified technicians.",
+          modalTitle: "Integrated Engineering Maintenance & Technical Management",
+          overview: "We ensure uninterrupted business continuity through proactive preventive and reactive corrective maintenance programs across all electromechanical infrastructure, backed by certified engineering teams.",
+          tasks: [
+            "Preventive and emergency servicing of HVAC systems (Chillers, VRV/VRF, Package, Split units).",
+            "Electrical distribution boards, backup diesel generators, low current networks, and lighting systems.",
+            "Water supply networks, booster pumps, drainage lines, grease traps, and plumbing systems.",
+            "Dedicated on-site resident technicians or mobile rapid-response teams available 24/7.",
+            "Scheduled preventive diagnostic tests for critical electromechanical assets."
+          ],
+          equipment: "High-precision thermal imaging cameras, OEM replacement parts, fully equipped mobile workshop units."
+        },
+        {
           id: "cleaning",
           icon: "fa-broom",
-          image: "assets/images/services/service-cleaning.svg",
-          title: "Integrated Cleaning & Facade Sanitization",
-          shortDesc: "Comprehensive internal and external cleaning for buildings, high-rise facades, and dedicated ATM sanitation.",
+          image: "assets/images/services/service-cleaning.jpg",
+          gallery: [
+            "assets/images/services/service-cleaning.jpg",
+            "assets/images/services/service-cleaning-2.jpg"
+          ],
+          title: "Integrated Cleaning & Sanitation",
+          shortDesc: "Interior, exterior, and high-rise facade cleaning plus specialized ATM sanitation under Delton supervision.",
           modalTitle: "Commercial Cleaning, Facade Maintenance & ATM Sanitization",
-          overview: "We execute commercial cleaning and sanitization following rigorous hospitality standards across corporate headquarters, shopping malls, banking branches, and medical facilities, led by qualified supervisors and eco-certified chemicals.",
+          overview: "We execute commercial cleaning and sanitization following rigorous hospitality standards across corporate headquarters, shopping malls, banking branches, and medical facilities, led by qualified supervisors.",
           tasks: [
             "Daily deep cleaning of executive offices, workstations, conference rooms, and reception lobbies.",
             "Rotary mechanical polishing, crystallization, and sealing of marble, granite, and parquet floors.",
             "Exterior glass and alucobond facade cleaning utilizing modern scaffolding, cradles, and safety rigging.",
-            "Specialized sanitization of Automatic Teller Machines (ATMs) inside and outside branches with scheduled maintenance rounds.",
+            "Specialized sanitization of Automatic Teller Machines (ATMs) inside and outside branches.",
             "Continuous touch-point sanitization and restroom hygiene using hospital-grade certified disinfectants."
           ],
           equipment: "German Kärcher industrial scrubbers, hydraulic cherry pickers, certified eco-friendly disinfectants."
         },
         {
-          id: "maintenance",
-          icon: "fa-screwdriver-wrench",
-          image: "assets/images/services/service-maintenance.svg",
-          title: "Technical Management & Contracting",
-          shortDesc: "Comprehensive HVAC, electrical, and plumbing maintenance (resident or on-demand technicians) plus renovations.",
-          modalTitle: "Engineering Maintenance, General Contracting & Fit-Out Works",
-          overview: "We ensure uninterrupted business continuity through proactive preventive and reactive corrective maintenance programs across all electromechanical infrastructure, alongside architectural fit-out and renovations.",
-          tasks: [
-            "Preventive and emergency servicing of HVAC systems (Chillers, VRV/VRF, Package, Split units).",
-            "Electrical distribution boards, backup diesel generators, low current networks, and lighting systems.",
-            "Water supply networks, booster pumps, drainage lines, grease traps, and fire-fighting readiness.",
-            "Dedicated on-site resident technicians or mobile rapid-response teams available 24/7.",
-            "Turnkey general contracting, interior architectural renovation, and office remodeling."
-          ],
-          equipment: "High-precision thermal imaging cameras, OEM replacement parts, fully equipped mobile workshop units."
-        },
-        {
           id: "landscaping",
           icon: "fa-tree",
-          image: "assets/images/services/service-landscaping.svg",
-          title: "Landscaping & Greenery Care",
-          shortDesc: "Establishment, design, and regular maintenance of green spaces inside and outside corporate premises.",
+          image: "assets/images/services/service-landscaping.jpg",
+          gallery: [
+            "assets/images/services/service-landscaping.jpg",
+            "assets/images/services/service-landscaping-2.jpg"
+          ],
+          title: "Landscaping & Green Area Care",
+          shortDesc: "Landscape design, establishment, and ongoing care for every green space around and within your facility.",
           modalTitle: "Design, Construction & Sustained Landscape Care",
           overview: "Our specialized agricultural engineering team enriches your corporate identity by designing, creating, and meticulously maintaining aesthetic, sustainable green environments indoors and outdoors.",
           tasks: [
@@ -350,9 +410,13 @@ const translations = {
         {
           id: "supplies",
           icon: "fa-boxes-packing",
-          image: "assets/images/services/service-supplies.svg",
-          title: "Operational Supplies & Staff Outsourcing",
-          shortDesc: "Office furnishings, hygiene chemicals, pantry supplies, plus recruiting and outsourcing specialized workforce.",
+          image: "assets/images/services/service-supplies.jpg",
+          gallery: [
+            "assets/images/services/service-supplies.jpg",
+            "assets/images/services/service-supplies-2.jpg"
+          ],
+          title: "Supplies & Manpower Outsourcing",
+          shortDesc: "Office furniture, cleaning tools, pantry provisions, and specialized workforce outsourcing for major companies.",
           modalTitle: "Turnkey Operational Logistics & Human Capital Outsourcing",
           overview: "We streamline your operational supply chain and human capital requirements, providing high-standard supplies alongside certified personnel outsourcing with full legal and administrative compliance.",
           tasks: [
@@ -367,9 +431,13 @@ const translations = {
         {
           id: "hospitality",
           icon: "fa-mug-hot",
-          image: "assets/images/services/service-hospitality.svg",
-          title: "Corporate Hospitality & Catering",
-          shortDesc: "Integrated management of executive kitchens, cafeterias, hospitality personnel, and pantry supplies.",
+          image: "assets/images/services/service-hospitality.jpg",
+          gallery: [
+            "assets/images/services/service-hospitality.jpg",
+            "assets/images/services/service-hospitality-2.jpg"
+          ],
+          title: "Corporate Hospitality Services",
+          shortDesc: "Integrated management of corporate kitchens, cafeterias, hospitality personnel, and complete provisions.",
           modalTitle: "Corporate Cafeteria Operations & Executive Hospitality Services",
           overview: "Delivering an upscale hospitality experience that represents your corporate prestige before clients and staff, managing corporate kitchens with hotel-grade etiquette and food hygiene.",
           tasks: [
@@ -380,6 +448,27 @@ const translations = {
             "Rigorous HACCP food safety protocols and sterile kitchen sanitation practices."
           ],
           equipment: "Commercial stainless steel culinary gear, professional Italian espresso machines, warming units."
+        },
+        {
+          id: "renovation",
+          icon: "fa-building",
+          image: "assets/images/services/service-renovation.jpg",
+          gallery: [
+            "assets/images/services/service-renovation.jpg",
+            "assets/images/services/service-renovation-2.jpg"
+          ],
+          title: "Renovation & Contracting Works",
+          shortDesc: "Integrated contracting and renovation for administrative buildings, corporate premises, and commercial branches.",
+          modalTitle: "Turnkey General Contracting, Renovation & Architectural Fit-Out",
+          overview: "Specialized engineering and construction solutions for turnkey fit-out, architectural renovations, and spatial restructuring of administrative facilities and branches, strictly aligned with operational schedules.",
+          tasks: [
+            "Complete contracting works and auxiliary constructions tailored for your facility.",
+            "Architectural renovations and interior remodeling planned around operational needs.",
+            "Spatial reconfiguration, drywall partitions, acoustic ceilings, and flooring solutions.",
+            "Thermal and moisture waterproofing, exterior facade coating, and durable finishes.",
+            "End-to-end project management, quality assurance, and formal handover protocols."
+          ],
+          equipment: "Modern precision construction machinery, certified construction materials meeting Egyptian standards."
         }
       ]
     },
@@ -466,6 +555,7 @@ const translations = {
         landscapingOpt: "Landscaping & Green Area Care",
         suppliesOpt: "Operational Supplies & Manpower Outsourcing",
         hospitalityOpt: "Corporate Hospitality & Catering",
+        renovationOpt: "Renovation & Contracting Works",
         otherOpt: "Other (Specified in Message)",
         messageLabel: "Project Details & Scope *",
         messagePlaceholder: "Please share premises size, facility type, requested scope, and location...",
@@ -479,6 +569,12 @@ const translations = {
       aboutText: "An Egyptian Joint Stock Company specialized in delivering integrated facility management services to leading organizations across Egypt.",
       quickLinks: "Quick Links",
       ourServices: "Core Services",
+      srvMaintenance: "Technical Management & Maintenance",
+      srvCleaning: "Commercial Cleaning & Facade Sanitization",
+      srvLandscaping: "Landscaping & Green Area Care",
+      srvSupplies: "Supplies & Manpower Outsourcing",
+      srvHospitality: "Corporate Hospitality & Catering",
+      srvRenovation: "Renovation & Contracting Works",
       contactInfo: "Contact Information",
       copyright: "© 2026 Delton for Services & Facility Management S.A.E. All Rights Reserved.",
       adminPortal: "Admin Portal",

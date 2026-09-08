@@ -11,7 +11,7 @@ const clientData = [
   { id: 'cbe', sector: 'banking', code: 'cbe', ar: 'البنك المركزي المصري', en: 'Central Bank of Egypt' },
   { id: 'aaib', sector: 'banking', code: 'aaib', ar: 'البنك العربي الأفريقي الدولي', en: 'Arab African Int. Bank' },
   { id: 'albaraka', sector: 'banking', code: 'albaraka', ar: 'بنك البركة مصر', en: 'Al Baraka Bank Egypt' },
-  { id: 'wu', sector: 'banking', code: 'wu', ar: 'ويسترن يونيون (IPAG)', en: 'Western Union IPAG' },
+  { id: 'wu', sector: 'banking', code: 'wu', ar: 'ويسترن يونيون (IPAG)', en: 'Western Union (IPAG)' },
   { id: 'cib-brokerage', sector: 'banking', code: 'cib-brokerage', ar: 'شركة التجاري الدولي للسمسرة', en: 'CIB Brokerage' },
   { id: 'cib-underwriting', sector: 'banking', code: 'cib-underwriting', ar: 'التجاري الدولي لترويج وتغطية الاكتتاب', en: 'CIB Promotion & Underwriting' },
   { id: 'misr-capital', sector: 'banking', code: 'misr-capital', ar: 'شركة مصر كابيتال للوساطة', en: 'Misr Capital for Brokerage' },
@@ -23,29 +23,56 @@ const clientData = [
   { id: 'elsewedy', sector: 'corporate', code: 'elsewedy', ar: 'شركة السويدي إنرجيا للكابلات', en: 'Elsewedy Energia Cables' },
   { id: 'metallurgical', sector: 'corporate', code: 'metallurgical', ar: 'الشركة القابضة للصناعات المعدنية', en: 'Holding Co. for Metallurgical Ind.' },
   { id: 'waterway', sector: 'corporate', code: 'waterway', ar: 'مجموعة واتر واي (The Waterway)', en: 'The Waterway Developments' },
-  { id: 'trust-petroleum', sector: 'corporate', code: 'trust-petroleum', ar: 'شركة تراست بتروليوم سيرفيس', en: 'Trust Petroleum Service' },
-  { id: 'pioneer', sector: 'corporate', code: 'pioneer', ar: 'شركة بايونير (Pioneer)', en: 'Pioneer Company' },
+  { id: 'trust-petroleum', sector: 'corporate', code: 'trust-petroleum', ar: 'شركة تراست بتروليوم سيرفيس', en: 'Trust Petroleum Services' },
+  { id: 'pioneer', sector: 'corporate', code: 'pioneer', ar: 'شركة بايونير (Pioneer)', en: 'Pioneer Holding' },
   { id: 'hbs', sector: 'corporate', code: 'hbs', ar: 'هادي بوشمان للخدمات البترولية (HBS)', en: 'Hadi Bushman Petroleum (HBS)' },
-  { id: 'cairo3', sector: 'corporate', code: 'cairo3', ar: 'شركة كايرو 3 (Cairo 3)', en: 'Cairo 3 Company' },
-  { id: 'wally-auto', sector: 'corporate', code: 'wally-auto', ar: 'شركة والي أوتو (Wally Auto)', en: 'Wally Auto Group' }
+  { id: 'cairo3', sector: 'corporate', code: 'cairo3', ar: 'كايرو ثري إيه (Cairo 3A)', en: 'Cairo 3A Group' },
+  { id: 'wally-auto', sector: 'corporate', code: 'wally-auto', ar: 'شركة والي أوتو (Wally Auto)', en: 'Wally Auto Group' },
+  { id: 'marakez', sector: 'corporate', code: 'marakez', ar: 'مراكز العقارية (Marakez)', en: 'Marakez Developments' },
+  { id: 'auto-samir-rayan', sector: 'corporate', code: 'auto-samir-rayan', ar: 'أوتو سمير ريان (Auto Samir Rayan)', en: 'Auto Samir Rayan' },
+  { id: 'lasirena', sector: 'corporate', code: 'lasirena', ar: 'مجموعة لاسيرينا (La Sirena)', en: 'La Sirena Group' },
+  { id: 'vezeeta', sector: 'corporate', code: 'vezeeta', ar: 'فيزيتا (Vezeeta)', en: 'Vezeeta' },
+  { id: 'pharmacare', sector: 'corporate', code: 'pharmacare', ar: 'فارماكير (Pharmacare)', en: 'Pharmacare' },
+  { id: 'ezzeldeen', sector: 'corporate', code: 'ezzeldeen', ar: 'صيدليات عز الدين', en: 'Ezzedeen Pharmacies' },
+  { id: 'fas', sector: 'corporate', code: 'fas', ar: 'شركة إف إيه إس (FAS)', en: 'FAS Group' }
 ];
 
 const clientImageMap = {
+  // Banking Sector
+  cbe: 'assets/images/clientLogo/cbe.svg',
   aaib: 'assets/images/clientLogo/arab african international bank.png',
   albaraka: 'assets/images/clientLogo/bank Elbarka.svg',
-  cairo3: 'assets/images/clientLogo/CAIRO 3A.jpg',
+  wu: 'assets/images/clientLogo/wu.svg',
+  'cib-brokerage': 'assets/images/clients/ci capital.jpeg',
+  'cib-underwriting': 'assets/images/clients/التجاري الدولي لترويج وتغطية الاكتتاب.jpeg',
+  'misr-capital': 'assets/images/clientLogo/misr-capital.png',
+
+  // Corporate & Institutions Sector
+  'supreme-court': 'assets/images/clientLogo/supreme-court.png',
   ncmp: 'assets/images/clientLogo/NCMP.jpg',
+  'nasr-auto': 'assets/images/clientLogo/نصر.jpg',
+  elsewedy: 'assets/images/clientLogo/elsewedy.svg',
+  metallurgical: 'assets/images/clientLogo/metallurgical.png',
+  waterway: 'assets/images/clientLogo/waterway.png',
+  'trust-petroleum': 'assets/images/clientLogo/trust-petroleum.png',
+  pioneer: 'assets/images/clientLogo/pioneer.png',
+  hbs: 'assets/images/clientLogo/hbs.jpg',
+  cairo3: 'assets/images/clientLogo/CAIRO 3A.jpg',
   'wally-auto': 'assets/images/clientLogo/wallyauto.jpg',
-  'nasr-auto': 'assets/images/clientLogo/نصر.jpg'
+  marakez: 'assets/images/clientLogo/Marakez.jpg',
+  'auto-samir-rayan': 'assets/images/clientLogo/Auto Samir Rayan.jpg',
+  lasirena: 'assets/images/clientLogo/lasirena.jpg',
+  vezeeta: 'assets/images/clientLogo/vezeeta.jpg',
+  pharmacare: 'assets/images/clientLogo/pharmacare.jpg',
+  ezzeldeen: 'assets/images/clientLogo/صيدليات عز الدين.jpg',
+  fas: 'assets/images/clientLogo/FAS.jpg'
 };
 
 function resolveClientImage(client) {
   const preferred = clientImageMap[client.id];
   if (preferred) return preferred;
 
-  const primary = `assets/images/clients/${client.code}.svg`;
-  const fallback = 'assets/images/clients/client-fallback.svg';
-  return `${primary}?v=${Date.now()}`;
+  return 'assets/images/clientLogo/client-fallback.svg';
 }
 
 /**
@@ -212,9 +239,13 @@ function openServiceModal(serviceId) {
       </button>
     </div>
 
-    <!-- Image banner -->
-    <div class="w-full h-52 sm:h-64 rounded-xl overflow-hidden mt-6 border border-slate-700 relative">
-      <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover">
+    <!-- Image Gallery -->
+    <div class="grid grid-cols-1 ${service.gallery && service.gallery.length > 1 ? 'sm:grid-cols-2' : ''} gap-3 mt-6">
+      ${(service.gallery || [service.image]).map(img => `
+        <div class="h-44 sm:h-52 rounded-xl overflow-hidden border border-slate-700 relative group">
+          <img src="${img}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+        </div>
+      `).join('')}
     </div>
 
     <!-- Overview -->
@@ -343,8 +374,8 @@ function renderClientsSection(lang, filter = 'all') {
 
   container.innerHTML = filtered.map((c, idx) => `
     <div class="client-card p-4 sm:p-5 flex flex-col justify-between items-center text-center group cursor-pointer" data-aos="fade-up" data-aos-delay="${(idx % 6) * 60}">
-      <div class="w-full h-24 mb-3 flex items-center justify-center">
-        <img src="${resolveClientImage(c)}" alt="${isRtl ? c.ar : c.en}" class="w-full h-full object-contain filter group-hover:brightness-110 transition duration-300" loading="lazy" onerror="this.onerror=null;this.src='assets/images/clients/client-fallback.svg';">
+      <div class="w-full h-24 mb-3 p-3 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden group-hover:scale-[1.02] transition duration-300">
+        <img src="${resolveClientImage(c)}" alt="${isRtl ? c.ar : c.en}" class="max-h-full max-w-full object-contain filter transition duration-300" loading="lazy" onerror="this.onerror=null;this.src='assets/images/clientLogo/client-fallback.svg';">
       </div>
       <h4 class="text-sm font-bold text-white group-hover:text-[#C9A227] transition leading-snug">
         ${isRtl ? c.ar : c.en}
