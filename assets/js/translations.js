@@ -44,7 +44,18 @@ const translations = {
       pillar4: "إشراف دوري وتقارير تشغيلية رقمية شفافة",
       downloadAr: "تحميل البروفايل بالعربية (PDF)",
       downloadEn: "تحميل البروفايل بالإنجليزية (PDF)",
-      registeredInfo: "شركة مساهمة مصرية خاضعة لأحكام قانون الشركات المصري"
+      registeredInfo: "شركة مساهمة مصرية خاضعة لأحكام قانون الشركات المصري",
+      companyInfo: {
+        legalLabel: "الشكل القانوني:",
+        legalValue: "شركة مساهمة مصرية (ش.م.م)",
+        foundedLabel: "تاريخ التأسيس:",
+        foundedValue: "2019",
+        headquartersLabel: "المقر الرئيسي:",
+        headquartersValue: "زهراء المعادي، القاهرة",
+        scopeLabel: "نطاق العمليات:",
+        scopeValue: "كافة محافظات جمهورية مصر العربية",
+        quote: "\"نضمن لكم بيئة عمل فعالة تدعم وتحافظ على أهداف استثماراتكم وتساهم في نجاح مؤسساتكم.\""
+      }
     },
     services: {
       badge: "محفظة الخدمات",
@@ -334,7 +345,18 @@ const translations = {
       pillar4: "Periodic oversight and transparent digital operational reports",
       downloadAr: "Download Profile in Arabic (PDF)",
       downloadEn: "Download Profile in English (PDF)",
-      registeredInfo: "Egyptian Joint Stock Company subject to Egyptian Companies Law"
+      registeredInfo: "Egyptian Joint Stock Company subject to Egyptian Companies Law",
+      companyInfo: {
+        legalLabel: "Legal form:",
+        legalValue: "Egyptian Joint Stock Company (S.A.E)",
+        foundedLabel: "Founded:",
+        foundedValue: "2019",
+        headquartersLabel: "Headquarters:",
+        headquartersValue: "Zahraa El Maadi, Cairo",
+        scopeLabel: "Operations scope:",
+        scopeValue: "Across all governorates of the Arab Republic of Egypt",
+        quote: "\"We deliver an efficient work environment that protects your investment goals and contributes to the success of your organization.\""
+      }
     },
     services: {
       badge: "Services Portfolio",

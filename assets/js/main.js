@@ -147,6 +147,18 @@ function setLanguage(lang) {
   if (langToggleBtn) langToggleBtn.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
   if (langToggleBtnMobile) langToggleBtnMobile.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
 
+  // Update brand name + subtitle in Arabic/English
+  const brandPrimaryText = document.getElementById('brandPrimaryText');
+  const mobileBrandPrimaryText = document.getElementById('mobileBrandPrimaryText');
+  const brandSecondaryText = document.getElementById('brandSecondaryText');
+  const mobileBrandSecondaryText = document.getElementById('mobileBrandSecondaryText');
+  const brandName = isRtl ? 'ديلتون' : 'DELTON';
+  const brandSubtitle = isRtl ? 'إدارة المرافق' : 'Facility Management';
+  if (brandPrimaryText) brandPrimaryText.textContent = brandName;
+  if (mobileBrandPrimaryText) mobileBrandPrimaryText.textContent = brandName;
+  if (brandSecondaryText) brandSecondaryText.textContent = brandSubtitle;
+  if (mobileBrandSecondaryText) mobileBrandSecondaryText.textContent = brandSubtitle;
+
   // Refresh AOS if available
   if (typeof AOS !== 'undefined') {
     AOS.refresh();

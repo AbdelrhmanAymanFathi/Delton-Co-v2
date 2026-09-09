@@ -156,15 +156,15 @@ function renderSlides(slides, currentLang) {
             </p>
             
             <!-- Dual CTA Buttons -->
-            <div class="pt-4 flex flex-wrap items-center gap-4 ${isRtl ? 'justify-start' : 'justify-start'}">
+            <div class="hero-cta-group pt-4 flex flex-wrap items-center gap-3 sm:gap-4 ${isRtl ? 'justify-start' : 'justify-start'}">
               <a href="${content.ctaPrimaryLink || '#contact'}" 
-                 class="px-8 py-3.5 rounded-xl font-bold bg-gradient-gold text-[#0B132B] hover:shadow-lg hover:shadow-yellow-500/30 transition duration-300 transform hover:-translate-y-0.5 flex items-center gap-2">
+                 class="hero-cta-primary px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl font-bold bg-gradient-gold text-[#0B132B] hover:shadow-lg hover:shadow-yellow-500/30 transition duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base">
                 <span>${content.ctaPrimary}</span>
                 <i class="fa-solid ${isRtl ? 'fa-arrow-left' : 'fa-arrow-right'} text-sm"></i>
               </a>
               
               <a href="${content.ctaSecondaryLink || '#services'}" 
-                 class="px-8 py-3.5 rounded-xl font-bold bg-slate-900/80 hover:bg-slate-800 text-white border border-slate-700 hover:border-[#C9A227] transition duration-300 transform hover:-translate-y-0.5 flex items-center gap-2">
+                 class="hero-cta-secondary px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl font-bold bg-slate-900/80 hover:bg-slate-800 text-white border border-slate-700 hover:border-[#C9A227] transition duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base">
                 <span>${content.ctaSecondary}</span>
                 <i class="fa-solid fa-layer-group text-[#C9A227] text-sm"></i>
               </a>
