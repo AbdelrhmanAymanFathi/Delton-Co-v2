@@ -173,7 +173,8 @@ html {
 
 .mobile-header-logo {
   display: block;
-  max-width: 72px;
+  max-width: 62px;
+  height: 32px;
   object-fit: contain;
   filter: drop-shadow(0 8px 18px rgba(212, 175, 55, 0.18));
 }
@@ -493,9 +494,9 @@ html {
     left: max(12px, env(safe-area-inset-left));
     right: auto;
     bottom: max(18px, env(safe-area-inset-bottom));
-    width: 54px;
-    height: 54px;
-    font-size: 26px;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
   }
 
   [dir="ltr"] .btn-whatsapp-float {
