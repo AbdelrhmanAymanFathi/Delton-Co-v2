@@ -103,6 +103,24 @@
             <label class="block text-[11px] text-slate-400 mb-1">الوصف:</label>
             <textarea id="formArDesc" rows="2" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]"></textarea>
           </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">نص زر الطلب الرئيسي:</label>
+              <input type="text" id="formArCtaPrimary" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">رابط زر الطلب الرئيسي:</label>
+              <input type="text" id="formArCtaPrimaryLink" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">نص الزر الثانوي:</label>
+              <input type="text" id="formArCtaSecondary" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">رابط الزر الثانوي:</label>
+              <input type="text" id="formArCtaSecondaryLink" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+          </div>
         </div>
 
         <!-- English Details -->
@@ -121,6 +139,24 @@
           <div>
             <label class="block text-[11px] text-slate-400 mb-1">Description:</label>
             <textarea id="formEnDesc" rows="2" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]"></textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Primary Button Label:</label>
+              <input type="text" id="formEnCtaPrimary" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Primary Button Link:</label>
+              <input type="text" id="formEnCtaPrimaryLink" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Secondary Button Label:</label>
+              <input type="text" id="formEnCtaSecondary" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Secondary Button Link:</label>
+              <input type="text" id="formEnCtaSecondaryLink" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs outline-none focus:border-[#C9A227]">
+            </div>
           </div>
         </div>
 
@@ -162,9 +198,9 @@
       localSlides = [
         {
           id: 1,
-          image: "assets/images/hero/hero-1.svg",
-          ar: { badge: "ديلتون لإدارة المرافق المتكاملة", title: "شريكك الاستراتيجي في إدارة وتشغيل المنشآت", description: "نضمن لكم بيئة عمل فعالة ومستدامة تدعم استثماراتكم." },
-          en: { badge: "Delton Integrated FM Solutions", title: "Your Strategic Partner in Integrated Facility Management", description: "Ensuring an efficient, sustainable work environment." }
+          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80",
+          ar: { badge: "ديلتون لإدارة المرافق المتكاملة", title: "شريكك الاستراتيجي في إدارة وتشغيل المنشآت", description: "نضمن لكم بيئة عمل فعالة ومستدامة تدعم استثماراتكم.", ctaPrimary: "طلب عرض سعر", ctaPrimaryLink: "#contact", ctaSecondary: "استكشف خدماتنا", ctaSecondaryLink: "#services" },
+          en: { badge: "Delton Integrated FM Solutions", title: "Your Strategic Partner in Integrated Facility Management", description: "Ensuring an efficient, sustainable work environment.", ctaPrimary: "Request a Quote", ctaPrimaryLink: "#contact", ctaSecondary: "Explore Services", ctaSecondaryLink: "#services" }
         }
       ];
       render();
@@ -177,7 +213,7 @@
         <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition flex flex-col justify-between shadow-xl">
           <div>
             <div class="w-full h-40 rounded-xl overflow-hidden mb-4 border border-slate-800 relative bg-slate-900">
-              <img src="../${s.image}" alt="Slide" class="w-full h-full object-cover">
+              <img src="${s.image.startsWith('http') ? s.image : '../' + s.image}" alt="Slide" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80'">
               <div class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-bold text-[#C9A227] border border-yellow-500/30">
                 شريحة رقم ${idx + 1}
               </div>
@@ -210,9 +246,17 @@
       document.getElementById('formArBadge').value = '';
       document.getElementById('formArTitle').value = '';
       document.getElementById('formArDesc').value = '';
+      document.getElementById('formArCtaPrimary').value = 'طلب عرض سعر';
+      document.getElementById('formArCtaPrimaryLink').value = '#contact';
+      document.getElementById('formArCtaSecondary').value = 'استكشف خدماتنا';
+      document.getElementById('formArCtaSecondaryLink').value = '#services';
       document.getElementById('formEnBadge').value = '';
       document.getElementById('formEnTitle').value = '';
       document.getElementById('formEnDesc').value = '';
+      document.getElementById('formEnCtaPrimary').value = 'Request a Quote';
+      document.getElementById('formEnCtaPrimaryLink').value = '#contact';
+      document.getElementById('formEnCtaSecondary').value = 'Explore Services';
+      document.getElementById('formEnCtaSecondaryLink').value = '#services';
       document.getElementById('slideModal').classList.remove('hidden');
     }
 
@@ -225,9 +269,17 @@
       document.getElementById('formArBadge').value = s.ar?.badge || '';
       document.getElementById('formArTitle').value = s.ar?.title || '';
       document.getElementById('formArDesc').value = s.ar?.description || '';
+      document.getElementById('formArCtaPrimary').value = s.ar?.ctaPrimary || 'طلب عرض سعر';
+      document.getElementById('formArCtaPrimaryLink').value = s.ar?.ctaPrimaryLink || '#contact';
+      document.getElementById('formArCtaSecondary').value = s.ar?.ctaSecondary || 'استكشف خدماتنا';
+      document.getElementById('formArCtaSecondaryLink').value = s.ar?.ctaSecondaryLink || '#services';
       document.getElementById('formEnBadge').value = s.en?.badge || '';
       document.getElementById('formEnTitle').value = s.en?.title || '';
       document.getElementById('formEnDesc').value = s.en?.description || '';
+      document.getElementById('formEnCtaPrimary').value = s.en?.ctaPrimary || 'Request a Quote';
+      document.getElementById('formEnCtaPrimaryLink').value = s.en?.ctaPrimaryLink || '#contact';
+      document.getElementById('formEnCtaSecondary').value = s.en?.ctaSecondary || 'Explore Services';
+      document.getElementById('formEnCtaSecondaryLink').value = s.en?.ctaSecondaryLink || '#services';
       document.getElementById('slideModal').classList.remove('hidden');
     }
 
@@ -242,15 +294,39 @@
       const arBadge = document.getElementById('formArBadge').value;
       const arTitle = document.getElementById('formArTitle').value;
       const arDesc = document.getElementById('formArDesc').value;
+      const arCtaPrimary = document.getElementById('formArCtaPrimary').value;
+      const arCtaPrimaryLink = document.getElementById('formArCtaPrimaryLink').value;
+      const arCtaSecondary = document.getElementById('formArCtaSecondary').value;
+      const arCtaSecondaryLink = document.getElementById('formArCtaSecondaryLink').value;
       const enBadge = document.getElementById('formEnBadge').value;
       const enTitle = document.getElementById('formEnTitle').value;
       const enDesc = document.getElementById('formEnDesc').value;
+      const enCtaPrimary = document.getElementById('formEnCtaPrimary').value;
+      const enCtaPrimaryLink = document.getElementById('formEnCtaPrimaryLink').value;
+      const enCtaSecondary = document.getElementById('formEnCtaSecondary').value;
+      const enCtaSecondaryLink = document.getElementById('formEnCtaSecondaryLink').value;
 
       const slideObj = {
         id: id ? parseInt(id) : (localSlides.length ? Math.max(...localSlides.map(x=>x.id)) + 1 : 1),
         image: img,
-        ar: { badge: arBadge, title: arTitle, description: arDesc, ctaPrimary: 'طلب عرض سعر', ctaPrimaryLink: '#contact', ctaSecondary: 'استكشف خدماتنا', ctaSecondaryLink: '#services' },
-        en: { badge: enBadge, title: enTitle, description: enDesc, ctaPrimary: 'Request a Quote', ctaPrimaryLink: '#contact', ctaSecondary: 'Explore Services', ctaSecondaryLink: '#services' }
+        ar: {
+          badge: arBadge,
+          title: arTitle,
+          description: arDesc,
+          ctaPrimary: arCtaPrimary || 'طلب عرض سعر',
+          ctaPrimaryLink: arCtaPrimaryLink || '#contact',
+          ctaSecondary: arCtaSecondary || 'استكشف خدماتنا',
+          ctaSecondaryLink: arCtaSecondaryLink || '#services'
+        },
+        en: {
+          badge: enBadge,
+          title: enTitle,
+          description: enDesc,
+          ctaPrimary: enCtaPrimary || 'Request a Quote',
+          ctaPrimaryLink: enCtaPrimaryLink || '#contact',
+          ctaSecondary: enCtaSecondary || 'Explore Services',
+          ctaSecondaryLink: enCtaSecondaryLink || '#services'
+        }
       };
 
       if (id) {

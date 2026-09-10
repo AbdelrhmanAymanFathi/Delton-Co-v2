@@ -206,7 +206,7 @@ $isLoggedIn = !empty($_SESSION['delton_admin_logged']);
       <button type="submit" class="w-full py-3 rounded-xl gold-gradient text-[#0B132B] font-bold shadow-lg transition transform hover:-translate-y-0.5">
         دخول لوحة التحكم
       </button>
-      <p class="text-[11px] text-center text-slate-500">كلمة المرور الافتراضية: <code class="text-yellow-400">delton2026</code></p>
+      <p class="text-[11px] text-center text-slate-500">بيانات الدخول محفوظة لدى مدير الموقع فقط</p>
     </form>
   </div>
 
@@ -234,7 +234,8 @@ $isLoggedIn = !empty($_SESSION['delton_admin_logged']);
         <div>
           <!-- Thumbnail & Actions -->
           <div class="w-full h-40 rounded-xl overflow-hidden mb-4 border border-slate-800 relative group bg-slate-900">
-            <img src="../<?php echo htmlspecialchars($s['image']); ?>" alt="Slide" class="w-full h-full object-cover">
+            <?php $thumb = preg_match('#^https?://#i', $s['image']) ? $s['image'] : ('../' . $s['image']); ?>
+            <img src="<?php echo htmlspecialchars($thumb); ?>" alt="Slide" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80'">
             <div class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-bold text-[#C9A227] border border-yellow-500/30">
               شريحة رقم <?php echo $idx + 1; ?>
             </div>
