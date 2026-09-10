@@ -35,8 +35,14 @@ body {
     linear-gradient(180deg, var(--navy-dark) 0%, #0a1427 100%);
   color: var(--text-light);
   overflow-x: hidden;
+  max-width: 100vw;
   font-family: 'Cairo', sans-serif;
   line-height: 1.65;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 [dir="ltr"] body {
@@ -204,6 +210,34 @@ body {
     min-height: 540px;
   }
 
+  .swiper-slide > .container {
+    padding-top: 2.2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .swiper-slide .max-w-3xl {
+    max-width: 100%;
+    gap: 0.9rem !important;
+  }
+
+  .swiper-slide .inline-flex {
+    font-size: 0.7rem !important;
+    padding: 0.45rem 0.75rem !important;
+    gap: 0.45rem !important;
+  }
+
+  .swiper-slide h1 {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em;
+  }
+
+  .swiper-slide p {
+    font-size: 0.9rem !important;
+    line-height: 1.7 !important;
+    max-width: 96%;
+  }
+
   .hero-pagination {
     bottom: 16px !important;
   }
@@ -213,7 +247,8 @@ body {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
-    margin-top: 1.25rem;
+    margin-top: 0.6rem;
+    padding-top: 0.25rem !important;
   }
 
   .hero-cta-primary,
@@ -222,6 +257,9 @@ body {
     justify-content: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    min-height: 48px;
+    font-size: 0.96rem;
+    border-radius: 0.9rem;
   }
 
   .stats-strip {
@@ -448,6 +486,36 @@ body {
   color: var(--navy-dark);
   transform: translateY(-4px);
   box-shadow: 0 10px 25px var(--gold-glow);
+}
+
+@media (max-width: 640px) {
+  .btn-whatsapp-float {
+    left: max(12px, env(safe-area-inset-left));
+    right: auto;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    width: 54px;
+    height: 54px;
+    font-size: 26px;
+  }
+
+  [dir="ltr"] .btn-whatsapp-float {
+    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+  }
+
+  .btn-back-to-top {
+    right: max(12px, env(safe-area-inset-right));
+    left: auto;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  [dir="ltr"] .btn-back-to-top {
+    right: auto;
+    left: max(12px, env(safe-area-inset-left));
+  }
 }
 
 /* Mobile Navigation Drawer */

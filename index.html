@@ -131,20 +131,20 @@
         </a>
       </div>
 
-      <!-- Mobile Controls (Logo + Language + Menu) -->
+      <!-- Mobile Controls (Menu + Language + Logo) -->
       <div class="flex md:hidden items-center justify-between gap-2 w-full">
-        <div class="flex items-center min-w-0">
-          <img src="newlogo.jpeg" alt="Delton" class="mobile-header-logo h-8 w-auto object-contain shrink-0">
-        </div>
+        <button id="mobileMenuToggle" class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center text-lg border border-slate-700 focus:outline-none shrink-0" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
 
-        <button id="langToggleBtnMobile" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 text-[10px] sm:text-xs font-semibold text-yellow-400 border border-slate-700 shrink-0">
+        <button id="langToggleBtnMobile" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 text-[10px] sm:text-xs font-semibold text-yellow-400 border border-slate-700 shrink-0 min-w-[72px]">
           <span>English</span>
           <i class="fa-solid fa-globe text-[10px] sm:text-[11px]"></i>
         </button>
 
-        <button id="mobileMenuToggle" class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center text-lg border border-slate-700 focus:outline-none shrink-0" aria-label="Toggle Mobile Menu">
-          <i class="fa-solid fa-bars-staggered"></i>
-        </button>
+        <div class="flex items-center justify-end min-w-0">
+          <img src="newlogo.jpeg" alt="Delton" class="mobile-header-logo h-8 w-auto object-contain shrink-0">
+        </div>
       </div>
 
     </div>
