@@ -35,14 +35,14 @@ body {
     linear-gradient(180deg, var(--navy-dark) 0%, #0a1427 100%);
   color: var(--text-light);
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
   font-family: 'Cairo', sans-serif;
   line-height: 1.65;
 }
 
 html {
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
 }
 
 [dir="ltr"] body {
@@ -283,18 +283,21 @@ html {
 
 .slide-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
   background-size: cover;
   background-position: center;
-  transform: scale(1.05);
-  transition: transform 7s ease-out;
+  background-repeat: no-repeat;
+  transition: background-size 7s ease-out, width 7s ease-out, height 7s ease-out, top 7s ease-out, left 7s ease-out;
 }
 
 .swiper-slide-active .slide-bg {
-  transform: scale(1);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .slide-overlay {
