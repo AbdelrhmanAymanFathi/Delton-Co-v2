@@ -137,7 +137,7 @@ function renderSlides(slides, currentLang) {
         
         <!-- Slide Content Container -->
         <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 py-16">
-          <div class="max-w-3xl ${isRtl ? 'text-right' : 'text-left'} space-y-6">
+          <div class="max-w-[760px] ${isRtl ? 'text-right' : 'text-left'} space-y-6">
             
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-[#C9A227] text-sm font-semibold tracking-wide">
@@ -146,7 +146,7 @@ function renderSlides(slides, currentLang) {
             </div>
             
             <!-- Title -->
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4.2rem] font-extrabold text-white leading-[1.08] tracking-[-0.03em] max-w-[760px]">
               ${content.title}
             </h1>
             
