@@ -21,6 +21,7 @@ const translations = {
       whyUs: "لماذا تختارنا",
       clients: "شركاء النجاح",
       contact: "اتصل بنا",
+      careers: "الوظائف",
       quoteBtn: "طلب عرض سعر",
       profileDownload: "تحميل البروفايل (PDF)",
       langToggle: "English"
@@ -286,8 +287,57 @@ const translations = {
         errorMsg: "يرجى التأكد من ملء جميع الحقول الإلزامية المطلوبة."
       }
     },
+    careers: {
+      badge: "فرص العمل",
+      title: "انضم إلى فريق ديلتون",
+      subtitle: "نبحث دائماً عن كوادر متميزة تشاركنا الشغف بالتميز التشغيلي وخدمة المنشآت الكبرى.",
+      lead: "قدّم سيرتك الذاتية الآن وسيتواصل معك فريق الموارد البشرية خلال 5 أيام عمل كحد أقصى.",
+      formTitle: "نموذج التقديم على وظيفة",
+      formDesc: "أكمل الحقول التالية وجميع البيانات سيتم التعامل معها بسرية تامة وفق سياسة الخصوصية الخاصة بالشركة.",
+      directTitle: "أو أرسل سيرتك الذاتية مباشرة",
+      directNote: "يمكنك أيضاً إرسال السيرة الذاتية على البريد الإلكتروني الرسمي:",
+      successTitle: "تم استلام طلبك بنجاح!",
+      successMsg: "شكراً لاهتمامك بالانضمام إلينا، سيقوم فريق الموارد البشرية بمراجعة بياناتك والتواصل معك قريباً.",
+      errorTitle: "فشل إرسال الطلب",
+      errorMsg: "حدث خطأ غير متوقع أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر البريد الإلكتروني.",
+      fileError: "الملف المرفق غير صالح أو يتجاوز الحجم المسموح به (5 ميجابايت).",
+      form: {
+        nameLabel: "الاسم بالكامل *",
+        namePlaceholder: "مثال: أحمد محمد علي",
+        phoneLabel: "رقم الهاتف / الواتساب *",
+        phonePlaceholder: "010xxxxxxxx",
+        emailLabel: "البريد الإلكتروني *",
+        emailPlaceholder: "name@example.com",
+        positionLabel: "الوظيفة المتقدم لها *",
+        positionPlaceholder: "اكتب الوظيفة أو اختر من الاقتراحات",
+        cityLabel: "المحافظة / المدينة *",
+        cityPlaceholder: "مثال: القاهرة - المعادي",
+        experienceLabel: "سنوات الخبرة",
+        qualificationLabel: "المؤهل الدراسي",
+        qualificationPlaceholder: "مثال: بكالوريوس تجارة",
+        cvLabel: "إرفاق السيرة الذاتية (CV) - اختياري",
+        cvNote: "صيغ مسموحة: PDF, DOC, DOCX, JPG, PNG - بحد أقصى 5 ميجابايت",
+        messageLabel: "نبذة عن خبراتك (اختياري)",
+        messagePlaceholder: "اكتب نبذة مختصرة عن خبراتك السابقة وأي مهارات تميزك...",
+        submitBtn: "إرسال طلب التقديم",
+        submitting: "جاري الإرسال...",
+        requiredError: "يرجى التأكد من ملء جميع الحقول الإلزامية بشكل صحيح."
+      },
+      experiences: ["بدون خبرة", "أقل من سنة", "1 - 3 سنوات", "3 - 5 سنوات", "أكثر من 5 سنوات"],
+      jobRoles: [
+        "عامل نظافة", "عامل تعقيم", "عامل نظافة واجهات", "فني صيانة عامة", "فني تكييف",
+        "فني كهرباء", "فني سباكة", "عامل مسطحات خضراء", "بستاني", "شيف", "باريستا",
+        "عامل بوفيه", "سائق", "أعمال أمن", "محاسب", "موظف موارد بشرية", "موظف إداري",
+        "مهندس ميكانيكا", "مهندس كهرباء", "منسق مشاريع", "مشرف موقع"
+      ],
+      governorates: [
+        "القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "الشرقية", "الغربية", "المنوفية",
+        "القليوبية", "الفيوم", "بني سويف", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر",
+        "أسوان", "البحر الأحمر", "بورسعيد", "الإسماعيلية", "السويس", "دمياط", "كفر الشيخ",
+        "مطروح", "شمال سيناء", "جنوب سيناء", "الوادي الجديد"
+      ]
+    },
     footer: {
-      aboutText: "شركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت لكافة المؤسسات والشركات في جمهورية مصر العربية.",
       quickLinks: "روابط سريعة",
       ourServices: "خدماتنا الأساسية",
       srvMaintenance: "الإدارة والصيانة الفنية",
@@ -322,6 +372,7 @@ const translations = {
       whyUs: "Why Delton",
       clients: "Our Clients",
       contact: "Contact Us",
+      careers: "Careers",
       quoteBtn: "Request a Quote",
       profileDownload: "Download Profile (PDF)",
       langToggle: "العربية"
@@ -586,6 +637,56 @@ const translations = {
         successMsg: "Thank you for reaching out to Delton! Your request has been received, and our Commercial Sector team will contact you within 24 hours.",
         errorMsg: "Please ensure all required fields are correctly completed."
       }
+    },
+    careers: {
+      badge: "Career Opportunities",
+      title: "Join the Delton Team",
+      subtitle: "We are always looking for talented professionals who share our passion for operational excellence.",
+      lead: "Submit your application now and our HR team will get back to you within a maximum of 5 working days.",
+      formTitle: "Job Application Form",
+      formDesc: "Complete the fields below. All data is treated with strict confidentiality in line with our privacy policy.",
+      directTitle: "Or send your CV directly",
+      directNote: "You can also email your resume to our official inbox:",
+      successTitle: "Application Received!",
+      successMsg: "Thank you for applying. Our HR team will review your details and contact you soon.",
+      errorTitle: "Submission Failed",
+      errorMsg: "An unexpected error occurred. Please try again or contact us directly by email.",
+      fileError: "The attached file is invalid or exceeds the allowed size (5 MB).",
+      form: {
+        nameLabel: "Full Name *",
+        namePlaceholder: "e.g. Ahmed Mohamed Ali",
+        phoneLabel: "Phone / WhatsApp *",
+        phonePlaceholder: "010xxxxxxxx",
+        emailLabel: "Email Address *",
+        emailPlaceholder: "name@example.com",
+        positionLabel: "Position Applied For *",
+        positionPlaceholder: "Type the role or choose from suggestions",
+        cityLabel: "Governorate / City *",
+        cityPlaceholder: "e.g. Cairo - Maadi",
+        experienceLabel: "Years of Experience",
+        qualificationLabel: "Academic Qualification",
+        qualificationPlaceholder: "e.g. B.Sc. Commerce",
+        cvLabel: "Attach Resume (CV) - Optional",
+        cvNote: "Allowed formats: PDF, DOC, DOCX, JPG, PNG - max 5 MB",
+        messageLabel: "About Your Experience (Optional)",
+        messagePlaceholder: "Write a short summary of your experience and key skills...",
+        submitBtn: "Submit Application",
+        submitting: "Submitting...",
+        requiredError: "Please make sure all required fields are filled in correctly."
+      },
+      experiences: ["No experience", "Less than 1 year", "1 - 3 years", "3 - 5 years", "More than 5 years"],
+      jobRoles: [
+        "Cleaner", "Sanitization Worker", "Facade Cleaner", "General Maintenance Technician", "HVAC Technician",
+        "Electrician", "Plumber", "Landscape Worker", "Gardener", "Chef", "Barista",
+        "Pantry Worker", "Driver", "Security", "Accountant", "HR Officer", "Administrative Officer",
+        "Mechanical Engineer", "Electrical Engineer", "Project Coordinator", "Site Supervisor"
+      ],
+      governorates: [
+        "Cairo", "Giza", "Alexandria", "Dakahlia", "Sharqia", "Gharbia", "Monufia",
+        "Qalyubia", "Faiyum", "Beni Suef", "Minya", "Asyut", "Sohag", "Qena", "Luxor",
+        "Aswan", "Red Sea", "Port Said", "Ismailia", "Suez", "Damietta", "Kafr El Sheikh",
+        "Matrouh", "North Sinai", "South Sinai", "New Valley"
+      ]
     },
     footer: {
       aboutText: "An Egyptian Joint Stock Company specialized in delivering integrated facility management services to leading organizations across Egypt.",

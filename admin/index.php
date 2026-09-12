@@ -17,6 +17,7 @@ $HERO_DIR      = "assets/images/hero/";
 $SERVICES_DIR  = "assets/images/services/";
 $CLIENTS_DIR   = "assets/images/clientLogo/";
 $BRAND_DIR     = "assets/images/brand/";
+$APPLICATIONS_JSON = __DIR__ . "/applications.json";
 
 // ======================= HELPERS =======================
 function req($k, $def = '') {
@@ -380,6 +381,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $msg = $ok ? "تم حفظ الإعدادات بنجاح!" : "خطأ في الحفظ";
         }
 
+        // ---------- JOB APPLICATIONS ----------
+        if ($_POST['action'] === 'delete_application') {
+            $apps = json_load($APPLICATIONS_JSON) ?: [];
+            $del = req('delete_id');
+            $apps = array_values(array_filter($apps, function ($a) use ($del) { return ($a['id'] ?? '') !== $del; }));
+            $ok = json_save($APPLICATIONS_JSON, $apps);
+            $msg = $ok ? "تم حذف الطلب بنجاح!" : "خطأ في الحذف";
+        }
+
         if ($ok) { $message = $msg; $messageType = "success"; }
         elseif ($msg !== "") { $message = $msg; $messageType = "error"; }
     }
@@ -387,7 +397,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 $isLoggedIn = !empty($_SESSION['delton_admin_logged']);
 $tab = isset($_GET['tab']) ? preg_replace('/[^a-z0-9_]/', '', $_GET['tab']) : 'slider';
-$allowedTabs = ['slider', 'services', 'whyus', 'clients', 'stats', 'about', 'settings'];
+$allowedTabs = ['slider', 'services', 'whyus', 'clients', 'stats', 'about', 'settings', 'applications'];
 if (!in_array($tab, $allowedTabs)) $tab = 'slider';
 
 $slides = json_load($SLIDER_JSON) ?: [];
@@ -552,6 +562,7 @@ $slides = json_load($SLIDER_JSON) ?: [];
         'stats'    => ['fa-chart-simple', 'الإحصائيات'],
         'about'    => ['fa-building-circle-check', 'عن ديلتون'],
         'settings' => ['fa-gear', 'الإعدادات والاتصال'],
+        'applications' => ['fa-briefcase', 'طلبات التوظيف'],
     ];
     foreach ($tabs as $key => $info):
     ?>
@@ -929,6 +940,99 @@ $slides = json_load($SLIDER_JSON) ?: [];
 
         <button class="px-6 py-3 rounded-xl gold-gradient text-[#0B132B] font-bold text-sm shadow-lg">حفظ الإعدادات</button>
       </form>
+
+    <!-- ================================================================
+         TAB: JOB APPLICATIONS
+    ================================================================= -->
+    <?php elseif ($tab === 'applications'):
+          $apps = json_load($APPLICATIONS_JSON) ?: [];
+          $apps = array_reverse($apps);
+    ?>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-briefcase text-[#C9A227]"></i> طلبات التوظيف (<?php echo count($apps); ?>)</h2>
+        <a href="?tab=applications" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold border border-slate-700">
+          <i class="fa-solid fa-rotate text-[#C9A227]"></i> تحديث
+        </a>
+      </div>
+
+      <?php if (empty($apps)): ?>
+        <div class="p-10 rounded-2xl bg-[#111C38] border border-dashed border-slate-700 text-center">
+          <i class="fa-solid fa-inbox text-4xl text-slate-600 mb-3"></i>
+          <p class="text-sm text-slate-400">لا توجد طلبات توظيف حتى الآن. ستظهر الطلبات هنا فور تقديم المتقدمين عبر صفحة "الوظائف" على الموقع، وتصلك نسخة بريدياً على info@delton-eg.com.</p>
+        </div>
+      <?php else: ?>
+        <div class="space-y-5">
+          <?php foreach ($apps as $a):
+            $created = !empty($a['created_at']) ? date('d/m/Y h:i A', strtotime($a['created_at'])) : '';
+            $hasCv = !empty($a['cv']);
+          ?>
+          <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition shadow-xl">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-lg shrink-0">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div class="min-w-0">
+                  <h3 class="text-sm font-bold text-white truncate"><?php echo e($a['name'] ?? ''); ?></h3>
+                  <p class="text-[11px] text-[#C9A227] font-semibold"><?php echo e($a['position'] ?? ''); ?></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <?php if ($hasCv): ?>
+                <a href="../<?php echo e($a['cv']); ?>" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 text-[11px] font-bold border border-emerald-500/30">
+                  <i class="fa-solid fa-file-arrow-down"></i> السيرة الذاتية
+                </a>
+                <?php endif; ?>
+                <form method="POST" onsubmit="return confirm('حذف هذا الطلب؟');">
+                  <input type="hidden" name="action" value="delete_application">
+                  <input type="hidden" name="delete_id" value="<?php echo e($a['id'] ?? ''); ?>">
+                  <button class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[11px] font-semibold border border-red-500/30">
+                    <i class="fa-solid fa-trash"></i> حذف
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px]">
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-phone text-[#C9A227]"></i> الهاتف / الواتساب</p>
+                <p class="text-slate-200 font-semibold" dir="ltr"><?php echo e($a['phone'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-envelope text-[#C9A227]"></i> البريد الإلكتروني</p>
+                <p class="text-slate-200 font-semibold truncate" dir="ltr"><?php echo e($a['email'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-map-location-dot text-[#C9A227]"></i> المحافظة</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($a['city'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-calendar-days text-[#C9A227]"></i> تاريخ التقديم</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($created); ?></p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-[11px]">
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-user-graduate text-[#C9A227]"></i> المؤهل</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($a['qualification'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-award text-[#C9A227]"></i> سنوات الخبرة</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($a['experience'] ?? ''); ?></p>
+              </div>
+            </div>
+
+            <?php if (!empty($a['message'])): ?>
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 mt-3">
+              <p class="text-slate-500 mb-1 text-[11px]"><i class="fa-solid fa-message text-[#C9A227]"></i> نبذة عن المتقدم</p>
+              <p class="text-slate-300 leading-relaxed" style="white-space:pre-line"><?php echo e($a['message']); ?></p>
+            </div>
+            <?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
 
     <?php endif; ?>
   </main>
