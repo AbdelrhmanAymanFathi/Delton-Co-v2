@@ -1,0 +1,790 @@
+{
+    "branding": {
+        "navbar": {
+            "image": "newlogo.jpeg",
+            "width": "110",
+            "height": "56"
+        },
+        "footer": {
+            "image": "assets/images/logoFooter.png",
+            "width": "150",
+            "height": "56"
+        }
+    },
+    "stats": [
+        {
+            "ar": {
+                "num": "2019",
+                "label": "سنة التأسيس",
+                "desc": "شركة مساهمة مصرية رائدة"
+            },
+            "en": {
+                "num": "2019",
+                "label": "Year Founded",
+                "desc": "Leading Egyptian Joint-Stock Company"
+            }
+        },
+        {
+            "ar": {
+                "num": "+18",
+                "label": "شراكات استراتيجية",
+                "desc": "بنوك ومؤسسات سيادية وكبرى"
+            },
+            "en": {
+                "num": "+18",
+                "label": "Strategic Partnerships",
+                "desc": "Major Banks & Sovereign Entities"
+            }
+        },
+        {
+            "ar": {
+                "num": "24/7",
+                "label": "جاهزية ودعم فني",
+                "desc": "فرق مقيمة واستجابة فورية"
+            },
+            "en": {
+                "num": "24/7",
+                "label": "Technical Readiness",
+                "desc": "Resident Technicians & Rapid Response"
+            }
+        },
+        {
+            "ar": {
+                "num": "100%",
+                "label": "تغطية جغرافية",
+                "desc": "كافة أنحاء جمهورية مصر العربية"
+            },
+            "en": {
+                "num": "100%",
+                "label": "National Coverage",
+                "desc": "Across All Governorates of Egypt"
+            }
+        }
+    ],
+    "services": {
+        "header": {
+            "ar": {
+                "badge": "محفظة الخدمات",
+                "title": "حلول شاملة ومتكاملة لإدارة المنشآت (FM Solutions)",
+                "subtitle": "نقدم حلولاً متكاملة لإدارة المرافق، يمكننا توفيرها بشكل جزئي أو كلي بحسب احتياجات مؤسستكم وطبيعة عملياتكم.",
+                "viewDetails": "عرض التفاصيل والمهام",
+                "closeModal": "إغلاق",
+                "requestService": "طلب هذه الخدمة الآن"
+            },
+            "en": {
+                "badge": "Services Portfolio",
+                "title": "Comprehensive Integrated Facility Management (FM Solutions)",
+                "subtitle": "We deliver complete facility management solutions, providable partially or turn-key according to your organizational requirements.",
+                "viewDetails": "View Details & Scope",
+                "closeModal": "Close",
+                "requestService": "Request This Service Now"
+            }
+        },
+        "items": [
+            {
+                "id": "maintenance",
+                "icon": "fa-screwdriver-wrench",
+                "image": "assets/images/services/service-maintenance.jpg",
+                "gallery": [
+                    "assets/images/services/service-maintenance.jpg",
+                    "assets/images/services/service-maintenance-2.jpg"
+                ],
+                "ar": {
+                    "title": "الإدارة والصيانة الفنية",
+                    "shortDesc": "صيانة شاملة للتكييفات، الكهرباء، والسباكة عبر فنيين مقيمين أو حسب الطلب لضمان استمرارية التشغيل.",
+                    "modalTitle": "الإدارة والتشغيل وحلول الصيانة الهندسية المتكاملة",
+                    "overview": "نضمن استمرارية أعمالكم دون انقطاع عبر برامج الصيانة الوقائية والتصحيحية لكافة الأنظمة الكهروميكانيكية، مدعومة بفرق هندسية وفنية معتمدة تلبي أعلى معايير الجودة والسلامة.",
+                    "tasks": [
+                        "صيانة منظومات التكييف بكافة أنواعها (Chillers, VRV/VRF, Package, Split).",
+                        "صيانة اللوحات الكهربائية، المولدات، شبكات الإنارة، وأنظمة التيار الخفيف (Low Current).",
+                        "إصلاح وصيانة شبكات السباكة، مضخات المياه، خطوط الصرف، ومصائد الشحوم.",
+                        "توفير أطقم فنية مقيمة (Resident Technicians) في الموقع أو فرق دعم سريع حسب الطلب 24/7.",
+                        "إجراء الفحوصات الدورية والاختبارات الوقائية المجدولة للأجهزة والمعدات الحيوية."
+                    ],
+                    "equipment": "أجهزة فحص حراري دقيقة، قطع غيار أصلية، فرق صيانة متنقلة ومجهزة بالكامل."
+                },
+                "en": {
+                    "title": "Technical Management & Maintenance",
+                    "shortDesc": "Air conditioning, electrical, and plumbing maintenance with resident or on-demand certified technicians.",
+                    "modalTitle": "Integrated Engineering Maintenance & Technical Management",
+                    "overview": "We ensure uninterrupted business continuity through proactive preventive and reactive corrective maintenance programs across all electromechanical infrastructure, backed by certified engineering teams.",
+                    "tasks": [
+                        "Preventive and emergency servicing of HVAC systems (Chillers, VRV/VRF, Package, Split units).",
+                        "Electrical distribution boards, backup diesel generators, low current networks, and lighting systems.",
+                        "Water supply networks, booster pumps, drainage lines, grease traps, and plumbing systems.",
+                        "Dedicated on-site resident technicians or mobile rapid-response teams available 24/7.",
+                        "Scheduled preventive diagnostic tests for critical electromechanical assets."
+                    ],
+                    "equipment": "High-precision thermal imaging cameras, OEM replacement parts, fully equipped mobile workshop units."
+                }
+            },
+            {
+                "id": "cleaning",
+                "icon": "fa-broom",
+                "image": "assets/images/services/service-cleaning.jpg",
+                "gallery": [
+                    "assets/images/services/service-cleaning.jpg",
+                    "assets/images/services/service-cleaning-2.jpg"
+                ],
+                "ar": {
+                    "title": "خدمات النظافة والتعقيم المتكاملة",
+                    "shortDesc": "نظافة داخلية وخارجية شاملة للمباني والواجهات، وتنظيف متخصص لماكينات الصراف الآلي (ATM).",
+                    "modalTitle": "خدمات النظافة الشاملة، الواجهات وماكينات الصراف الآلي",
+                    "overview": "نقدم خدمات النظافة والتعقيم وفق بروتوكولات فندقية صارمة تشمل المباني الإدارية، المراكز التجارية، الفروع المصرفية، والصروح الطبية، بإشراف أطقم مدربة وخامات معتمدة دولياً.",
+                    "tasks": [
+                        "النظافة الداخلية اليومية والشاملة للمكاتب، القاعات، والممرات ومناطق الاستقبال.",
+                        "تنظيف وجلي وتلميع الأرضيات (رخام، جرانيت، باركيه) بأحدث الماكينات الدوارة.",
+                        "نظافة الواجهات الخارجية (زجاج، كلادينج، واجهات حجرية) باستخدام أوناش ومعدات سلامة متطورة.",
+                        "تنظيف وتطهير ماكينات الصراف الآلي (ATM) داخل وخارج الفروع وتلميع الشاشات واللوحات بإتقان.",
+                        "التعقيم المستمر لنقاط التلامس ودورات المياه بمطهرات معتمدة وصديقة للبيئة."
+                    ],
+                    "equipment": "ماكينات Kärcher ألمانية، رافعات هيدروليكية، مواد تعقيم ومطهرات معتمدة صحياً."
+                },
+                "en": {
+                    "title": "Integrated Cleaning & Sanitation",
+                    "shortDesc": "Interior, exterior, and high-rise facade cleaning plus specialized ATM sanitation under Delton supervision.",
+                    "modalTitle": "Commercial Cleaning, Facade Maintenance & ATM Sanitization",
+                    "overview": "We execute commercial cleaning and sanitization following rigorous hospitality standards across corporate headquarters, shopping malls, banking branches, and medical facilities, led by qualified supervisors.",
+                    "tasks": [
+                        "Daily deep cleaning of executive offices, workstations, conference rooms, and reception lobbies.",
+                        "Rotary mechanical polishing, crystallization, and sealing of marble, granite, and parquet floors.",
+                        "Exterior glass and alucobond facade cleaning utilizing modern scaffolding, cradles, and safety rigging.",
+                        "Specialized sanitization of Automatic Teller Machines (ATMs) inside and outside branches.",
+                        "Continuous touch-point sanitization and restroom hygiene using hospital-grade certified disinfectants."
+                    ],
+                    "equipment": "German Kärcher industrial scrubbers, hydraulic cherry pickers, certified eco-friendly disinfectants."
+                }
+            },
+            {
+                "id": "landscaping",
+                "icon": "fa-tree",
+                "image": "assets/images/services/service-landscaping.jpg",
+                "gallery": [
+                    "assets/images/services/service-landscaping.jpg",
+                    "assets/images/services/service-landscaping-2.jpg"
+                ],
+                "ar": {
+                    "title": "تنسيق وعناية المسطحات الخضراء",
+                    "shortDesc": "إنشاء وتصميم المسطحات الخضراء والعناية والمتابعة الدورية بها داخل وخارج المنشأة.",
+                    "modalTitle": "تصميم، إنشاء والعناية الدورية بالمسطحات الخضراء",
+                    "overview": "فريق زراعي متخصص مسؤول عن إضفاء الطابع الجمالي والبيئي المستدام لمنشآتكم من خلال تصميم وتنسيق الحدائق والمساحات الخضراء ومتابعتها بصورة دورية دقيقة.",
+                    "tasks": [
+                        "تصميم وتنفيذ الحدائق الخارجية واللاندسكيب للمقرات الإدارية والمجمعات.",
+                        "تركيب وصيانة شبكات الري الحديثة (الري بالتنقيط والرشاشات الأوتوماتيكية).",
+                        "القص والتهذيب الدوري للنجيل والشجيرات والأسيجة النباتية بجدول زمني منتظم.",
+                        "التسميد العضوي ومكافحة الآفات الزراعية بمبيدات مرخصة وآمنة بيئياً.",
+                        "توريد ورعاية نباتات الزينة الداخلية للمكاتب وصالات الاستقبال والاجتماعات."
+                    ],
+                    "equipment": "أجهزة ومقصات هيدروليكية، شبكات ري ذكية، بيوت محمية ونباتات فاخرة."
+                },
+                "en": {
+                    "title": "Landscaping & Green Area Care",
+                    "shortDesc": "Landscape design, establishment, and ongoing care for every green space around and within your facility.",
+                    "modalTitle": "Design, Construction & Sustained Landscape Care",
+                    "overview": "Our specialized agricultural engineering team enriches your corporate identity by designing, creating, and meticulously maintaining aesthetic, sustainable green environments indoors and outdoors.",
+                    "tasks": [
+                        "Architectural landscape design and softscape construction for corporate complexes.",
+                        "Smart irrigation system installation and routine maintenance (automated drip and pop-up sprinklers).",
+                        "Scheduled mowing, topiary hedge trimming, pruning, and seasonal floral renewal.",
+                        "Organic fertilization and soil treatment using environmentally authorized pest control agents.",
+                        "Interior plant cultivation, botanical styling for VIP boardrooms, executive corridors, and entrance lobbies."
+                    ],
+                    "equipment": "Commercial hydraulic mowers, automated irrigation timers, pest management sprayers."
+                }
+            },
+            {
+                "id": "supplies",
+                "icon": "fa-boxes-packing",
+                "image": "assets/images/services/service-supplies.jpg",
+                "gallery": [
+                    "assets/images/services/service-supplies.jpg",
+                    "assets/images/services/service-supplies-2.jpg"
+                ],
+                "ar": {
+                    "title": "التوريدات التشغيلية والتوظيف (Outsourcing)",
+                    "shortDesc": "توريد الأثاث المكتبي ومستلزمات النظافة والبوفيه، وتوظيف وتوريد العمالة المتخصصة للشركات.",
+                    "modalTitle": "التوريدات التشغيلية الشاملة وإسناد الكوادر البشرية",
+                    "overview": "نلبي كافة الاحتياجات اللوجستية والتشغيلية لمؤسستكم من التوريدات المكتبية والخامات، إلى جانب حلول التوظيف وتوريد الكوادر البشرية المتخصصة بأعلى معايير الانضباط والكفاءة.",
+                    "tasks": [
+                        "توريد الأثاث المكتبي العصري، المكاتب التنفيذية، وحدات العمل وقاعات المؤتمرات.",
+                        "توفير خامات وأدوات النظافة عالية الجودة وموزعات المناديل والمطهرات بالجملة.",
+                        "توريد مستلزمات البوفيه اليومية وخامات الضيافة بجودة ممتازة وأسعار تنافسية.",
+                        "توظيف وتوريد العمالة المتخصصة والمدربة (Outsourcing) لصالح كبرى المؤسسات.",
+                        "إدارة ملفات التأمينات، الرواتب، والتدريب المهني للعمالة المسندة بالكامل."
+                    ],
+                    "equipment": "سلاسل إمداد موثوقة، مستودعات تخزين مجهزة، أسطول نقل لوجستي سريع."
+                },
+                "en": {
+                    "title": "Supplies & Manpower Outsourcing",
+                    "shortDesc": "Office furniture, cleaning tools, pantry provisions, and specialized workforce outsourcing for major companies.",
+                    "modalTitle": "Turnkey Operational Logistics & Human Capital Outsourcing",
+                    "overview": "We streamline your operational supply chain and human capital requirements, providing high-standard supplies alongside certified personnel outsourcing with full legal and administrative compliance.",
+                    "tasks": [
+                        "Executive office furniture, ergonomic workstations, boardroom setups, and modular furnishings.",
+                        "Commercial janitorial equipment, paper dispensers, certified detergents, and PPE supplies.",
+                        "Pantry provisions, specialty coffees, hospitality consumables, and pantry machinery.",
+                        "Sourcing, vetting, and outsourcing specialized labor and technical staff for corporate clients.",
+                        "Complete payroll, social insurance, labor law compliance, and vocational training management."
+                    ],
+                    "equipment": "Verified procurement pipelines, central temperature-controlled storage, express distribution fleet."
+                }
+            },
+            {
+                "id": "hospitality",
+                "icon": "fa-mug-hot",
+                "image": "assets/images/services/service-hospitality.jpg",
+                "gallery": [
+                    "assets/images/services/service-hospitality.jpg",
+                    "assets/images/services/service-hospitality-2.jpg"
+                ],
+                "ar": {
+                    "title": "إدارة خدمات الضيافة والبوفيه",
+                    "shortDesc": "إدارة متكاملة للمطابخ والكافيتريات وتوفير عمال المطبخ والخامات وفق أعلى معايير الجودة.",
+                    "modalTitle": "إدارة المطابخ والكافيتريات وخدمات الضيافة المؤسسية",
+                    "overview": "نقدم تجربة ضيافة راقية تعكس وقار مؤسستكم أمام ضيوفكم وموظفيكم، عبر إدارة احترافية للمطابخ والكافيتريات بأطقم مدربة على أصول الضيافة الفندقية.",
+                    "tasks": [
+                        "إدارة وتشغيل مطابخ وكافيتريات الشركات والمقرات الإدارية بالكامل.",
+                        "توفير شيفات، باريستا، وعمال بوفيه مدربين على اللياقة والمظهر المهني واللباقة.",
+                        "توفير الخامات الغذائية الطازجة والمشروبات الساخنة والباردة بعقود دورية منتظمة.",
+                        "تجهيز بوفيهات الاجتماعات الوزارية والتنفيذية والفعاليات والمؤتمرات الرسمية.",
+                        "تطبيق معايير السلامة الغذائية العالمية (HACCP) والنظافة الفائقة لكافة الأدوات."
+                    ],
+                    "equipment": "معدات طهي وإعداد ستانلس ستيل معتمدة، ماكينات قهوة إيطالية احترافية."
+                },
+                "en": {
+                    "title": "Corporate Hospitality Services",
+                    "shortDesc": "Integrated management of corporate kitchens, cafeterias, hospitality personnel, and complete provisions.",
+                    "modalTitle": "Corporate Cafeteria Operations & Executive Hospitality Services",
+                    "overview": "Delivering an upscale hospitality experience that represents your corporate prestige before clients and staff, managing corporate kitchens with hotel-grade etiquette and food hygiene.",
+                    "tasks": [
+                        "Complete management and day-to-day operation of corporate cafeterias and executive dining halls.",
+                        "Supplying certified executive chefs, professional baristas, and courteous hospitality staff.",
+                        "Sourcing fresh culinary ingredients, gourmet hot and cold beverages under scheduled agreements.",
+                        "Executive catering for board meetings, ministerial delegations, summits, and VIP events.",
+                        "Rigorous HACCP food safety protocols and sterile kitchen sanitation practices."
+                    ],
+                    "equipment": "Commercial stainless steel culinary gear, professional Italian espresso machines, warming units."
+                }
+            },
+            {
+                "id": "renovation",
+                "icon": "fa-building",
+                "image": "assets/images/services/service-renovation.jpg",
+                "gallery": [
+                    "assets/images/services/service-renovation.jpg",
+                    "assets/images/services/service-renovation-2.jpg"
+                ],
+                "ar": {
+                    "title": "أعمال المقاولات والتجديدات",
+                    "shortDesc": "تنفيذ أعمال المقاولات المتكاملة والتجديدات للمباني الإدارية والفروع التجارية وفق أعلى المواصفات.",
+                    "modalTitle": "أعمال المقاولات والتجديدات والتشطيبات المعمارية",
+                    "overview": "فريق هندسي متخصص في تنفيذ أعمال المقاولات الشاملة والتجديدات وإعادة تهيئة المقرات الإدارية والفروع المصرفية والتجارية، مع الالتزام التام بالجداول الزمنية والمواصفات القياسية.",
+                    "tasks": [
+                        "تنفيذ أعمال المقاولات المتكاملة والإنشاءات التكميلية لمنشأتكم.",
+                        "التجديدات المعمارية والتشطيبات الداخلية المخططة وفقاً لمتطلبات التشغيل.",
+                        "تعديل وتجهيز المساحات المكتبية والقواطع والأسقف المعلقة والأرضيات.",
+                        "أعمال العزل المائي والحراري والدهانات الديكورية المقاومة للعوامل الجوية.",
+                        "إدارة مراحل المشروع والتسليم بأعلى معايير الجودة وضمان الأعمال."
+                    ],
+                    "equipment": "معدات بناء وتشطيب متطورة، خامات معتمدة طبقاً للمواصفات القياسية المصرية."
+                },
+                "en": {
+                    "title": "Renovation & Contracting Works",
+                    "shortDesc": "Integrated contracting and renovation for administrative buildings, corporate premises, and commercial branches.",
+                    "modalTitle": "Turnkey General Contracting, Renovation & Architectural Fit-Out",
+                    "overview": "Specialized engineering and construction solutions for turnkey fit-out, architectural renovations, and spatial restructuring of administrative facilities and branches, strictly aligned with operational schedules.",
+                    "tasks": [
+                        "Complete contracting works and auxiliary constructions tailored for your facility.",
+                        "Architectural renovations and interior remodeling planned around operational needs.",
+                        "Spatial reconfiguration, drywall partitions, acoustic ceilings, and flooring solutions.",
+                        "Thermal and moisture waterproofing, exterior facade coating, and durable finishes.",
+                        "End-to-end project management, quality assurance, and formal handover protocols."
+                    ],
+                    "equipment": "Modern precision construction machinery, certified construction materials meeting Egyptian standards."
+                }
+            }
+        ]
+    },
+    "whyUs": {
+        "header": {
+            "ar": {
+                "badge": "لماذا ديلتون؟",
+                "title": "معايير استثنائية تجعلنا خيار كبرى البنوك والمؤسسات",
+                "subtitle": "نحن لا نقدم مجرد خدمات اعتيادية، بل نبني شراكات نجاح طويلة الأمد ترتكز على الشفافية والالتزام."
+            },
+            "en": {
+                "badge": "Why Choose Delton",
+                "title": "Exceptional Standards Trusted by Premier Institutions",
+                "subtitle": "We don't merely provide services; we cultivate enduring partnerships founded on transparency, safety, and operational excellence."
+            }
+        },
+        "cards": [
+            {
+                "icon": "fa-award",
+                "ar": {
+                    "title": "خبرة وسجل إنجازات موثوق",
+                    "desc": "منذ عام 2019 نجحنا في كسب ثقة كبرى الهيئات القضائية والبنوك والمؤسسات الصناعية الرائدة في مصر."
+                },
+                "en": {
+                    "title": "Proven Track Record",
+                    "desc": "Since 2019, we have earned the trust of supreme judicial courts, central banks, and multinational industrial giants."
+                }
+            },
+            {
+                "icon": "fa-user-gear",
+                "ar": {
+                    "title": "كوادر فنية متخصصة ومقيمة",
+                    "desc": "أطقم عمل مدربة تخضع لإشراف فني مستمر، مع إمكانية تواجد فنيين مقيمين بالمبنى لضمان عدم توقف الأعمال."
+                },
+                "en": {
+                    "title": "Certified Resident Technicians",
+                    "desc": "Vetted, continually supervised technical workforce with options for full-time resident teams on your premises."
+                }
+            },
+            {
+                "icon": "fa-map-location-dot",
+                "ar": {
+                    "title": "تغطية شاملة لجمهورية مصر",
+                    "desc": "قدرة لوجستية على خدمة فروعكم ومقراتكم عبر كافة المحافظات والمدن الجديدة بذات الجودة والجاهزية."
+                },
+                "en": {
+                    "title": "Nationwide Coverage",
+                    "desc": "Full operational capability to serve headquarters and branch networks across all Egyptian governorates."
+                }
+            },
+            {
+                "icon": "fa-shield-halved",
+                "ar": {
+                    "title": "اتفاقيات أداء ومستوى خدمة (SLA)",
+                    "desc": "عقود واضحة ومحددة تتضمن مؤشرات أداء دقيقة (KPIs) تضمن حقوقكم واستجابة فورية لأي طوارئ."
+                },
+                "en": {
+                    "title": "Strict SLAs & Measurable KPIs",
+                    "desc": "Clear contractual frameworks with measurable performance indicators guaranteeing fast emergency resolution."
+                }
+            },
+            {
+                "icon": "fa-hand-holding-dollar",
+                "ar": {
+                    "title": "كفاءة اقتصادية وترشيد تكاليف",
+                    "desc": "حلول تشغيلية مدروسة تمنع الهدر وتقلل تكاليف الاستهلاك والصيانة على المدى الطويل دون المساس بالجودة."
+                },
+                "en": {
+                    "title": "Cost Efficiency & Asset Longevity",
+                    "desc": "Systematic preventive maintenance schedules that prevent asset degradation and trim unnecessary operational expenditures."
+                }
+            },
+            {
+                "icon": "fa-headset",
+                "ar": {
+                    "title": "متابعة وإشراف على مدار الساعة",
+                    "desc": "غرفة عمليات وخدمة عملاء نشطة على مدار الساعة لتقديم الدعم الفوري ومتابعة خطط التشغيل."
+                },
+                "en": {
+                    "title": "24/7 Command Center",
+                    "desc": "Always-on dispatch center and customer service monitoring technical operations and emergency dispatches round the clock."
+                }
+            }
+        ]
+    },
+    "clients": [
+        {
+            "id": "cbe",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/cbe.svg",
+            "ar": {
+                "name": "البنك المركزي المصري"
+            },
+            "en": {
+                "name": "Central Bank of Egypt"
+            }
+        },
+        {
+            "id": "aaib",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/arab african international bank.png",
+            "ar": {
+                "name": "البنك العربي الأفريقي الدولي"
+            },
+            "en": {
+                "name": "Arab African Int. Bank"
+            }
+        },
+        {
+            "id": "albaraka",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/bank Elbarka.svg",
+            "ar": {
+                "name": "بنك البركة مصر"
+            },
+            "en": {
+                "name": "Al Baraka Bank Egypt"
+            }
+        },
+        {
+            "id": "wu",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/wu.svg",
+            "ar": {
+                "name": "ويسترن يونيون (IPAG)"
+            },
+            "en": {
+                "name": "Western Union (IPAG)"
+            }
+        },
+        {
+            "id": "cib-brokerage",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/ci capital.jpeg",
+            "ar": {
+                "name": "شركة التجاري الدولي للسمسرة"
+            },
+            "en": {
+                "name": "CIB Brokerage"
+            }
+        },
+        {
+            "id": "cib-underwriting",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/التجاري الدولي لترويج وتغطية الاكتتاب.jpeg",
+            "ar": {
+                "name": "التجاري الدولي لترويج وتغطية الاكتتاب"
+            },
+            "en": {
+                "name": "CIB Promotion & Underwriting"
+            }
+        },
+        {
+            "id": "misr-capital",
+            "sector": "banking",
+            "image": "assets/images/clientLogo/misr-capital.png",
+            "ar": {
+                "name": "شركة مصر كابيتال للوساطة"
+            },
+            "en": {
+                "name": "Misr Capital for Brokerage"
+            }
+        },
+        {
+            "id": "supreme-court",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/supreme-court.png",
+            "ar": {
+                "name": "المحكمة الدستورية العليا"
+            },
+            "en": {
+                "name": "Supreme Constitutional Court"
+            }
+        },
+        {
+            "id": "ncmp",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/NCMP.jpg",
+            "ar": {
+                "name": "الشركة الوطنية لمنتجات الذرة (NCMP)"
+            },
+            "en": {
+                "name": "National Maize Products (NCMP)"
+            }
+        },
+        {
+            "id": "nasr-auto",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/نصر.jpg",
+            "ar": {
+                "name": "شركة النصر لصناعة السيارات"
+            },
+            "en": {
+                "name": "El Nasr Automotive Manufacturing"
+            }
+        },
+        {
+            "id": "elsewedy",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/elsewedy.svg",
+            "ar": {
+                "name": "شركة السويدي إنرجيا للكابلات"
+            },
+            "en": {
+                "name": "Elsewedy Energia Cables"
+            }
+        },
+        {
+            "id": "metallurgical",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/metallurgical.png",
+            "ar": {
+                "name": "الشركة القابضة للصناعات المعدنية"
+            },
+            "en": {
+                "name": "Holding Co. for Metallurgical Ind."
+            }
+        },
+        {
+            "id": "waterway",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/waterway.png",
+            "ar": {
+                "name": "مجموعة واتر واي (The Waterway)"
+            },
+            "en": {
+                "name": "The Waterway Developments"
+            }
+        },
+        {
+            "id": "trust-petroleum",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/trust-petroleum.png",
+            "ar": {
+                "name": "شركة تراست بتروليوم سيرفيس"
+            },
+            "en": {
+                "name": "Trust Petroleum Services"
+            }
+        },
+        {
+            "id": "pioneer",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/pioneer.png",
+            "ar": {
+                "name": "شركة بايونير (Pioneer)"
+            },
+            "en": {
+                "name": "Pioneer Holding"
+            }
+        },
+        {
+            "id": "hbs",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/hbs.jpg",
+            "ar": {
+                "name": "هادي بوشمان للخدمات البترولية (HBS)"
+            },
+            "en": {
+                "name": "Hadi Bushman Petroleum (HBS)"
+            }
+        },
+        {
+            "id": "cairo3",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/CAIRO 3A.jpg",
+            "ar": {
+                "name": "كايرو ثري إيه (Cairo 3A)"
+            },
+            "en": {
+                "name": "Cairo 3A Group"
+            }
+        },
+        {
+            "id": "wally-auto",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/wallyauto.jpg",
+            "ar": {
+                "name": "شركة والي أوتو (Wally Auto)"
+            },
+            "en": {
+                "name": "Wally Auto Group"
+            }
+        },
+        {
+            "id": "marakez",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/Marakez.jpg",
+            "ar": {
+                "name": "مراكز العقارية (Marakez)"
+            },
+            "en": {
+                "name": "Marakez Developments"
+            }
+        },
+        {
+            "id": "auto-samir-rayan",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/Auto Samir Rayan.jpg",
+            "ar": {
+                "name": "أوتو سمير ريان (Auto Samir Rayan)"
+            },
+            "en": {
+                "name": "Auto Samir Rayan"
+            }
+        },
+        {
+            "id": "lasirena",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/lasirena.jpg",
+            "ar": {
+                "name": "مجموعة لاسيرينا (La Sirena)"
+            },
+            "en": {
+                "name": "La Sirena Group"
+            }
+        },
+        {
+            "id": "vezeeta",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/vezeeta.jpg",
+            "ar": {
+                "name": "فيزيتا (Vezeeta)"
+            },
+            "en": {
+                "name": "Vezeeta"
+            }
+        },
+        {
+            "id": "pharmacare",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/pharmacare.jpg",
+            "ar": {
+                "name": "فارماكير (Pharmacare)"
+            },
+            "en": {
+                "name": "Pharmacare"
+            }
+        },
+        {
+            "id": "ezzeldeen",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/صيدليات عز الدين.jpg",
+            "ar": {
+                "name": "صيدليات عز الدين"
+            },
+            "en": {
+                "name": "Ezzedeen Pharmacies"
+            }
+        },
+        {
+            "id": "fas",
+            "sector": "corporate",
+            "image": "assets/images/clientLogo/FAS.jpg",
+            "ar": {
+                "name": "شركة إف إيه إس (FAS)"
+            },
+            "en": {
+                "name": "FAS Group"
+            }
+        }
+    ],
+    "about": {
+        "ar": {
+            "badge": "نبذة عن ديلتون",
+            "title": "ريادة في تقديم حلول إدارة المنشآت المتكاملة",
+            "lead": "تأسست شركة ديلتون عام 2019 كشركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت، مستهدفةً كافة المؤسسات والشركات الكبرى في جمهورية مصر العربية.",
+            "p1": "نحن ندرك بعمق متطلبات وتحديات تشغيل المباني الإدارية والفروع الحيوية، لذا نضمن لشركائنا بيئة عمل فعالة، آمنة ومستدامة تدعم وتحافظ على أهداف استثماراتهم وتساهم مباشرة في تعزيز إنتاجية ونجاح مؤسساتهم.",
+            "p2": "سواء كنتم بحاجة إلى إدارة تشغيلية شاملة لكامل المنشأة أو حلول تخصصية محددة، فإننا نمتلك الكفاءة الفنية والكوادر المؤهلة لتصميم وتنفيذ الحل الأمثل وفق اتفاقيات مستوى الخدمة (SLA) الصارمة.",
+            "pillarsTitle": "أبرز ركائز تميزنا التشغيلي:",
+            "pillars": [
+                "فريق هندسي وفني معتمد مقيم أو عند الطلب",
+                "التزام كامل بمعايير السلامة المهنية والصحة والبيئة (HSE)",
+                "تقنيات ومعدات أوروبية حديثة لضمان أعلى جودة",
+                "إشراف دوري وتقارير تشغيلية رقمية شفافة"
+            ],
+            "downloadAr": "تحميل البروفايل بالعربية (PDF)",
+            "downloadEn": "تحميل البروفايل بالإنجليزية (PDF)",
+            "companyInfo": {
+                "legalLabel": "الشكل القانوني:",
+                "legalValue": "شركة مساهمة مصرية (ش.م.م)",
+                "foundedLabel": "تاريخ التأسيس:",
+                "foundedValue": "2019",
+                "headquartersLabel": "المقر الرئيسي:",
+                "headquartersValue": "زهراء المعادي، القاهرة",
+                "scopeLabel": "نطاق العمليات:",
+                "scopeValue": "كافة محافظات جمهورية مصر العربية",
+                "quote": "\"نضمن لكم بيئة عمل فعالة تدعم وتحافظ على أهداف استثماراتكم وتساهم في نجاح مؤسساتكم.\""
+            }
+        },
+        "en": {
+            "badge": "About Delton",
+            "title": "Pioneering Integrated Facility Management Solutions",
+            "lead": "Delton Company was established in 2019 as an Egyptian joint-stock company, dedicated to providing integrated facility management services to all leading institutions and corporations operating across Egypt.",
+            "p1": "We understand our clients' profound requirements and operational challenges in administrative headquarters and mission-critical facilities. We are honored to ensure a productive, safe, and sustainable work environment that safeguards your investments and directly drives organizational success.",
+            "p2": "Whether you need full turnkey facility management or tailored specialized services, our accredited technical workforce and engineering leadership deliver optimal solutions aligned with rigorous Service Level Agreements (SLAs).",
+            "pillarsTitle": "Key Pillars of Operational Excellence:",
+            "pillars": [
+                "Certified resident or on-demand engineering & technical teams",
+                "Strict adherence to Health, Safety & Environment (HSE) standards",
+                "Advanced European equipment and eco-certified materials",
+                "Periodic oversight and transparent digital operational reports"
+            ],
+            "downloadAr": "Download Profile in Arabic (PDF)",
+            "downloadEn": "Download Profile in English (PDF)",
+            "companyInfo": {
+                "legalLabel": "Legal form:",
+                "legalValue": "Egyptian Joint Stock Company (S.A.E)",
+                "foundedLabel": "Founded:",
+                "foundedValue": "2019",
+                "headquartersLabel": "Headquarters:",
+                "headquartersValue": "Zahraa El Maadi, Cairo",
+                "scopeLabel": "Operations scope:",
+                "scopeValue": "Across all governorates of the Arab Republic of Egypt",
+                "quote": "\"We deliver an efficient work environment that protects your investment goals and contributes to the success of your organization.\""
+            }
+        }
+    },
+    "contact": {
+        "phones": [
+            "01102668966",
+            "01123544717",
+            "01123545516"
+        ],
+        "email": "info@delton-eg.com",
+        "ar": {
+            "badge": "تواصل معنا",
+            "title": "جاهزون لخدمتكم ومناقشة احتياجات منشأتكم",
+            "subtitle": "يسعدنا الرد على استفساراتكم وترتيب زيارة معاينة ميدانية لمقر مؤسستكم لتقديم عرض فني ومالي مفصل.",
+            "addressTitle": "العنوان الرئيسي:",
+            "address": "2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة، مصر",
+            "phoneTitle": "أرقام الهاتف المباشرة:",
+            "emailTitle": "البريد الإلكتروني:",
+            "hoursTitle": "أوقات العمل الرسمية:",
+            "hours": "الأحد - الخميس: 8:30 ص - 5:00 م (دعم الطوارئ 24/7)"
+        },
+        "en": {
+            "badge": "Contact Us",
+            "title": "Ready to Discuss Your Facility Requirements",
+            "subtitle": "We look forward to addressing your inquiries and scheduling a complimentary technical survey to deliver a comprehensive proposal.",
+            "addressTitle": "Headquarters Address:",
+            "address": "2120 St Elarqam, El Meraag, Zahraa Elmaadi, Cairo, Egypt",
+            "phoneTitle": "Direct Hotlines:",
+            "emailTitle": "Official Email:",
+            "hoursTitle": "Business Hours:",
+            "hours": "Sunday - Thursday: 8:30 AM - 5:00 PM (24/7 Emergency Support)"
+        }
+    },
+    "footer": {
+        "phones": "01102668966 / 01123544717",
+        "ar": {
+            "aboutText": "",
+            "quickLinks": "روابط سريعة",
+            "ourServices": "خدماتنا الأساسية",
+            "contactInfo": "بيانات التواصل",
+            "copyright": "© 2026 شركة ديلتون لخدمات وإدارة المنشآت ش.م.م. جميع الحقوق محفوظة.",
+            "address": "2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة"
+        },
+        "en": {
+            "aboutText": "",
+            "quickLinks": "Quick Links",
+            "ourServices": "Core Services",
+            "contactInfo": "Contact Information",
+            "copyright": "© 2026 Delton for Services & Facility Management S.A.E. All Rights Reserved.",
+            "address": "2120 St Elarqam, El Meraag, Zahraa Elmaadi, Cairo, Egypt"
+        }
+    },
+    "clientsHeader": {
+        "ar": {
+            "badge": "شركاء المسيرة",
+            "title": "شركاء النجاح وقائمة الشراكات الاستراتيجية",
+            "subtitle": "تعتبر قائمة عملائنا شهادة حية على جودة خدماتنا وثقة كبرى الكيانات في إمكانياتنا التشغيلية.",
+            "filterAll": "جميع القطاعات",
+            "filterBanking": "القطاع المصرفي والمالي",
+            "filterCorporate": "المؤسسات الكبرى والصناعية"
+        },
+        "en": {
+            "badge": "Strategic Partnerships",
+            "title": "Delton's Clients & Strategic Success Partners",
+            "subtitle": "Our client roster reflects our unwavering commitment to quality and the trust major Egyptian institutions place in us.",
+            "filterAll": "All Sectors",
+            "filterBanking": "Banking & Financial Sector",
+            "filterCorporate": "Corporate & Industrial Entities"
+        }
+    }
+}

@@ -424,6 +424,99 @@ html {
   border-radius: 20px;
 }
 
+@media (max-width: 640px) {
+  .service-card {
+    padding: 1rem !important;
+  }
+
+  .service-card .w-14,
+  .service-card .h-14 {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.05rem !important;
+    line-height: 1.45;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .service-card p,
+  .service-card span,
+  .service-card button {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .service-card button {
+    min-height: 48px;
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .modal-backdrop {
+    padding: 0.75rem;
+  }
+
+  .modal-content {
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+    max-height: 92vh;
+    padding: 1rem !important;
+    border-radius: 16px;
+  }
+
+  .modal-content *,
+  .modal-content *::before,
+  .modal-content *::after {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .modal-content .flex.items-start.justify-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .modal-content .grid {
+    gap: 0.75rem;
+  }
+
+  .modal-content .flex.items-center.justify-between.gap-4 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .modal-content .flex.items-center.justify-between.gap-4 > button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-content h2 {
+    font-size: 1.15rem !important;
+    line-height: 1.4;
+  }
+
+  .modal-content h4 {
+    font-size: 0.92rem !important;
+    line-height: 1.4;
+  }
+
+  .modal-content p,
+  .modal-content li,
+  .modal-content span,
+  .modal-content button {
+    font-size: 0.82rem;
+  }
+}
+
 /* Floating WhatsApp Button */
 .btn-whatsapp-float {
   position: fixed;

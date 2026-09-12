@@ -6,7 +6,7 @@
 let currentLanguage = localStorage.getItem('delton_lang') || 'ar';
 
 // Official Client Roster
-const clientData = [
+let clientData = [
   // Banking Sector
   { id: 'cbe', sector: 'banking', code: 'cbe', ar: 'البنك المركزي المصري', en: 'Central Bank of Egypt' },
   { id: 'aaib', sector: 'banking', code: 'aaib', ar: 'البنك العربي الأفريقي الدولي', en: 'Arab African Int. Bank' },
@@ -69,10 +69,27 @@ const clientImageMap = {
 };
 
 function resolveClientImage(client) {
+  if (client.image) return client.image;
+
   const preferred = clientImageMap[client.id];
   if (preferred) return preferred;
 
   return 'assets/images/clientLogo/client-fallback.svg';
+}
+
+/**
+ * Apply client list overrides loaded from admin/content.json
+ */
+function applyClientOverrides(overrides) {
+  if (!Array.isArray(overrides) || !overrides.length) return;
+
+  clientData = overrides.map(c => ({
+    id: c.id || ('client-' + Math.random().toString(36).slice(2, 7)),
+    sector: c.sector || 'corporate',
+    image: c.image || '',
+    ar: (c.ar && c.ar.name) ? c.ar.name : '',
+    en: (c.en && c.en.name) ? c.en.name : ''
+  }));
 }
 
 /**
@@ -135,6 +152,11 @@ function setLanguage(lang) {
   // Re-render Clients Cards
   renderClientsSection(lang, currentClientFilter);
 
+  // Update dynamic contact info + branding + service dropdown options
+  renderDynamicContact();
+  renderBranding();
+  renderServiceSelectOptions();
+
   // Update Slider
   if (window.updateSliderLanguage) {
     window.updateSliderLanguage(lang);
@@ -170,6 +192,87 @@ function setLanguage(lang) {
  */
 function getNestedTranslation(obj, path) {
   return path.split('.').reduce((prev, curr) => prev ? prev[curr] : undefined, obj);
+}
+
+/**
+ * Fill phone / email / footer contact elements from admin-managed data
+ */
+function normalizeBrandSize(value, fallback) {
+  if (value === undefined || value === null || value === '') return fallback + 'px';
+  const text = String(value).trim();
+  if (/^\d+(\.\d+)?$/.test(text)) return text + 'px';
+  return text;
+}
+
+function renderBranding() {
+  const branding = window.__Branding || {
+    navbar: { image: 'newlogo.jpeg', width: '110', height: '52' },
+    footer: { image: 'assets/images/logoFooter.png', width: '150', height: '56' }
+  };
+
+  document.querySelectorAll('[data-brand-logo]').forEach(el => {
+    const role = el.getAttribute('data-brand-logo');
+    const config = branding[role] || branding.navbar || {};
+    const src = config.image || 'newlogo.jpeg';
+    const width = normalizeBrandSize(config.width, role === 'footer' ? 150 : 110);
+    const height = normalizeBrandSize(config.height, role === 'footer' ? 56 : 52);
+
+    el.src = src;
+    el.style.width = width;
+    el.style.height = height;
+    el.style.maxWidth = '100%';
+    el.style.objectFit = 'contain';
+  });
+}
+
+function renderDynamicContact() {
+  const phones = (window.__ContactPhones && window.__ContactPhones.length)
+    ? window.__ContactPhones
+    : ['01102668966', '01123544717', '01123545516'];
+  const email = window.__ContactEmail || 'info@delton-eg.com';
+  const isRtl = currentLanguage === 'ar';
+
+  document.querySelectorAll('[data-dyn-phone]').forEach(el => {
+    const idx = parseInt(el.getAttribute('data-dyn-phone'), 10) || 0;
+    const p = phones[idx] || phones[0] || '';
+    el.textContent = p;
+    if (el.tagName === 'A') el.setAttribute('href', 'tel:' + p);
+  });
+
+  document.querySelectorAll('[data-dyn-email]').forEach(el => {
+    el.textContent = email;
+    if (el.tagName === 'A') el.setAttribute('href', 'mailto:' + email);
+  });
+
+  const footerAddress = document.querySelector('[data-dyn-footer-address]');
+  if (footerAddress && window.__FooterAddress && window.__FooterAddress[isRtl ? 'ar' : 'en']) {
+    footerAddress.textContent = window.__FooterAddress[isRtl ? 'ar' : 'en'];
+  }
+
+  const footerPhones = document.querySelector('[data-dyn-footer-phones]');
+  if (footerPhones && window.__FooterPhones) footerPhones.textContent = window.__FooterPhones;
+}
+
+/**
+ * Build the contact form service dropdown dynamically from active services
+ */
+function renderServiceSelectOptions() {
+  const sel = document.getElementById('contactServiceSelect');
+  if (!sel) return;
+
+  const contact = translations[currentLanguage].contact.form;
+  const sData = translations[currentLanguage].services;
+
+  const options = [
+    `<option value="" disabled selected>${contact.selectServicePlaceholder}</option>`,
+    `<option value="all">${contact.allServicesOpt}</option>`
+  ];
+
+  (sData.items || []).forEach(srv => {
+    options.push(`<option value="${srv.id}">${srv.title}</option>`);
+  });
+
+  sel.innerHTML = options.join('');
 }
 
 /**
@@ -539,7 +642,16 @@ document.addEventListener('keydown', (e) => {
 /**
  * App Initialization
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Wait for admin content (services/whyUs/clients/stats/settings) to merge
+  if (window.ContentManager && window.ContentManager.ready) {
+    await window.ContentManager.ready;
+  }
+
+  if (window.__ContentClients) {
+    applyClientOverrides(window.__ContentClients);
+  }
+
   setLanguage(currentLanguage);
   setupNavbarScroll();
   setupMobileMenu();

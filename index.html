@@ -68,11 +68,11 @@
       <div class="flex items-center gap-6 text-slate-300">
         <a href="tel:01102668966" class="hover:text-[#C9A227] transition flex items-center gap-2">
           <i class="fa-solid fa-phone text-[#C9A227]"></i>
-          <span dir="ltr">01102668966</span>
+          <span dir="ltr" data-dyn-phone="0">01102668966</span>
         </a>
         <a href="mailto:info@delton-eg.com" class="hover:text-[#C9A227] transition flex items-center gap-2">
           <i class="fa-solid fa-envelope text-[#C9A227]"></i>
-          <span>info@delton-eg.com</span>
+          <span data-dyn-email>info@delton-eg.com</span>
         </a>
         <span class="text-slate-400 hidden lg:flex items-center gap-2">
           <i class="fa-regular fa-clock text-[#C9A227]"></i>
@@ -106,7 +106,7 @@
       
       <!-- Brand Logo -->
       <a href="#home" class="hidden md:flex items-center gap-3 group min-w-0">
-        <img src="newlogo.jpeg" alt="Delton Logo" class="h-10 sm:h-12 md:h-14 w-auto object-contain drop-shadow-[0_10px_20px_rgba(212,175,55,0.22)] transition duration-300 group-hover:scale-[1.02]">
+        <img src="newlogo.jpeg" alt="Delton Logo" data-brand-logo="navbar" class="drop-shadow-[0_10px_20px_rgba(212,175,55,0.22)] transition duration-300 group-hover:scale-[1.02]" style="width:110px;height:52px;">
         <div class="leading-none min-w-0">
           <span id="brandPrimaryText" class="block text-base sm:text-lg md:text-xl font-black tracking-[0.18em] text-white group-hover:text-[#F6D77A] transition">ديلتون</span>
           <span id="brandSecondaryText" class="block mt-1 text-[9px] sm:text-[10px] text-[#C9A227] font-semibold tracking-[0.28em]">إدارة المرافق</span>
@@ -143,7 +143,7 @@
         </button>
 
         <div class="flex items-center justify-end min-w-0">
-          <img src="newlogo.jpeg" alt="Delton" class="mobile-header-logo h-8 w-auto object-contain shrink-0">
+          <img src="newlogo.jpeg" alt="Delton" data-brand-logo="navbar" class="mobile-header-logo shrink-0" style="width:110px;height:52px;">
         </div>
       </div>
 
@@ -157,7 +157,7 @@
     <div>
       <div class="flex items-center justify-between pb-6 border-b border-slate-800">
         <div class="flex items-center gap-3 min-w-0">
-          <img src="newlogo.jpeg" alt="Delton" class="h-10 w-auto object-contain">
+          <img src="newlogo.jpeg" alt="Delton" data-brand-logo="navbar" style="width:110px;height:52px;">
           <div class="leading-none">
             <span id="mobileBrandPrimaryText" class="block text-base font-extrabold text-white tracking-[0.18em]">ديلتون</span>
             <span id="mobileBrandSecondaryText" class="block mt-1 text-[8px] text-[#C9A227] tracking-[0.24em]">إدارة المرافق</span>
@@ -186,8 +186,8 @@
       </a>
 
       <div class="text-xs text-slate-400 space-y-2">
-        <p><i class="fa-solid fa-phone text-[#C9A227] mr-1 ml-1"></i> <span dir="ltr">01102668966</span></p>
-        <p><i class="fa-solid fa-envelope text-[#C9A227] mr-1 ml-1"></i> info@delton-eg.com</p>
+        <p><i class="fa-solid fa-phone text-[#C9A227] mr-1 ml-1"></i> <span dir="ltr" data-dyn-phone="0">01102668966</span></p>
+        <p><i class="fa-solid fa-envelope text-[#C9A227] mr-1 ml-1"></i> <span data-dyn-email>info@delton-eg.com</span></p>
       </div>
     </div>
 
@@ -216,28 +216,28 @@
         
         <!-- Metric 1 -->
         <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="0">
-          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">2019</div>
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1" data-i18n="stats.item1.num">2019</div>
           <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item1.label">سنة التأسيس</div>
           <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item1.desc">شركة مساهمة مصرية رائدة</div>
         </div>
 
         <!-- Metric 2 -->
         <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">+18</div>
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1" data-i18n="stats.item2.num">+18</div>
           <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item2.label">شراكات استراتيجية</div>
           <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item2.desc">بنوك ومؤسسات سيادية وكبرى</div>
         </div>
 
         <!-- Metric 3 -->
         <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
-          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">24/7</div>
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1" data-i18n="stats.item3.num">24/7</div>
           <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item3.label">جاهزية ودعم فني</div>
           <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item3.desc">فرق مقيمة واستجابة فورية</div>
         </div>
 
         <!-- Metric 4 -->
         <div class="stat-card p-5 sm:p-6 text-center group hover:border-[#C9A227] transition duration-300 shadow-2xl" data-aos="fade-up" data-aos-delay="300">
-          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1">100%</div>
+          <div class="text-2xl sm:text-4xl font-black text-gradient-gold mb-1" data-i18n="stats.item4.num">100%</div>
           <div class="text-sm font-bold text-white mb-0.5" data-i18n="stats.item4.label">تغطية جغرافية</div>
           <div class="text-xs text-slate-400 font-medium" data-i18n="stats.item4.desc">كافة أنحاء جمهورية مصر العربية</div>
         </div>
@@ -513,9 +513,9 @@
               <div>
                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.phoneTitle">أرقام الهاتف المباشرة:</h4>
                 <div class="space-y-1 text-sm font-semibold text-white" dir="ltr">
-                  <a href="tel:01102668966" class="block hover:text-[#C9A227] transition">01102668966</a>
-                  <a href="tel:01123544717" class="block hover:text-[#C9A227] transition">01123544717</a>
-                  <a href="tel:01123545516" class="block hover:text-[#C9A227] transition">01123545516</a>
+                  <a href="tel:01102668966" class="block hover:text-[#C9A227] transition" data-dyn-phone="0">01102668966</a>
+                  <a href="tel:01123544717" class="block hover:text-[#C9A227] transition" data-dyn-phone="1">01123544717</a>
+                  <a href="tel:01123545516" class="block hover:text-[#C9A227] transition" data-dyn-phone="2">01123545516</a>
                 </div>
               </div>
             </div>
@@ -527,7 +527,7 @@
               </div>
               <div>
                 <h4 class="text-xs font-bold text-slate-400 uppercase mb-1" data-i18n="contact.emailTitle">البريد الإلكتروني:</h4>
-                <a href="mailto:info@delton-eg.com" class="text-sm font-semibold text-yellow-400 hover:text-white transition">
+                <a href="mailto:info@delton-eg.com" class="text-sm font-semibold text-yellow-400 hover:text-white transition" data-dyn-email>
                   info@delton-eg.com
                 </a>
               </div>
@@ -663,7 +663,7 @@
         
         <!-- Brand Summary -->
         <div class="lg:col-span-4 space-y-4">
-          <img src="assets/images/logoFooter.png" alt="Delton Facility Management" class="h-14 w-auto object-contain">
+          <img src="assets/images/logoFooter.png" alt="Delton Facility Management" data-brand-logo="footer" class="object-contain" style="width:150px;height:56px;">
           <p class="text-slate-300 leading-relaxed" data-i18n="footer.aboutText">
             شركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت لكافة المؤسسات والشركات في جمهورية مصر العربية.
           </p>
@@ -712,9 +712,9 @@
         <!-- Contact Info -->
         <div class="lg:col-span-3 space-y-3">
           <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4" data-i18n="footer.contactInfo">بيانات التواصل</h4>
-          <p class="leading-relaxed">2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة</p>
-          <p dir="ltr" class="text-right rtl:text-right ltr:text-left text-white font-semibold">01102668966 / 01123544717</p>
-          <p class="text-yellow-400">info@delton-eg.com</p>
+          <p class="leading-relaxed" data-dyn-footer-address>2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة</p>
+          <p dir="ltr" class="text-right rtl:text-right ltr:text-left text-white font-semibold" data-dyn-footer-phones>01102668966 / 01123544717</p>
+          <p class="text-yellow-400" data-dyn-email>info@delton-eg.com</p>
           <p class="text-slate-500">www.delton-eg.com</p>
           <div class="pt-2">
             <a href="admin/index.php" class="text-[11px] text-slate-500 hover:text-yellow-400 transition flex items-center gap-1">
@@ -756,6 +756,7 @@
 
   <!-- Delton Application Scripts -->
   <script src="assets/js/translations.js"></script>
+  <script src="assets/js/content.js"></script>
   <script src="assets/js/slider.js"></script>
   <script src="assets/js/main.js"></script>
 

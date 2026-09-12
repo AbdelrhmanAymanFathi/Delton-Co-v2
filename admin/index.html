@@ -15,7 +15,7 @@
 <body class="min-h-screen py-10 px-4">
 
   <!-- Header -->
-  <header class="max-w-5xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6">
+  <header class="max-w-5xl mx-auto mb-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6">
     <div class="flex items-center gap-3">
       <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/40 flex items-center justify-center text-[#C9A227] text-2xl">
         <i class="fa-solid fa-sliders"></i>
@@ -25,7 +25,7 @@
         <p class="text-xs text-[#C9A227] font-semibold">Delton Facility Management - Local / Static CMS</p>
       </div>
     </div>
-    
+
     <div class="flex items-center gap-3">
       <button onclick="downloadSliderJson()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg flex items-center gap-2 transition hover:-translate-y-0.5">
         <i class="fa-solid fa-download"></i>
@@ -37,6 +37,15 @@
       </a>
     </div>
   </header>
+
+  <!-- Note: Full CMS banner -->
+  <div class="max-w-5xl mx-auto mb-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs leading-relaxed flex items-center gap-3">
+    <i class="fa-solid fa-database text-base text-emerald-400"></i>
+    <div>
+      <p><strong>ملاحظة:</strong> هذه النسخة الثابتة تتحكم في السلايدر فقط وتعمل بدون خادم (عبر ملف admin/index.html).</p>
+      <p>للتحكم الكامل في كل محتوى الموقع (Services + Why Us + العملاء + الإحصائيات + نصوص الأقسام + بيانات التواصل والفوتر) استخدم: <code class="bg-emerald-900/60 px-1.5 rounded text-emerald-100">admin/index.php</code> — وهو مدمج مع نفس الموقع.</p>
+    </div>
+  </div>
 
   <!-- Tip Alert -->
   <div class="max-w-5xl mx-auto mb-6 p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-200 text-xs leading-relaxed flex items-start gap-3">
