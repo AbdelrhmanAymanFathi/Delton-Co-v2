@@ -1,6 +1,11 @@
 Options -Indexes -MultiViews
 
-<FilesMatch "\.(json|log|ini|env)$">
+<FilesMatch "\.(log|ini|env)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "^(applications|contact_inquiries)\.json$">
   Order Allow,Deny
   Deny from all
 </FilesMatch>

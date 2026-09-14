@@ -505,14 +505,14 @@
                 <!-- Name -->
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.nameLabel">الاسم بالكامل *</label>
-                  <input type="text" id="contactName" required data-i18n-placeholder="contact.form.namePlaceholder" placeholder="مثال: م. أحمد عبد الرحمن" 
+                  <input type="text" id="contactName" name="name" required data-i18n-placeholder="contact.form.namePlaceholder" placeholder="مثال: م. أحمد عبد الرحمن"
                          class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition">
                 </div>
 
                 <!-- Company -->
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.companyLabel">اسم الشركة / المؤسسة *</label>
-                  <input type="text" id="contactCompany" required data-i18n-placeholder="contact.form.companyPlaceholder" placeholder="مثال: البنك الأهلي / مجموعة الفطيم" 
+                  <input type="text" id="contactCompany" name="company" required data-i18n-placeholder="contact.form.companyPlaceholder" placeholder="مثال: البنك الأهلي / مجموعة الفطيم"
                          class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition">
                 </div>
               </div>
@@ -521,7 +521,7 @@
                 <!-- Phone -->
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.phoneLabel">رقم الهاتف / الواتساب *</label>
-                  <input type="tel" id="contactPhone" required placeholder="010xxxxxxxx"
+                  <input type="tel" id="contactPhone" name="phone" required placeholder="010xxxxxxxx"
                          pattern="01[0125][0-9]{8}" maxlength="11" inputmode="numeric" autocomplete="tel"
                          title="رقم مصري صحيح مكوّن من 11 رقم ويبدأ بـ 010 / 011 / 012 / 015"
                          class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition" dir="ltr">
@@ -530,7 +530,7 @@
                 <!-- Email -->
                 <div>
                   <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.emailLabel">البريد الإلكتروني المهني *</label>
-                  <input type="email" id="contactEmail" required placeholder="name@company.com"
+                  <input type="email" id="contactEmail" name="email" required placeholder="name@company.com"
                          pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" maxlength="254" autocomplete="email"
                          title="يرجى إدخال بريد إلكتروني صحيح، مثال: name@company.com"
                          class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition" dir="ltr">
@@ -540,7 +540,7 @@
               <!-- Service Selection Dropdown -->
               <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.serviceLabel">الخدمة المطلوبة *</label>
-                <select id="contactServiceSelect" required 
+                <select id="contactServiceSelect" name="service" required
                         class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition">
                   <option value="" disabled selected data-i18n="contact.form.selectServicePlaceholder">-- اختر الخدمة المطلوبة --</option>
                   <option value="all" data-i18n="contact.form.allServicesOpt">حلول متكاملة لكامل المنشأة (Comprehensive FM)</option>
@@ -557,7 +557,7 @@
               <!-- Message -->
               <div>
                 <label class="block text-xs font-semibold text-slate-300 mb-2" data-i18n="contact.form.messageLabel">تفاصيل الاحتياج أو المشروع *</label>
-                <textarea id="contactMessage" rows="4" required data-i18n-placeholder="contact.form.messagePlaceholder" placeholder="يرجى توضيح حجم المقر، طبيعة المنشأة، الخدمات المطلوبة والموقع الجغرافي..." 
+                <textarea id="contactMessage" name="message" rows="4" required data-i18n-placeholder="contact.form.messagePlaceholder" placeholder="يرجى توضيح حجم المقر، طبيعة المنشأة، الخدمات المطلوبة والموقع الجغرافي..."
                           class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm outline-none focus:border-[#E4B15B] transition"></textarea>
               </div>
 

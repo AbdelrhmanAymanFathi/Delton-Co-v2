@@ -638,8 +638,34 @@ function setupContactForm() {
     const fd = new FormData(form);
     fd.append('lang', currentLanguage);
 
-    fetch('assets/php/contact.php', { method: 'POST', body: fd })
-      .then(res => res.json())
+    // Some hosting security layers (e.g. bot/DDoS "human check" on shared hosting)
+    // answer a POST with a tiny HTML page that sets a verification cookie and
+    // reloads - fine for a normal page load, but fetch() never executes that
+    // script. Detect that shape, set the cookie ourselves, and retry once.
+    function extractChallengeCookie(text) {
+      const m = text.match(/document\.cookie\s*=\s*["']([^"']+)["']/);
+      return m ? m[1] : null;
+    }
+
+    function submitContact(isRetry) {
+      return fetch('assets/php/contact.php', { method: 'POST', body: fd })
+        .then(res => res.text().then((text) => {
+          let data = null;
+          try { data = JSON.parse(text); } catch (e) { /* not JSON */ }
+
+          if (!data) {
+            const cookie = !isRetry ? extractChallengeCookie(text) : null;
+            if (cookie) {
+              document.cookie = cookie;
+              return submitContact(true);
+            }
+            throw new Error('non_json_response');
+          }
+          return data;
+        }));
+    }
+
+    submitContact(false)
       .then(data => {
         if (data && data.ok) {
           form.reset();
@@ -669,9 +695,9 @@ function setupContactForm() {
         }
       })
       .catch(() => {
-        showErrorToast(cf.errorMsg || (currentLanguage === 'ar'
-          ? 'حدث خطأ أثناء الإرسال. حاول مرة أخرى بعد قليل.'
-          : 'An error occurred while sending. Please try again shortly.'));
+        showErrorToast(currentLanguage === 'ar'
+          ? 'تعذر إرسال الطلب حالياً بسبب فحص أمني من مزود الاستضافة. برجاء المحاولة مرة أخرى خلال لحظات، أو تواصل معنا مباشرة عبر واتساب.'
+          : 'We could not submit your request right now due to a security check on our hosting. Please try again shortly, or reach us directly via WhatsApp.');
       })
       .finally(() => {
         if (submitBtn) {

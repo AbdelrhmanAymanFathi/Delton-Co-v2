@@ -1177,7 +1177,7 @@ $slides = json_load($SLIDER_JSON) ?: [];
               <p class="text-[11px] text-slate-400 italic mb-2">EN: <?php echo e($c['en']['title'] ?? ''); ?></p>
               <p class="text-xs text-slate-300 mb-3" style="white-space:pre-line"><?php echo e($c['ar']['desc'] ?? ''); ?></p>
               <div class="flex items-center justify-between border-t border-slate-700/60 pt-3">
-                <button onclick='editCareersWhy(<?php echo json_encode(["idx"=>$idx, "icon"=>$c["icon"] ?? "fa-award", "ar_title"=>$c["ar"]["title"] ?? "", "ar_desc"=>$c["ar"]["desc"] ?? "", "en_title"=>$c["en"]["title"] ?? "", "en_desc"=>$c["en"]["desc"] ?? ""], JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE); ?>)'
+                <button onclick='editCareersWhy(<?php echo (int)$idx; ?>)'
                         class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700"><i class="fa-solid fa-pen-to-square text-[#C9A227]"></i> تعديل</button>
                 <form method="POST" onsubmit="return confirm('حذف هذه البطاقة؟');">
                   <input type="hidden" name="action" value="delete_careers_why">
@@ -1251,23 +1251,7 @@ $slides = json_load($SLIDER_JSON) ?: [];
                 <a href="#application" onclick="document.getElementById('appPosition').value='<?php echo e(addslashes($v['ar']['title'] ?? '')); ?>';"
                    class="px-3 py-1.5 rounded-lg bg-[#C9A227]/20 hover:bg-[#C9A227]/30 text-[#F0CB86] text-[11px] font-bold border border-[#C9A227]/40">قدّم الآن</a>
                 <div class="flex gap-2">
-                  <button onclick='editCareersVacancy(<?php
-                    $payload = [
-                      "idx" => $idx,
-                      "vac_slug" => $v["id"] ?? "",
-                      "icon" => $v["icon"] ?? "fa-briefcase",
-                      "location" => $v["location"] ?? "",
-                      "type" => $v["type"] ?? "",
-                      "salary" => $v["salary"] ?? "",
-                      "ar_title" => $v["ar"]["title"] ?? "",
-                      "ar_tagline" => $v["ar"]["tagline"] ?? "",
-                      "ar_reqs" => implode("\n", $v["ar"]["reqs"] ?? []),
-                      "en_title" => $v["en"]["title"] ?? "",
-                      "en_tagline" => $v["en"]["tagline"] ?? "",
-                      "en_reqs" => implode("\n", $v["en"]["reqs"] ?? [])
-                    ];
-                    echo json_encode($payload, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
-                  ?>)' class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700"><i class="fa-solid fa-pen-to-square text-[#C9A227]"></i> تعديل</button>
+                  <button onclick='editCareersVacancy(<?php echo (int)$idx; ?>)' class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700"><i class="fa-solid fa-pen-to-square text-[#C9A227]"></i> تعديل</button>
                   <form method="POST" onsubmit="return confirm('حذف هذه الوظيفة نهائياً؟');">
                     <input type="hidden" name="action" value="delete_careers_vacancy">
                     <input type="hidden" name="delete_id" value="<?php echo $idx; ?>">
