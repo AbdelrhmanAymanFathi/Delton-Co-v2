@@ -146,7 +146,7 @@ function renderSlides(slides, currentLang) {
             </div>
             
             <!-- Title -->
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4.2rem] font-extrabold text-white leading-[1.08] tracking-[-0.03em] max-w-[760px]">
+            <h1 class="hero-slide-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.8rem] text-white max-w-[760px]">
               ${content.title}
             </h1>
             
@@ -198,7 +198,7 @@ async function initHeroSlider(lang = 'ar') {
         crossFade: true
       },
       autoplay: {
-        delay: 5500,
+        delay: 3000,
         disableOnInteraction: false,
         pauseOnMouseEnter: true
       },

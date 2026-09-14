@@ -136,6 +136,15 @@ function setLanguage(lang) {
     }
   });
 
+  // Update title/tooltip attributes
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.getAttribute('data-i18n-title');
+    const val = getNestedTranslation(translations[lang], key);
+    if (val !== undefined) {
+      el.setAttribute('title', val);
+    }
+  });
+
   // Update Profile Download Links
   const profileDownloadBtn = document.getElementById('profileDownloadLink');
   if (profileDownloadBtn) {
@@ -169,18 +178,6 @@ function setLanguage(lang) {
   if (langToggleBtn) langToggleBtn.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
   if (langToggleBtnMobile) langToggleBtnMobile.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
 
-  // Update brand name + subtitle in Arabic/English
-  const brandPrimaryText = document.getElementById('brandPrimaryText');
-  const mobileBrandPrimaryText = document.getElementById('mobileBrandPrimaryText');
-  const brandSecondaryText = document.getElementById('brandSecondaryText');
-  const mobileBrandSecondaryText = document.getElementById('mobileBrandSecondaryText');
-  const brandName = isRtl ? 'ديلتون' : 'DELTON';
-  const brandSubtitle = isRtl ? 'إدارة المرافق' : 'Facility Management';
-  if (brandPrimaryText) brandPrimaryText.textContent = brandName;
-  if (mobileBrandPrimaryText) mobileBrandPrimaryText.textContent = brandName;
-  if (brandSecondaryText) brandSecondaryText.textContent = brandSubtitle;
-  if (mobileBrandSecondaryText) mobileBrandSecondaryText.textContent = brandSubtitle;
-
   // Refresh AOS if available
   if (typeof AOS !== 'undefined') {
     AOS.refresh();
@@ -206,16 +203,16 @@ function normalizeBrandSize(value, fallback) {
 
 function renderBranding() {
   const branding = window.__Branding || {
-    navbar: { image: 'newlogo.jpeg', width: '110', height: '52' },
-    footer: { image: 'assets/images/logoFooter.png', width: '150', height: '56' }
+    navbar: { image: 'assets/images/logo-nav.png', width: '124', height: '50' },
+    footer: { image: 'assets/images/logo-nav.png', width: '160', height: '64' }
   };
 
   document.querySelectorAll('[data-brand-logo]').forEach(el => {
     const role = el.getAttribute('data-brand-logo');
     const config = branding[role] || branding.navbar || {};
-    const src = config.image || 'newlogo.jpeg';
-    const width = normalizeBrandSize(config.width, role === 'footer' ? 150 : 110);
-    const height = normalizeBrandSize(config.height, role === 'footer' ? 56 : 52);
+    const src = config.image || 'assets/images/logo-nav.png';
+    const width = normalizeBrandSize(config.width, role === 'footer' ? 150 : 140);
+    const height = normalizeBrandSize(config.height, role === 'footer' ? 56 : 66);
 
     el.src = src;
     el.style.width = width;
@@ -244,9 +241,16 @@ function renderDynamicContact() {
     if (el.tagName === 'A') el.setAttribute('href', 'mailto:' + email);
   });
 
+  const defaultFooterAddress = {
+    ar: '2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة',
+    en: '2120 St Elarqam, El Meraag, Zahraa Elmaadi, Cairo, Egypt'
+  };
+  const footerAddressData = (window.__FooterAddress && (window.__FooterAddress.ar || window.__FooterAddress.en))
+    ? window.__FooterAddress
+    : defaultFooterAddress;
   const footerAddress = document.querySelector('[data-dyn-footer-address]');
-  if (footerAddress && window.__FooterAddress && window.__FooterAddress[isRtl ? 'ar' : 'en']) {
-    footerAddress.textContent = window.__FooterAddress[isRtl ? 'ar' : 'en'];
+  if (footerAddress) {
+    footerAddress.textContent = footerAddressData[isRtl ? 'ar' : 'en'] || footerAddressData.ar || footerAddressData.en || '';
   }
 
   const footerPhones = document.querySelector('[data-dyn-footer-phones]');
@@ -276,6 +280,33 @@ function renderServiceSelectOptions() {
 }
 
 /**
+ * Ash & Ember icon "temperature" system — each service gets its own
+ * light/dark ember tint instead of one flat gold, without leaving the
+ * gold/ash/ember family. Falls back to the maintenance tone if a service
+ * id isn't recognized.
+ */
+const SERVICE_ACCENTS = {
+  maintenance: { light: '#F2C572', dark: '#C23B2E' },  // hot ember
+  cleaning:    { light: '#F7ECD8', dark: '#9C99A6' },  // cool steam
+  landscaping: { light: '#E4B15B', dark: '#6B5A4A' },  // ember cooling to ash-bronze
+  supplies:    { light: '#C7C4CC', dark: '#6E6B76' },  // pure ash-silver
+  hospitality: { light: '#F3C9A6', dark: '#C2503B' },  // warm rose-ember
+  renovation:  { light: '#D9C9A6', dark: '#6B6258' }   // warm stone/concrete
+};
+
+function hexToRgb(hex) {
+  const h = hex.replace('#', '');
+  return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16));
+}
+
+function serviceAccentStyle(serviceId, { size = '2xl' } = {}) {
+  const acc = SERVICE_ACCENTS[serviceId] || SERVICE_ACCENTS.maintenance;
+  const [lr, lg, lb] = hexToRgb(acc.light);
+  const [dr, dg, db] = hexToRgb(acc.dark);
+  return `background:linear-gradient(135deg, rgba(${lr},${lg},${lb},.18), rgba(${dr},${dg},${db},.10)); border:1px solid rgba(${dr},${dg},${db},.4); color:${acc.light}; box-shadow:0 8px 20px rgba(${dr},${dg},${db},.18);`;
+}
+
+/**
  * Render Services Grid
  */
 function renderServicesSection(lang) {
@@ -290,7 +321,7 @@ function renderServicesSection(lang) {
       <div>
         <!-- Service Header & Icon -->
         <div class="flex items-center justify-between mb-6">
-          <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-2xl shadow-lg shadow-yellow-500/10">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition duration-300" style="${serviceAccentStyle(srv.id)}">
             <i class="fa-solid ${srv.icon}"></i>
           </div>
           <span class="text-xs font-bold text-slate-400 bg-slate-800/80 px-3 py-1 rounded-full border border-slate-700">
@@ -301,11 +332,11 @@ function renderServicesSection(lang) {
         <!-- Service Image Thumbnail -->
         <div class="w-full h-44 rounded-xl overflow-hidden mb-6 border border-slate-800 relative group">
           <img src="${srv.image}" alt="${srv.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-transparent to-transparent opacity-60"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0E0C10] via-transparent to-transparent opacity-60"></div>
         </div>
 
         <!-- Service Title -->
-        <h3 class="text-xl font-bold text-white mb-3 hover:text-[#C9A227] transition">
+        <h3 class="text-xl font-bold text-white mb-3 hover:text-[#E4B15B] transition">
           ${srv.title}
         </h3>
 
@@ -317,7 +348,7 @@ function renderServicesSection(lang) {
 
       <!-- Action Button -->
       <button onclick="openServiceModal('${srv.id}')" 
-              class="w-full py-3 px-4 rounded-xl font-semibold bg-slate-800 hover:bg-[#C9A227] text-slate-200 hover:text-[#0B132B] border border-slate-700 hover:border-[#C9A227] transition duration-300 flex items-center justify-center gap-2 group">
+              class="w-full py-3 px-4 rounded-xl font-semibold bg-slate-800 hover:bg-[#E4B15B] text-slate-200 hover:text-[#0E0C10] border border-slate-700 hover:border-[#E4B15B] transition duration-300 flex items-center justify-center gap-2 group">
         <span>${sData.viewDetails}</span>
         <i class="fa-solid ${isRtl ? 'fa-arrow-left' : 'fa-arrow-right'} text-xs transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition"></i>
       </button>
@@ -341,11 +372,11 @@ function openServiceModal(serviceId) {
     <!-- Header -->
     <div class="flex items-start justify-between pb-4 border-b border-slate-700/60">
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-yellow-500/15 border border-yellow-500/40 flex items-center justify-center text-[#C9A227] text-2xl">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl" style="${serviceAccentStyle(service.id)}">
           <i class="fa-solid ${service.icon}"></i>
         </div>
         <div>
-          <span class="text-xs uppercase tracking-wider text-[#C9A227] font-bold">DELTON FM SOLUTION</span>
+          <span class="text-xs uppercase tracking-wider text-[#E4B15B] font-bold">DELTON FM SOLUTION</span>
           <h2 class="text-xl sm:text-2xl font-bold text-white">${service.modalTitle || service.title}</h2>
         </div>
       </div>
@@ -365,7 +396,7 @@ function openServiceModal(serviceId) {
 
     <!-- Overview -->
     <div class="mt-6">
-      <h4 class="text-base font-bold text-[#C9A227] mb-2 flex items-center gap-2">
+      <h4 class="text-base font-bold text-[#E4B15B] mb-2 flex items-center gap-2">
         <i class="fa-solid fa-circle-info"></i>
         <span>${isRtl ? 'نطاق الخدمة والمعايير التشغيلية:' : 'Operational Scope & Standards:'}</span>
       </h4>
@@ -377,13 +408,13 @@ function openServiceModal(serviceId) {
     <!-- Key Tasks -->
     <div class="mt-6">
       <h4 class="text-base font-bold text-white mb-3 flex items-center gap-2">
-        <i class="fa-solid fa-list-check text-[#C9A227]"></i>
+        <i class="fa-solid fa-list-check text-[#E4B15B]"></i>
         <span>${isRtl ? 'أبرز المهام والخدمات الفرعية التي نغطيها:' : 'Key Sub-Tasks & Operations Covered:'}</span>
       </h4>
       <ul class="space-y-2.5">
         ${service.tasks.map(t => `
           <li class="flex items-start gap-3 text-slate-300 text-sm sm:text-base">
-            <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#C9A227] flex items-center justify-center text-xs mt-0.5 shrink-0">
+            <span class="w-5 h-5 rounded-full bg-yellow-500/20 text-[#E4B15B] flex items-center justify-center text-xs mt-0.5 shrink-0">
               <i class="fa-solid fa-check"></i>
             </span>
             <span>${t}</span>
@@ -394,7 +425,7 @@ function openServiceModal(serviceId) {
 
     <!-- Specialized Equipment Badge -->
     <div class="mt-6 p-4 rounded-xl bg-slate-800/60 border border-slate-700/80 flex items-start gap-3">
-      <i class="fa-solid fa-shield-halved text-[#C9A227] text-xl mt-0.5"></i>
+      <i class="fa-solid fa-shield-halved text-[#E4B15B] text-xl mt-0.5"></i>
       <div>
         <h5 class="text-sm font-bold text-white mb-1">
           ${isRtl ? 'المعدات والخامات المعتمدة:' : 'Accredited Equipment & Materials:'}
@@ -409,7 +440,7 @@ function openServiceModal(serviceId) {
         ${sData.closeModal}
       </button>
 
-      <button onclick="selectServiceAndScroll('${service.id}')" class="px-7 py-2.5 rounded-xl bg-gradient-gold text-[#0B132B] font-bold text-sm hover:shadow-lg hover:shadow-yellow-500/20 transition flex items-center gap-2">
+      <button onclick="selectServiceAndScroll('${service.id}')" class="px-7 py-2.5 rounded-xl bg-gradient-gold text-[#0E0C10] font-bold text-sm hover:shadow-lg hover:shadow-yellow-500/20 transition flex items-center gap-2">
         <span>${sData.requestService}</span>
         <i class="fa-solid ${isRtl ? 'fa-arrow-left' : 'fa-arrow-right'} text-xs"></i>
       </button>
@@ -460,11 +491,11 @@ function renderWhyUsSection(lang) {
 
   const wData = translations[lang].whyUs;
   container.innerHTML = wData.cards.map((card, idx) => `
-    <div class="p-6 sm:p-8 rounded-2xl bg-[#111C38] border border-[#1F3059] hover:border-[#C9A227] transition duration-300 hover:-translate-y-1.5 shadow-xl group" data-aos="fade-up" data-aos-delay="${idx * 80}">
-      <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg shadow-yellow-500/10">
+    <div class="whyus-card p-6 sm:p-8 rounded-2xl bg-[#18141A] border border-[#2E262C] hover:border-[#E4B15B] transition duration-300 hover:-translate-y-1.5 shadow-xl group" data-aos="fade-up" data-aos-delay="${idx * 80}">
+      <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#E4B15B] text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg shadow-yellow-500/10">
         <i class="fa-solid ${card.icon}"></i>
       </div>
-      <h3 class="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-[#C9A227] transition">
+      <h3 class="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-[#E4B15B] transition">
         ${card.title}
       </h3>
       <p class="text-slate-300 text-sm leading-relaxed">
@@ -492,7 +523,7 @@ function renderClientsSection(lang, filter = 'all') {
       <div class="w-full h-24 mb-3 p-3 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden group-hover:scale-[1.02] transition duration-300">
         <img src="${resolveClientImage(c)}" alt="${isRtl ? c.ar : c.en}" class="max-h-full max-w-full object-contain filter transition duration-300" loading="lazy" onerror="this.onerror=null;this.src='assets/images/clientLogo/client-fallback.svg';">
       </div>
-      <h4 class="text-sm font-bold text-white group-hover:text-[#C9A227] transition leading-snug">
+      <h4 class="text-sm font-bold text-white group-hover:text-[#E4B15B] transition leading-snug">
         ${isRtl ? c.ar : c.en}
       </h4>
       <span class="text-[11px] text-slate-400 mt-1 uppercase tracking-wider font-semibold">
@@ -505,10 +536,10 @@ function renderClientsSection(lang, filter = 'all') {
   document.querySelectorAll('.client-filter-btn').forEach(btn => {
     const f = btn.getAttribute('data-filter');
     if (f === filter) {
-      btn.classList.add('bg-gradient-gold', 'text-[#0B132B]', 'font-bold', 'shadow-lg');
+      btn.classList.add('bg-gradient-gold', 'text-[#0E0C10]', 'font-bold', 'shadow-lg');
       btn.classList.remove('bg-slate-800', 'text-slate-300');
     } else {
-      btn.classList.remove('bg-gradient-gold', 'text-[#0B132B]', 'font-bold', 'shadow-lg');
+      btn.classList.remove('bg-gradient-gold', 'text-[#0E0C10]', 'font-bold', 'shadow-lg');
       btn.classList.add('bg-slate-800', 'text-slate-300');
     }
   });
@@ -521,6 +552,17 @@ function setClientFilter(filter) {
   renderClientsSection(currentLanguage, filter);
 }
 
+function validateEgyptianPhone(phone) {
+  return /^01[0125][0-9]{8}$/.test(String(phone || '').trim());
+}
+
+function validateEmailStrict(email) {
+  const em = String(email || '').trim().toLowerCase();
+  if (em.length > 254) return false;
+  if (/\s/.test(em)) return false;
+  return /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(em);
+}
+
 /**
  * Handle Contact Form Submit
  */
@@ -528,8 +570,19 @@ function setupContactForm() {
   const form = document.getElementById('deltonContactForm');
   if (!form) return;
 
+  // Live-sanitize the phone field: digits only, capped at 11 (Egyptian mobile length)
+  const phoneInput = document.getElementById('contactPhone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 11);
+    });
+  }
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    const t = translations[currentLanguage] || {};
+    const cf = (t.contact && t.contact.form) || {};
 
     const name = document.getElementById('contactName')?.value.trim();
     const company = document.getElementById('contactCompany')?.value.trim();
@@ -541,35 +594,91 @@ function setupContactForm() {
     const toast = document.getElementById('formToast');
     const toastMsg = document.getElementById('formToastMsg');
 
-    if (!name || !phone || !message) {
-      if (toast && toastMsg) {
-        toastMsg.textContent = translations[currentLanguage].contact.form.errorMsg;
-        toast.className = 'p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-200 text-sm block animate-bounce';
-        toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+    function showErrorToast(msg) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg || (cf.errorMsg || '');
+      toast.className = 'p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-200 text-sm block animate-bounce';
+      toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    function showSuccessToast(msg) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg || (cf.successMsg || '');
+      toast.className = 'p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-200 text-sm block';
+      toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    if (!name || !company || !phone || !email || !service || !message) {
+      showErrorToast(cf.errorMsg || '');
+      return;
+    }
+
+    if (!validateEgyptianPhone(phone)) {
+      showErrorToast(currentLanguage === 'ar'
+        ? 'رقم التليفون غير صحيح. يجب أن يكون 11 رقماً مصرياً ويبدأ بـ 010 / 011 / 012 / 015.'
+        : 'Invalid Egyptian phone. Must be 11 digits starting with 010/011/012/015.');
+      document.getElementById('contactPhone')?.focus();
+      return;
+    }
+
+    if (!validateEmailStrict(email)) {
+      showErrorToast(currentLanguage === 'ar'
+        ? 'البريد الإلكتروني غير صحيح. يرجى التأكد من وجود علامة @ والنطاق.'
+        : 'Invalid email format. Must contain @ and a valid domain.');
+      document.getElementById('contactEmail')?.focus();
       return;
     }
 
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> ${translations[currentLanguage].contact.form.submitting}`;
+      const originalBtnLabel = submitBtn.innerHTML;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> ${cf.submitting || ''}`;
     }
 
-    // Simulate sending
-    setTimeout(() => {
-      if (toast && toastMsg) {
-        toastMsg.textContent = translations[currentLanguage].contact.form.successMsg;
-        toast.className = 'p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-200 text-sm block';
-        toast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+    const fd = new FormData(form);
+    fd.append('lang', currentLanguage);
 
-      form.reset();
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<span>${translations[currentLanguage].contact.form.submitBtn}</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
-      }
-    }, 1000);
+    fetch('assets/php/contact.php', { method: 'POST', body: fd })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.ok) {
+          form.reset();
+          showSuccessToast(cf.successMsg || '');
+        } else {
+          let msg = cf.errorMsg || '';
+          if (data && data.code) {
+            if (data.code === 'phone') {
+              msg = (currentLanguage === 'ar')
+                ? 'رقم التليفون غير صحيح (11 رقماً مصرياً - 010/011/012/015).'
+                : 'Invalid Egyptian phone (11 digits, 010/011/012/015 prefix).';
+            } else if (data.code === 'email') {
+              msg = (currentLanguage === 'ar')
+                ? 'البريد الإلكتروني غير صحيح.'
+                : 'Invalid email address.';
+            } else if (data.code === 'rate_limited') {
+              msg = (currentLanguage === 'ar')
+                ? 'لقد تجاوزت الحد المسموح به من الطلبات. حاول مرة أخرى بعد دقيقة.'
+                : 'Too many submissions. Please try again in a minute.';
+            } else if (data.code === 'server') {
+              msg = (currentLanguage === 'ar')
+                ? 'حدث خطأ أثناء المعالجة. حاول مرة أخرى لاحقاً.'
+                : 'Server error. Please try again later.';
+            }
+          }
+          showErrorToast(msg);
+        }
+      })
+      .catch(() => {
+        showErrorToast(cf.errorMsg || (currentLanguage === 'ar'
+          ? 'حدث خطأ أثناء الإرسال. حاول مرة أخرى بعد قليل.'
+          : 'An error occurred while sending. Please try again shortly.'));
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>${cf.submitBtn || ''}</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
+        }
+      });
   });
 }
 

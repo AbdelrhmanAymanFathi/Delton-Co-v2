@@ -1,0 +1,11 @@
+Options -Indexes -MultiViews
+
+<FilesMatch "\.(json|log|ini|env)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<Files "index.php">
+  Order Allow,Deny
+  Allow from all
+</Files>

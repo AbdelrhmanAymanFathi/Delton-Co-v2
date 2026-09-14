@@ -148,11 +148,62 @@
       }
     }
 
+    // ---- Careers (careers.html: hero/form headers, why-join cards, vacancies, form lists) ----
+    if (content.careers) {
+      var car = content.careers;
+      for (i = 0; i < langs.length; i++) {
+        l = langs[i];
+        t = translations[l];
+        if (!t.careers) continue;
+
+        var ch = car.header && car.header[l];
+        if (ch) {
+          Object.assign(t.careers, ch);
+        }
+
+        if (Array.isArray(car.whyJoin) && car.whyJoin.length) {
+          t.careers.whyJoin = car.whyJoin.map(function (c) {
+            var cl = c[l] || {};
+            return { icon: c.icon, title: cl.title || '', desc: cl.desc || '' };
+          });
+        }
+
+        if (Array.isArray(car.vacancies) && car.vacancies.length) {
+          t.careers.vacancies = car.vacancies.map(function (v) {
+            var vl = v[l] || {};
+            return {
+              id: v.id,
+              icon: v.icon,
+              location: v.location,
+              type: v.type,
+              salary: v.salary,
+              title: vl.title || '',
+              tagline: vl.tagline || '',
+              reqs: vl.reqs || []
+            };
+          });
+        }
+      }
+
+      if (car.lists) {
+        var jr = Array.isArray(car.lists.jobRoles) ? car.lists.jobRoles.filter(Boolean) : [];
+        var ex = Array.isArray(car.lists.experiences) ? car.lists.experiences.filter(Boolean) : [];
+        var gv = Array.isArray(car.lists.governorates) ? car.lists.governorates.filter(Boolean) : [];
+        if (jr.length || ex.length || gv.length) {
+          window.__CareersLists = {
+            jobRoles: jr.length ? jr : null,
+            experiences: ex.length ? ex : null,
+            governorates: gv.length ? gv : null
+          };
+        }
+      }
+    }
+
     // ---- Branding (navbar + footer logos) ----
     if (content.branding) {
       window.__Branding = {
-        navbar: Object.assign({ image: 'newlogo.jpeg', width: '110', height: '52' }, content.branding.navbar || {}),
-        footer: Object.assign({ image: 'assets/images/logoFooter.png', width: '150', height: '56' }, content.branding.footer || {})
+        navbar: Object.assign({ image: 'assets/images/logo-nav.png', width: '124', height: '50' }, content.branding.navbar || {}),
+        footer: Object.assign({ image: 'assets/images/logo-nav.png', width: '160', height: '64' }, content.branding.footer || {})
       };
       if (window.renderBranding) window.renderBranding();
     }

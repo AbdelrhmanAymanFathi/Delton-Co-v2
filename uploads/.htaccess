@@ -1,0 +1,10 @@
+Options -Indexes -MultiViews
+
+<FilesMatch "\.(php|phtml|pl|py|jsp|asp|sh|cgi)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>

@@ -1,25 +1,28 @@
 /* ==========================================================================
    Delton Facility Management - Main Stylesheet
-   Brand Colors: Gold (#C9A227) & Deep Navy (#0B132B)
+   Brand Colors: Gold (#E4B15B) & Deep Navy (#0E0C10)
    Dual-Direction: RTL (Cairo) & LTR (Poppins)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --gold-primary: #D4AF37;
-  --gold-hover: #B8891E;
-  --gold-soft: #F7E8AA;
-  --gold-light: #F5E7BB;
-  --gold-glow: rgba(212, 175, 55, 0.3);
-  --navy-dark: #071120;
-  --navy-deep: #0B1528;
-  --navy-card: #101D34;
-  --navy-surface: #142743;
-  --navy-border: #23395F;
-  --navy-darker: #040A14;
-  --text-light: #F8FAFC;
-  --text-muted: #A8B4C7;
+  --gold-primary: #E4B15B;
+  --gold-hover: #B8862E;
+  --gold-soft: #F3DDAE;
+  --gold-light: #F6E6C2;
+  --gold-glow: rgba(228, 177, 91, 0.3);
+  --ember-core: #C23B2E;
+  --ember-core-deep: #8A1F22;
+  --ash-silver: #9C99A6;
+  --navy-dark: #0E0C10;
+  --navy-deep: #100D12;
+  --navy-card: #18141A;
+  --navy-surface: #211C22;
+  --navy-border: #2E262C;
+  --navy-darker: #0A080C;
+  --text-light: #F5EFE6;
+  --text-muted: #A39FA6;
   --radius-card: 18px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -29,10 +32,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ash & Ember surface treatment: a warm ember glow low in one corner plus a
+   fine neutral grain, layered as background-image only so it composites over
+   whatever Tailwind bg-[#...] color class is already set on the element. */
+.ash-ember-surface {
+  background-image:
+    radial-gradient(ellipse 55% 60% at 6% 100%, rgba(194, 59, 46, 0.16), transparent 55%),
+    radial-gradient(ellipse 45% 55% at 3% 100%, rgba(228, 177, 91, 0.11), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-blend-mode: normal, normal, overlay;
+}
+
 body {
-  background:
-    radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 30%),
-    linear-gradient(180deg, var(--navy-dark) 0%, #0a1427 100%);
   color: var(--text-light);
   overflow-x: hidden;
   max-width: 100%;
@@ -59,7 +71,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #23345C;
+  background: #3A323A;
   border-radius: 5px;
   border: 2px solid var(--navy-darker);
 }
@@ -82,37 +94,37 @@ html {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #C9A227 50%, #997516 100%);
+  background: linear-gradient(135deg, #F0CB86 0%, #E4B15B 50%, #8A6720 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .bg-gradient-gold {
-  background: linear-gradient(135deg, #DFB739 0%, #C9A227 60%, #A88118 100%);
+  background: linear-gradient(135deg, #F0CB86 0%, #E4B15B 60%, #B8862E 100%);
 }
 
 .border-gold-glow {
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  box-shadow: 0 0 15px rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(228, 177, 91, 0.4);
+  box-shadow: 0 0 15px rgba(228, 177, 91, 0.15);
 }
 
 .border-gold-glow:hover {
   border-color: var(--gold-primary);
-  box-shadow: 0 0 25px rgba(201, 162, 39, 0.35);
+  box-shadow: 0 0 25px rgba(228, 177, 91, 0.35);
 }
 
 /* Navbar Blur & Scrolled State */
 .navbar-fixed {
   transition: var(--transition-smooth);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  border-bottom: 1px solid rgba(140, 130, 136, 0.1);
 }
 
 .navbar-scrolled {
-  background: rgba(7, 17, 32, 0.88) !important;
+  background: rgba(14, 12, 16, 0.88) !important;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.36);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.24);
+  border-bottom: 1px solid rgba(228, 177, 91, 0.24);
 }
 
 #mainNavbar .container {
@@ -197,10 +209,49 @@ html {
 
 .mobile-header-logo {
   display: block;
-  max-width: 54px;
-  height: 28px;
+  max-width: 124px;
+  height: 50px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 18px rgba(212, 175, 55, 0.18));
+  filter: drop-shadow(0 8px 18px rgba(228, 177, 91, 0.18));
+}
+
+/* Hero slide heading. Line-height/weight/tracking are set here as plain CSS
+   (not as Tailwind utility classes) and forced with !important so they are
+   guaranteed to apply no matter which Tailwind pipeline serves the page
+   (CDN JIT or a locally-built stylesheet) and cannot lose to a Tailwind
+   font-size utility that bundles its own tight default line-height (e.g.
+   text-5xl ships with line-height: 1). Applies at every breakpoint. */
+.hero-slide-title {
+  line-height: 1.25 !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 800 !important;
+}
+
+/* Arabic script needs much more vertical room (dots/diacritics sit close to
+   the line above) and no negative tracking (it makes connected letterforms
+   collide), plus a lighter weight than the Latin title — at this size,
+   Cairo's extrabold strokes visually touch between wrapped lines. */
+[dir="rtl"] .hero-slide-title {
+  line-height: 1.9 !important;
+  letter-spacing: normal !important;
+  font-weight: 700 !important;
+}
+
+/* Section headings (About/Services/Why Us/Clients/Contact/Careers h2/h1).
+   Same root cause and fix as .hero-slide-title above: these use Tailwind's
+   text-3xl/4xl/5xl utilities, which bundle their own tight default
+   line-height (text-5xl = line-height: 1) that can win over any Tailwind
+   leading-* utility depending on which Tailwind pipeline builds the page.
+   Set as plain CSS with !important so it is never at the mercy of that. */
+.section-heading {
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+[dir="rtl"] .section-heading {
+  line-height: 1.6 !important;
+  letter-spacing: normal !important;
+  font-weight: 700 !important;
 }
 
 @media (max-width: 1024px) {
@@ -253,9 +304,7 @@ html {
   }
 
   .swiper-slide h1 {
-    font-size: clamp(1.9rem, 7vw, 2.7rem) !important;
-    line-height: 1.12 !important;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.7rem, 6.2vw, 2.4rem) !important;
   }
 
   .swiper-slide p {
@@ -299,10 +348,6 @@ html {
   .stat-card {
     min-height: 130px;
   }
-
-  .mobile-header-logo {
-    max-width: 64px;
-  }
 }
 
 .slide-bg {
@@ -329,9 +374,9 @@ html {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(6, 11, 24, 0.92) 0%,
-    rgba(11, 19, 43, 0.85) 50%,
-    rgba(17, 28, 56, 0.78) 100%
+    rgba(10, 8, 12, 0.92) 0%,
+    rgba(14, 12, 16, 0.85) 50%,
+    rgba(24, 20, 26, 0.78) 100%
   );
 }
 
@@ -341,8 +386,8 @@ html {
   width: 48px !important;
   height: 48px !important;
   border-radius: 50%;
-  background: rgba(17, 28, 56, 0.8);
-  border: 1px solid rgba(201, 162, 39, 0.5);
+  background: rgba(24, 20, 26, 0.8);
+  border: 1px solid rgba(228, 177, 91, 0.5);
   color: var(--gold-primary) !important;
   backdrop-filter: blur(6px);
   transition: var(--transition-smooth);
@@ -370,7 +415,7 @@ html {
 .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
-  background: rgba(148, 163, 184, 0.85) !important;
+  background: rgba(140, 130, 136, 0.85) !important;
   opacity: 0.8;
   transition: var(--transition-smooth);
   margin: 0 5px !important;
@@ -380,20 +425,20 @@ html {
   width: 30px;
   height: 10px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #F7E8AA 0%, #D4AF37 100%) !important;
+  background: linear-gradient(90deg, #F3DDAE 0%, #E4B15B 100%) !important;
   opacity: 1;
-  box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 14px rgba(228, 177, 91, 0.45);
 }
 
 /* Service Card Hover & Interactions */
 .service-card {
-  background: linear-gradient(180deg, rgba(17, 28, 56, 0.98), rgba(11, 19, 43, 0.96));
-  border: 1px solid rgba(35, 57, 95, 0.9);
+  background: linear-gradient(180deg, rgba(24, 20, 26, 0.98), rgba(14, 12, 16, 0.96));
+  border: 1px solid rgba(46, 38, 44, 0.9);
   border-radius: var(--radius-card);
   transition: var(--transition-smooth);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.30);
+  box-shadow: 0 18px 40px rgba(6, 5, 8, 0.30);
 }
 
 .service-card::before {
@@ -410,18 +455,54 @@ html {
 
 .service-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(201, 162, 39, 0.6);
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 162, 39, 0.15);
+  border-color: rgba(228, 177, 91, 0.6);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(228, 177, 91, 0.15);
 }
 
 .service-card:hover::before {
   opacity: 1;
 }
 
+/* Why Us cards are built with inline Tailwind utility classes (no dedicated
+   rule of their own yet); give them a positioning context so the hover
+   z-index below actually takes effect, matching the other card types. */
+.whyus-card {
+  position: relative;
+}
+
+/* Scale-up on hover for ALL card types across the site (services, clients,
+   stats, why-us): desktop/tablet only, excluded on mobile screen sizes.
+   !important is required here because the AOS scroll-animation library applies
+   its own high-specificity "aos-animate" transform reset to the same element,
+   which otherwise silently cancels this hover scale (only an inner image's
+   own group-hover zoom would then be visible, not the card/text). Each
+   selector keeps its own existing lift distance and just adds the zoom. */
+@media (min-width: 768px) {
+  .service-card:hover {
+    transform: translateY(-8px) scale(1.1) !important;
+    z-index: 10;
+  }
+
+  .client-card:hover {
+    transform: translateY(-5px) scale(1.1) !important;
+    z-index: 10;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-6px) scale(1.1) !important;
+    z-index: 10;
+  }
+
+  .whyus-card:hover {
+    transform: translateY(-6px) scale(1.1) !important;
+    z-index: 10;
+  }
+}
+
 /* Client Logo Card */
 .client-card {
-  background: linear-gradient(180deg, rgba(17, 28, 56, 0.95), rgba(11, 19, 43, 0.94));
-  border: 1px solid rgba(35, 57, 95, 0.9);
+  background: linear-gradient(180deg, rgba(24, 20, 26, 0.95), rgba(14, 12, 16, 0.94));
+  border: 1px solid rgba(46, 38, 44, 0.9);
   border-radius: 14px;
   transition: var(--transition-smooth);
   position: relative;
@@ -431,20 +512,20 @@ html {
 .client-card:hover {
   transform: translateY(-5px);
   border-color: var(--gold-primary);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(201, 162, 39, 0.15);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(228, 177, 91, 0.15);
 }
 
 /* Modal Popup Styling */
 .modal-backdrop {
-  background: rgba(6, 11, 24, 0.85);
+  background: rgba(10, 8, 12, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .modal-content {
-  background: #0D1733;
-  border: 1px solid rgba(201, 162, 39, 0.35);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(201, 162, 39, 0.15);
+  background: #18141A;
+  border: 1px solid rgba(228, 177, 91, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(228, 177, 91, 0.15);
   border-radius: 20px;
 }
 
@@ -580,8 +661,8 @@ html {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(17, 28, 56, 0.9);
-  border: 1px solid rgba(201, 162, 39, 0.4);
+  background: rgba(24, 20, 26, 0.9);
+  border: 1px solid rgba(228, 177, 91, 0.4);
   color: var(--gold-primary);
   display: flex;
   align-items: center;
@@ -663,23 +744,23 @@ html {
 
 /* Stat Counter Card */
 .stat-card {
-  background: linear-gradient(145deg, rgba(17, 28, 56, 0.8), rgba(11, 19, 43, 0.95));
-  border: 1px solid rgba(201, 162, 39, 0.25);
+  background: linear-gradient(145deg, rgba(24, 20, 26, 0.8), rgba(14, 12, 16, 0.95));
+  border: 1px solid rgba(228, 177, 91, 0.25);
   border-radius: 14px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 22px 50px rgba(7, 17, 32, 0.28);
+  box-shadow: 0 22px 50px rgba(14, 12, 16, 0.28);
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 28px 60px rgba(7, 17, 32, 0.35), 0 0 28px rgba(212, 175, 55, 0.12);
+  border-color: rgba(228, 177, 91, 0.6);
+  box-shadow: 0 28px 60px rgba(14, 12, 16, 0.35), 0 0 28px rgba(228, 177, 91, 0.12);
 }
 
 @keyframes goldPulse {
-  0%, 100% { box-shadow: 0 0 0 rgba(212, 175, 55, 0.0); }
-  50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.18); }
+  0%, 100% { box-shadow: 0 0 0 rgba(228, 177, 91, 0.0); }
+  50% { box-shadow: 0 0 20px rgba(228, 177, 91, 0.18); }
 }
 
 .service-card,

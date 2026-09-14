@@ -1,0 +1,14 @@
+{
+  "name": "delton-fm-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Delton for Services & Facility Management - Corporate website (static build)",
+  "scripts": {
+    "build:css": "tailwindcss -i ./tailwind.input.css -o ./assets/css/tailwind.build.css --minify",
+    "watch:css": "tailwindcss -i ./tailwind.input.css -o ./assets/css/tailwind.build.css --watch --minify",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

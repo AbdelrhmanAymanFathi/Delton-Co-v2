@@ -17,54 +17,89 @@ $HERO_DIR      = "assets/images/hero/";
 $SERVICES_DIR  = "assets/images/services/";
 $CLIENTS_DIR   = "assets/images/clientLogo/";
 $BRAND_DIR     = "assets/images/brand/";
-$APPLICATIONS_JSON = __DIR__ . "/applications.json";
+$APPLICATIONS_JSON  = __DIR__ . "/applications.json";
+$INQUIRIES_JSON     = __DIR__ . "/contact_inquiries.json";
 
 // ======================= HELPERS =======================
-function req($k, $def = '') {
-    return trim($_POST[$k] ?? $def);
+/**
+ * @param string $k
+ * @param mixed  $def
+ * @return string
+ */
+function req(string $k, $def = ''): string {
+    return trim((string)($_POST[$k] ?? $def));
 }
 
-function json_load($file) {
+/**
+ * @param string $file
+ * @return array|null
+ */
+function json_load(string $file): ?array {
     if (!file_exists($file)) return null;
-    $data = json_decode(file_get_contents($file), true);
+    $data = json_decode((string)file_get_contents($file), true);
     return is_array($data) ? $data : null;
 }
 
-function json_save($file, $data) {
-    return file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+/**
+ * @param string $file
+ * @param array  $data
+ * @return int|false
+ */
+function json_save(string $file, array $data) {
+    return file_put_contents(
+        $file,
+        json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+    );
 }
 
-function text_to_lines($str) {
+/**
+ * @param string $str
+ * @return array<int, string>
+ */
+function text_to_lines(string $str): array {
     $lines = preg_split('/\r\n|\r|\n/', $str);
     $out = [];
     foreach ($lines as $line) {
-        $t = trim($line);
+        $t = trim((string)$line);
         if ($t !== '') $out[] = $t;
     }
     return $out;
 }
 
-function upload_image($field, $rel_dir) {
+/**
+ * @param string $field
+ * @param string $rel_dir
+ * @return string
+ */
+function upload_image(string $field, string $rel_dir): string {
     if (empty($_FILES[$field]['name'])) return '';
     $f = $_FILES[$field];
     $allowed = ['jpg', 'jpeg', 'png', 'webp', 'svg', 'gif', 'avif'];
-    $ext = strtolower(pathinfo($f['name'], PATHINFO_EXTENSION));
-    if (!in_array($ext, $allowed) || $f['error'] !== UPLOAD_ERR_OK) return '';
+    $ext = strtolower((string)pathinfo((string)$f['name'], PATHINFO_EXTENSION));
+    if (!in_array($ext, $allowed, true) || (int)$f['error'] !== UPLOAD_ERR_OK) return '';
     $abs_dir = __DIR__ . '/../' . $rel_dir;
     if (!is_dir($abs_dir)) mkdir($abs_dir, 0755, true);
     $name = 'upload-' . time() . '-' . rand(100, 999) . '.' . $ext;
-    if (move_uploaded_file($f['tmp_name'], $abs_dir . $name)) {
+    if (move_uploaded_file((string)$f['tmp_name'], $abs_dir . $name)) {
         return $rel_dir . $name;
     }
     return '';
 }
 
-function thumb_src($path) {
+/**
+ * @param string $path
+ * @return string
+ */
+function thumb_src(string $path): string {
     if ($path === '') return '';
-    return (preg_match('#^https?://#i', $path)) ? $path : ('../' . $path);
+    return (preg_match('#^https?://#i', $path) === 1) ? $path : ('../' . $path);
 }
 
-function e($str) {
+/**
+ * @param mixed $str
+ * @return string
+ */
+function e($str): string {
     return htmlspecialchars((string)$str, ENT_QUOTES, 'UTF-8');
 }
 
@@ -78,6 +113,16 @@ function default_content() {
         'about'          => ['ar' => [], 'en' => []],
         'contact'        => ['phones' => [], 'email' => '', 'ar' => [], 'en' => []],
         'footer'         => ['phones' => '', 'ar' => [], 'en' => []],
+        'careers'        => [
+            'header'   => ['ar' => [], 'en' => []],
+            'whyJoin'  => [],
+            'vacancies' => [],
+            'lists'    => [
+                'jobRoles'     => [],
+                'experiences'  => [],
+                'governorates' => []
+            ]
+        ],
         'branding'       => [
             'navbar' => ['image' => 'newlogo.jpeg', 'width' => '110', 'height' => '52'],
             'footer' => ['image' => 'assets/images/logoFooter.png', 'width' => '150', 'height' => '56']
@@ -101,6 +146,33 @@ $content = load_content();
 $message = "";
 $messageType = "";
 
+$ADMIN_MAX_LOGIN_ATTEMPTS = 5;
+$ADMIN_LOCKOUT_SECONDS  = 300;
+
+function admin_login_rate_ok() {
+    global $ADMIN_MAX_LOGIN_ATTEMPTS, $ADMIN_LOCKOUT_SECONDS;
+    $now = time();
+    if (empty($_SESSION['admin_login_attempts'])) {
+        $_SESSION['admin_login_attempts'] = [];
+    }
+    $_SESSION['admin_login_attempts'] = array_filter(
+        $_SESSION['admin_login_attempts'],
+        function ($t) use ($now, $ADMIN_LOCKOUT_SECONDS) { return ($now - (int)$t) < $ADMIN_LOCKOUT_SECONDS; }
+    );
+    $remaining = $ADMIN_LOCKOUT_SECONDS - (empty($_SESSION['admin_login_attempts']) ? 0 : ($now - (int)end($_SESSION['admin_login_attempts'])));
+    if (count($_SESSION['admin_login_attempts']) >= $ADMIN_MAX_LOGIN_ATTEMPTS) {
+        return ['ok' => false, 'wait' => max(1, $remaining)];
+    }
+    return ['ok' => true, 'remaining' => $ADMIN_MAX_LOGIN_ATTEMPTS - count($_SESSION['admin_login_attempts'])];
+}
+
+function admin_record_failed_login() {
+    if (empty($_SESSION['admin_login_attempts'])) {
+        $_SESSION['admin_login_attempts'] = [];
+    }
+    $_SESSION['admin_login_attempts'][] = time();
+}
+
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: index.php");
@@ -110,12 +182,20 @@ if (isset($_GET['logout'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     // ---- LOGIN ----
     if ($_POST['action'] === 'login') {
-        if (req('pin') === $ADMIN_PIN) {
+        $rate = admin_login_rate_ok();
+        if (!$rate['ok']) {
+            $message = "محاولات تسجيل دخول كثيرة جداً. يرجى المحاولة بعد {$rate['wait']} ثانية / Too many attempts. Please wait {$rate['wait']}s.";
+            $messageType = "error";
+        } elseif (req('pin') === $ADMIN_PIN) {
             $_SESSION['delton_admin_logged'] = true;
+            unset($_SESSION['admin_login_attempts']);
             header("Location: index.php");
             exit;
         } else {
-            $message = "كلمة المرور غير صحيحة / Invalid Admin Password";
+            admin_record_failed_login();
+            $rate = admin_login_rate_ok();
+            $left = $rate['ok'] ? " — متبقية: {$rate['remaining']}" : '';
+            $message = "كلمة المرور غير صحيحة / Invalid Admin Password{$left}";
             $messageType = "error";
         }
     }
@@ -212,12 +292,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         if ($_POST['action'] === 'save_services_header') {
-            foreach (['ar', 'en'] as $l) {
-                $content['services']['header'][$l] = [
-                    "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle'),
-                    "viewDetails" => req('h_ar_view'), "closeModal" => req('h_ar_close'), "requestService" => req('h_ar_request')
-                ];
-            }
+            $content['services']['header']['ar'] = [
+                "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle'),
+                "viewDetails" => req('h_ar_view'), "closeModal" => req('h_ar_close'), "requestService" => req('h_ar_request')
+            ];
+            $content['services']['header']['en'] = [
+                "badge" => req('h_en_badge'), "title" => req('h_en_title'), "subtitle" => req('h_en_subtitle'),
+                "viewDetails" => req('h_en_view'), "closeModal" => req('h_en_close'), "requestService" => req('h_en_request')
+            ];
             $ok = json_save($CONTENT_JSON, $content);
             $msg = $ok ? "تم حفظ عنوان القسم بنجاح!" : "خطأ في الحفظ";
         }
@@ -231,10 +313,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 "ar" => ["title" => req('ar_title'), "desc" => req('ar_desc')],
                 "en" => ["title" => req('en_title'), "desc" => req('en_desc')]
             ];
+            $found = false;
             if ($wid !== '') {
-                foreach ($cards as $k => $c) { if (($k + 1) . '' === $wid) { $cards[$k] = $card; $found = true; break; } }
+                $widInt = intval($wid);
+                if ($widInt >= 0 && $widInt < count($cards)) {
+                    $cards[$widInt] = $card;
+                    $found = true;
+                }
             }
-            if (empty($found)) $cards[] = $card;
+            if (!$found) $cards[] = $card;
             $content['whyUs']['cards'] = array_values($cards);
             $ok = json_save($CONTENT_JSON, $content);
             $msg = $ok ? "تم حفظ البطاقة بنجاح!" : "خطأ في الحفظ";
@@ -250,11 +337,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         if ($_POST['action'] === 'save_why_header') {
-            foreach (['ar', 'en'] as $l) {
-                $content['whyUs']['header'][$l] = [
-                    "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle')
-                ];
-            }
+            $content['whyUs']['header']['ar'] = [
+                "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle')
+            ];
+            $content['whyUs']['header']['en'] = [
+                "badge" => req('h_en_badge'), "title" => req('h_en_title'), "subtitle" => req('h_en_subtitle')
+            ];
             $ok = json_save($CONTENT_JSON, $content);
             $msg = $ok ? "تم حفظ عنوان القسم بنجاح!" : "خطأ في الحفظ";
         }
@@ -291,12 +379,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
 
         if ($_POST['action'] === 'save_clients_header') {
-            foreach (['ar', 'en'] as $l) {
-                $content['clientsHeader'][$l] = [
-                    "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle'),
-                    "filterAll" => req('h_ar_filterAll'), "filterBanking" => req('h_ar_filterBanking'), "filterCorporate" => req('h_ar_filterCorporate')
-                ];
-            }
+            $content['clientsHeader']['ar'] = [
+                "badge" => req('h_ar_badge'), "title" => req('h_ar_title'), "subtitle" => req('h_ar_subtitle'),
+                "filterAll" => req('h_ar_filterAll'), "filterBanking" => req('h_ar_filterBanking'), "filterCorporate" => req('h_ar_filterCorporate')
+            ];
+            $content['clientsHeader']['en'] = [
+                "badge" => req('h_en_badge'), "title" => req('h_en_title'), "subtitle" => req('h_en_subtitle'),
+                "filterAll" => req('h_en_filterAll'), "filterBanking" => req('h_en_filterBanking'), "filterCorporate" => req('h_en_filterCorporate')
+            ];
             $ok = json_save($CONTENT_JSON, $content);
             $msg = $ok ? "تم حفظ عنوان القسم بنجاح!" : "خطأ في الحفظ";
         }
@@ -390,6 +480,141 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $msg = $ok ? "تم حذف الطلب بنجاح!" : "خطأ في الحذف";
         }
 
+        // ---------- CONTACT INQUIRIES ----------
+        if ($_POST['action'] === 'delete_inquiry') {
+            $inqs = json_load($INQUIRIES_JSON) ?: [];
+            $del = req('delete_id');
+            $inqs = array_values(array_filter($inqs, function ($i) use ($del) { return ($i['id'] ?? '') !== $del; }));
+            $ok = json_save($INQUIRIES_JSON, $inqs);
+            $msg = $ok ? "تم حذف الرسالة بنجاح!" : "خطأ في الحذف";
+        }
+
+        // ---------- CAREERS: Header ----------
+        if ($_POST['action'] === 'save_careers_header') {
+            $content['careers']['header']['ar'] = [
+                "badge"        => req('h_ar_badge'),
+                "title"        => req('h_ar_title'),
+                "subtitle"     => req('h_ar_subtitle'),
+                "lead"         => req('h_ar_lead'),
+                "whyBadge"     => req('h_ar_whyBadge'),
+                "whyTitle"     => req('h_ar_whyTitle'),
+                "whySubtitle"  => req('h_ar_whySubtitle'),
+                "vacBadge"     => req('h_ar_vacBadge'),
+                "vacTitle"     => req('h_ar_vacTitle'),
+                "vacSubtitle"  => req('h_ar_vacSubtitle'),
+                "formTitle"    => req('h_ar_formTitle'),
+                "formDesc"     => req('h_ar_formDesc'),
+                "directTitle"  => req('h_ar_directTitle'),
+                "directNote"   => req('h_ar_directNote')
+            ];
+            $content['careers']['header']['en'] = [
+                "badge"        => req('h_en_badge'),
+                "title"        => req('h_en_title'),
+                "subtitle"     => req('h_en_subtitle'),
+                "lead"         => req('h_en_lead'),
+                "whyBadge"     => req('h_en_whyBadge'),
+                "whyTitle"     => req('h_en_whyTitle'),
+                "whySubtitle"  => req('h_en_whySubtitle'),
+                "vacBadge"     => req('h_en_vacBadge'),
+                "vacTitle"     => req('h_en_vacTitle'),
+                "vacSubtitle"  => req('h_en_vacSubtitle'),
+                "formTitle"    => req('h_en_formTitle'),
+                "formDesc"     => req('h_en_formDesc'),
+                "directTitle"  => req('h_en_directTitle'),
+                "directNote"   => req('h_en_directNote')
+            ];
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حفظ عناوين صفحة التوظيف بنجاح!" : "خطأ في الحفظ";
+        }
+
+        // ---------- CAREERS: Why Join Cards ----------
+        if ($_POST['action'] === 'save_careers_why') {
+            $cards = is_array($content['careers']['whyJoin'] ?? null) ? $content['careers']['whyJoin'] : [];
+            $wid = req('why_id');
+            $card = [
+                "icon" => req('icon', 'fa-award'),
+                "ar"   => ["title" => req('ar_title'), "desc" => req('ar_desc')],
+                "en"   => ["title" => req('en_title'), "desc" => req('en_desc')]
+            ];
+            $found = false;
+            foreach ($cards as $k => $c) {
+                if ($wid !== '' && (string)$k === (string)$wid) {
+                    $cards[$k] = $card;
+                    $found = true;
+                }
+            }
+            if (!$found) $cards[] = $card;
+            $content['careers']['whyJoin'] = array_values($cards);
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حفظ بطاقة لماذا تنضم بنجاح!" : "خطأ في الحفظ";
+        }
+
+        if ($_POST['action'] === 'delete_careers_why') {
+            $del = intval(req('delete_id'));
+            $cards = [];
+            $cur = is_array($content['careers']['whyJoin'] ?? null) ? $content['careers']['whyJoin'] : [];
+            foreach ($cur as $k => $c) { if ($k !== $del) $cards[] = $c; }
+            $content['careers']['whyJoin'] = array_values($cards);
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حذف البطاقة بنجاح!" : "خطأ في الحذف";
+        }
+
+        // ---------- CAREERS: Vacancies ----------
+        if ($_POST['action'] === 'save_careers_vacancy') {
+            $vac = is_array($content['careers']['vacancies'] ?? null) ? $content['careers']['vacancies'] : [];
+            $vid = req('vac_id');
+            $item = [
+                "id"       => req('vac_slug') ?: ('job-' . substr(md5(uniqid('', true)), 0, 6)),
+                "icon"     => req('icon', 'fa-briefcase'),
+                "location" => req('location'),
+                "type"     => req('type'),
+                "salary"   => req('salary'),
+                "ar"       => [
+                    "title"   => req('ar_title'),
+                    "tagline" => req('ar_tagline'),
+                    "reqs"    => text_to_lines(req('ar_reqs'))
+                ],
+                "en" => [
+                    "title"   => req('en_title'),
+                    "tagline" => req('en_tagline'),
+                    "reqs"    => text_to_lines(req('en_reqs'))
+                ]
+            ];
+            $found = false;
+            foreach ($vac as $k => $v) {
+                if ($vid !== '' && (string)$k === (string)$vid) {
+                    $vac[$k] = $item;
+                    $found = true;
+                }
+            }
+            if (!$found) $vac[] = $item;
+            $content['careers']['vacancies'] = array_values($vac);
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حفظ الوظيفة الشاغرة بنجاح!" : "خطأ في الحفظ";
+        }
+
+        if ($_POST['action'] === 'delete_careers_vacancy') {
+            $del = intval(req('delete_id'));
+            $out = [];
+            $cur = is_array($content['careers']['vacancies'] ?? null) ? $content['careers']['vacancies'] : [];
+            foreach ($cur as $k => $v) { if ($k !== $del) $out[] = $v; }
+            $content['careers']['vacancies'] = array_values($out);
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حذف الوظيفة بنجاح!" : "خطأ في الحذف";
+        }
+
+        // ---------- CAREERS: Form Lists (jobRoles, experiences, governorates) ----------
+        if ($_POST['action'] === 'save_careers_lists') {
+            if (!isset($content['careers']['lists']) || !is_array($content['careers']['lists'])) {
+                $content['careers']['lists'] = ['jobRoles' => [], 'experiences' => [], 'governorates' => []];
+            }
+            $content['careers']['lists']['jobRoles']     = text_to_lines(req('list_jobs'));
+            $content['careers']['lists']['experiences']  = text_to_lines(req('list_exp'));
+            $content['careers']['lists']['governorates'] = text_to_lines(req('list_gov'));
+            $ok = json_save($CONTENT_JSON, $content);
+            $msg = $ok ? "تم حفظ قوائم النموذج بنجاح!" : "خطأ في الحفظ";
+        }
+
         if ($ok) { $message = $msg; $messageType = "success"; }
         elseif ($msg !== "") { $message = $msg; $messageType = "error"; }
     }
@@ -397,7 +622,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 $isLoggedIn = !empty($_SESSION['delton_admin_logged']);
 $tab = isset($_GET['tab']) ? preg_replace('/[^a-z0-9_]/', '', $_GET['tab']) : 'slider';
-$allowedTabs = ['slider', 'services', 'whyus', 'clients', 'stats', 'about', 'settings', 'applications'];
+$allowedTabs = ['slider', 'services', 'whyus', 'clients', 'stats', 'about', 'careers', 'settings', 'applications', 'inquiries'];
 if (!in_array($tab, $allowedTabs)) $tab = 'slider';
 
 $slides = json_load($SLIDER_JSON) ?: [];
@@ -408,7 +633,7 @@ $slides = json_load($SLIDER_JSON) ?: [];
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة تحكم ديلتون | Delton Admin Panel</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/tailwind.build.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script>
@@ -555,14 +780,16 @@ $slides = json_load($SLIDER_JSON) ?: [];
   <nav class="max-w-6xl mx-auto mb-8 flex flex-wrap gap-2">
     <?php
     $tabs = [
-        'slider'   => ['fa-sliders', 'السلايدر'],
-        'services' => ['fa-screwdriver-wrench', 'الخدمات'],
-        'whyus'    => ['fa-shield-halved', 'لماذا نحن'],
-        'clients'  => ['fa-handshake', 'العملاء'],
-        'stats'    => ['fa-chart-simple', 'الإحصائيات'],
-        'about'    => ['fa-building-circle-check', 'عن ديلتون'],
-        'settings' => ['fa-gear', 'الإعدادات والاتصال'],
+        'slider'       => ['fa-sliders', 'السلايدر'],
+        'services'     => ['fa-screwdriver-wrench', 'الخدمات'],
+        'whyus'        => ['fa-shield-halved', 'لماذا نحن'],
+        'clients'      => ['fa-handshake', 'العملاء'],
+        'stats'        => ['fa-chart-simple', 'الإحصائيات'],
+        'about'        => ['fa-building-circle-check', 'عن ديلتون'],
+        'careers'      => ['fa-user-tie', 'صفحة التوظيف'],
+        'settings'     => ['fa-gear', 'الإعدادات والاتصال'],
         'applications' => ['fa-briefcase', 'طلبات التوظيف'],
+        'inquiries'    => ['fa-envelope-open-text', 'رسائل العملاء'],
     ];
     foreach ($tabs as $key => $info):
     ?>
@@ -840,6 +1067,243 @@ $slides = json_load($SLIDER_JSON) ?: [];
       </form>
 
     <!-- ================================================================
+         TAB: CAREERS PAGE (Full Control)
+    ================================================================= -->
+    <?php elseif ($tab === 'careers'):
+          $hdr = $content['careers']['header'] ?? ['ar'=>[], 'en'=>[]];
+          $whyCards = is_array($content['careers']['whyJoin'] ?? null) ? $content['careers']['whyJoin'] : [];
+          $vacs = is_array($content['careers']['vacancies'] ?? null) ? $content['careers']['vacancies'] : [];
+          $lists = $content['careers']['lists'] ?? ['jobRoles'=>[], 'experiences'=>[], 'governorates'=>[]];
+    ?>
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-user-tie text-[#C9A227]"></i> التحكم الكامل في صفحة التوظيف (careers.html)</h2>
+        <a href="careers.html" target="_blank" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold border border-slate-700">
+          <i class="fa-solid fa-up-right-from-square text-[#C9A227]"></i> فتح الصفحة في تبويب جديد
+        </a>
+      </div>
+
+      <!-- ========== الجزء الأول: العناوين الرئيسية + رأس الصفحة + رأس النموذج ========== -->
+      <form method="POST" class="space-y-6 p-6 rounded-2xl bg-[#111C38] border border-slate-700 shadow-xl">
+        <input type="hidden" name="action" value="save_careers_header">
+        <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 mb-2 flex items-center gap-2"><i class="fa-solid fa-heading"></i> 1. عناوين الصفحة (Hero + النموذج + جهة الاتصال)</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+            <h4 class="text-xs font-bold text-yellow-400 mb-3">المحتوى بالعربية</h4>
+            <?php
+            $arFields = [
+              'badge'       => 'وسم / البادج أعلى Hero (مثال: فرص العمل)',
+              'title'       => 'عنوان Hero الرئيسي',
+              'subtitle'    => 'عنوان Hero الفرعي (الوصف القصير)',
+              'lead'        => 'جملة Call-to-Action تحت Hero (مثال: قدّم سيرتك خلال 5 أيام...)',
+              'whyBadge'    => 'وسم / البادج أعلى قسم "لماذا تنضم إلينا"',
+              'whyTitle'    => 'عنوان قسم "لماذا تنضم إلينا"',
+              'whySubtitle' => 'الوصف تحت عنوان "لماذا تنضم إلينا"',
+              'vacBadge'    => 'وسم / البادج أعلى قسم "الوظائف الشاغرة"',
+              'vacTitle'    => 'عنوان قسم "الوظائف الشاغرة"',
+              'vacSubtitle' => 'الوصف تحت عنوان "الوظائف الشاغرة"',
+              'formTitle'   => 'عنوان نموذج التقديم على وظيفة',
+              'formDesc'    => 'وصف نموذج التقديم على وظيفة',
+              'directTitle' => 'عنوان بطاقة "أو أرسل سيرتك مباشرة"',
+              'directNote'  => 'نص تحت عنوان البطاقة الجانبية'
+            ];
+            foreach ($arFields as $fld => $label):
+              $rows = in_array($fld, ['subtitle','formDesc','directNote','lead','whySubtitle','vacSubtitle']) ? 2 : 1;
+            ?>
+            <div class="field">
+              <label class="lbl"><?php echo $label; ?></label>
+              <?php if ($rows > 1): ?>
+                <textarea class="inp" name="h_ar_<?php echo $fld; ?>" rows="<?php echo $rows; ?>"><?php echo e($hdr['ar'][$fld] ?? ''); ?></textarea>
+              <?php else: ?>
+                <input class="inp" name="h_ar_<?php echo $fld; ?>" value="<?php echo e($hdr['ar'][$fld] ?? ''); ?>">
+              <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800" dir="ltr">
+            <h4 class="text-xs font-bold text-yellow-400 mb-3">English Content</h4>
+            <?php
+            $enFields = [
+              'badge'       => 'Hero Badge Label',
+              'title'       => 'Hero Main Title',
+              'subtitle'    => 'Hero Subtitle / Short Description',
+              'lead'        => 'Hero CTA sentence (e.g. Submit within 5 days...)',
+              'whyBadge'    => '"Why Join Us" Section Badge',
+              'whyTitle'    => '"Why Join Us" Section Title',
+              'whySubtitle' => '"Why Join Us" Section Description',
+              'vacBadge'    => '"Open Vacancies" Section Badge',
+              'vacTitle'    => '"Open Vacancies" Section Title',
+              'vacSubtitle' => '"Open Vacancies" Section Description',
+              'formTitle'   => 'Application Form Section Title',
+              'formDesc'    => 'Application Form Section Description',
+              'directTitle' => '"Or send CV directly" Card Title',
+              'directNote'  => 'Left card body text'
+            ];
+            foreach ($enFields as $fld => $label):
+              $rows = in_array($fld, ['subtitle','formDesc','directNote','lead','whySubtitle','vacSubtitle']) ? 2 : 1;
+            ?>
+            <div class="field">
+              <label class="lbl"><?php echo $label; ?></label>
+              <?php if ($rows > 1): ?>
+                <textarea class="inp" name="h_en_<?php echo $fld; ?>" rows="<?php echo $rows; ?>"><?php echo e($hdr['en'][$fld] ?? ''); ?></textarea>
+              <?php else: ?>
+                <input class="inp" name="h_en_<?php echo $fld; ?>" value="<?php echo e($hdr['en'][$fld] ?? ''); ?>">
+              <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <button class="px-6 py-3 rounded-xl gold-gradient text-[#0B132B] font-bold text-sm shadow-lg"><i class="fa-solid fa-floppy-disk"></i> حفظ جميع العناوين (Hero + النموذج)</button>
+      </form>
+
+      <!-- ========== الجزء الثاني: بطاقات "لماذا تنضم إلينا" Why Join ========== -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 flex items-center gap-2"><i class="fa-solid fa-hand-holding-heart"></i> 2. بطاقات "لماذا تنضم إلى ديلتون / Why Join Delton" (<?php echo count($whyCards); ?>)</h3>
+          <button onclick="openCareersWhyModal()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] font-bold text-xs shadow-lg">+ إضافة بطاقة جديدة</button>
+        </div>
+        <?php if (empty($whyCards)): ?>
+          <div class="p-8 rounded-2xl bg-[#111C38] border border-dashed border-slate-700 text-center">
+            <i class="fa-solid fa-layer-group text-3xl text-slate-600 mb-2"></i>
+            <p class="text-xs text-slate-400">لا توجد بطاقات الآن. اضغط "إضافة بطاقة جديدة" لبدء إنشاء القسم.</p>
+          </div>
+        <?php else: ?>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <?php foreach ($whyCards as $idx => $c): ?>
+            <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition">
+              <div class="w-11 h-11 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-[#C9A227] text-lg mb-3">
+                <i class="fa-solid <?php echo e($c['icon'] ?? 'fa-award'); ?>"></i>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-1"><?php echo e($c['ar']['title'] ?? ''); ?></h4>
+              <p class="text-[11px] text-slate-400 italic mb-2">EN: <?php echo e($c['en']['title'] ?? ''); ?></p>
+              <p class="text-xs text-slate-300 mb-3" style="white-space:pre-line"><?php echo e($c['ar']['desc'] ?? ''); ?></p>
+              <div class="flex items-center justify-between border-t border-slate-700/60 pt-3">
+                <button onclick='editCareersWhy(<?php echo json_encode(["idx"=>$idx, "icon"=>$c["icon"] ?? "fa-award", "ar_title"=>$c["ar"]["title"] ?? "", "ar_desc"=>$c["ar"]["desc"] ?? "", "en_title"=>$c["en"]["title"] ?? "", "en_desc"=>$c["en"]["desc"] ?? ""], JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE); ?>)'
+                        class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700"><i class="fa-solid fa-pen-to-square text-[#C9A227]"></i> تعديل</button>
+                <form method="POST" onsubmit="return confirm('حذف هذه البطاقة؟');">
+                  <input type="hidden" name="action" value="delete_careers_why">
+                  <input type="hidden" name="delete_id" value="<?php echo $idx; ?>">
+                  <button class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[11px] font-semibold border border-red-500/30"><i class="fa-solid fa-trash"></i> حذف</button>
+                </form>
+              </div>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <!-- ========== الجزء الثالث: الوظائف الشاغرة (Open Vacancies) ========== -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> 3. الوظائف الشاغرة المعروضة على الصفحة / Open Vacancies (<?php echo count($vacs); ?>)</h3>
+          <button onclick="openCareersVacancyModal()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] font-bold text-xs shadow-lg">+ إضافة وظيفة شاغرة</button>
+        </div>
+        <?php if (empty($vacs)): ?>
+          <div class="p-8 rounded-2xl bg-[#111C38] border border-dashed border-slate-700 text-center">
+            <i class="fa-solid fa-clipboard-list text-3xl text-slate-600 mb-2"></i>
+            <p class="text-xs text-slate-400">لا توجد وظائف شاغرة الآن. الوظائف التي تضيفها هنا ستظهر مباشرة في صفحة careers.html.</p>
+          </div>
+        <?php else: ?>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <?php foreach ($vacs as $idx => $v): ?>
+            <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg shrink-0">
+                    <i class="fa-solid <?php echo e($v['icon'] ?? 'fa-briefcase'); ?>"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <h4 class="text-sm font-bold text-white truncate"><?php echo e($v['ar']['title'] ?? ''); ?></h4>
+                    <p class="text-[11px] text-slate-400 italic truncate">EN: <?php echo e($v['en']['title'] ?? ''); ?></p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-1 shrink-0">
+                  <?php if (!empty($v['type'])): ?>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-200 font-bold"><?php echo e($v['type']); ?></span>
+                  <?php endif; ?>
+                  <?php if (!empty($v['location'])): ?>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-200 font-bold"><i class="fa-solid fa-location-dot"></i> <?php echo e($v['location']); ?></span>
+                  <?php endif; ?>
+                </div>
+              </div>
+              <?php if (!empty($v['salary'])): ?>
+                <div class="mb-2 text-[11px] text-yellow-300 font-bold"><i class="fa-solid fa-money-bill-wave"></i> <?php echo e($v['salary']); ?></div>
+              <?php endif; ?>
+              <?php if (!empty($v['ar']['tagline']) || !empty($v['en']['tagline'])): ?>
+                <p class="text-xs text-slate-300 mb-3">
+                  <span class="text-slate-400">AR:</span> <?php echo e($v['ar']['tagline'] ?? ''); ?><br>
+                  <span class="text-slate-400">EN:</span> <span dir="ltr"><?php echo e($v['en']['tagline'] ?? ''); ?></span>
+                </p>
+              <?php endif; ?>
+              <?php if (!empty($v['ar']['reqs']) || !empty($v['en']['reqs'])): ?>
+                <div class="mb-3 text-xs">
+                  <?php if (!empty($v['ar']['reqs']) && is_array($v['ar']['reqs'])): ?>
+                    <p class="text-slate-400 font-bold mb-1">المتطلبات:</p>
+                    <ul class="list-disc pr-4 space-y-0.5 text-slate-300">
+                      <?php foreach (array_slice($v['ar']['reqs'],0,3) as $r): ?>
+                        <li><?php echo e($r); ?></li>
+                      <?php endforeach; ?>
+                      <?php if (count($v['ar']['reqs']) > 3): ?><li class="text-slate-500 italic">+<?php echo count($v['ar']['reqs']) - 3; ?> متطلبات أخرى...</li><?php endif; ?>
+                    </ul>
+                  <?php endif; ?>
+                </div>
+              <?php endif; ?>
+              <div class="flex items-center justify-between border-t border-slate-700/60 pt-3">
+                <a href="#application" onclick="document.getElementById('appPosition').value='<?php echo e(addslashes($v['ar']['title'] ?? '')); ?>';"
+                   class="px-3 py-1.5 rounded-lg bg-[#C9A227]/20 hover:bg-[#C9A227]/30 text-[#F0CB86] text-[11px] font-bold border border-[#C9A227]/40">قدّم الآن</a>
+                <div class="flex gap-2">
+                  <button onclick='editCareersVacancy(<?php
+                    $payload = [
+                      "idx" => $idx,
+                      "vac_slug" => $v["id"] ?? "",
+                      "icon" => $v["icon"] ?? "fa-briefcase",
+                      "location" => $v["location"] ?? "",
+                      "type" => $v["type"] ?? "",
+                      "salary" => $v["salary"] ?? "",
+                      "ar_title" => $v["ar"]["title"] ?? "",
+                      "ar_tagline" => $v["ar"]["tagline"] ?? "",
+                      "ar_reqs" => implode("\n", $v["ar"]["reqs"] ?? []),
+                      "en_title" => $v["en"]["title"] ?? "",
+                      "en_tagline" => $v["en"]["tagline"] ?? "",
+                      "en_reqs" => implode("\n", $v["en"]["reqs"] ?? [])
+                    ];
+                    echo json_encode($payload, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
+                  ?>)' class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-semibold border border-slate-700"><i class="fa-solid fa-pen-to-square text-[#C9A227]"></i> تعديل</button>
+                  <form method="POST" onsubmit="return confirm('حذف هذه الوظيفة نهائياً؟');">
+                    <input type="hidden" name="action" value="delete_careers_vacancy">
+                    <input type="hidden" name="delete_id" value="<?php echo $idx; ?>">
+                    <button class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[11px] font-semibold border border-red-500/30"><i class="fa-solid fa-trash"></i> حذف</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <!-- ========== الجزء الرابع: قوائم النموذج ========== -->
+      <form method="POST" class="space-y-6 p-6 rounded-2xl bg-[#111C38] border border-slate-700 shadow-xl">
+        <input type="hidden" name="action" value="save_careers_lists">
+        <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 mb-2 flex items-center gap-2"><i class="fa-solid fa-list-check"></i> 4. قوائم خانات نموذج التقديم (Job Roles / الخبرة / المحافظات)</h3>
+        <p class="text-[11px] text-slate-400 -mt-4">كُل سطر = عنصر واحد في القائمة. (تظهر في الـ dropdown و datalist داخل نموذج التوظيف)</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="field">
+            <label class="lbl">قائمة الوظائف المقترحة (job roles)</label>
+            <textarea class="inp" name="list_jobs" rows="12" placeholder="عامل نظافة&#10;فني صيانة&#10;محاسب..."><?php echo e(implode("\n", $lists['jobRoles'] ?? [])); ?></textarea>
+          </div>
+          <div class="field">
+            <label class="lbl">خيارات سنوات الخبرة (dropdown)</label>
+            <textarea class="inp" name="list_exp" rows="12" placeholder="بدون خبرة&#10;أقل من سنة&#10;1 - 3 سنوات..."><?php echo e(implode("\n", $lists['experiences'] ?? [])); ?></textarea>
+          </div>
+          <div class="field">
+            <label class="lbl">قائمة المحافظات / المدن (datalist)</label>
+            <textarea class="inp" name="list_gov" rows="12" placeholder="القاهرة&#10;الجيزة&#10;الإسكندرية..."><?php echo e(implode("\n", $lists['governorates'] ?? [])); ?></textarea>
+          </div>
+        </div>
+        <button class="px-6 py-3 rounded-xl gold-gradient text-[#0B132B] font-bold text-sm shadow-lg"><i class="fa-solid fa-list"></i> حفظ القوائم</button>
+      </form>
+
+    <!-- ================================================================
          TAB: SETTINGS (Contact + Footer)
     ================================================================= -->
     <?php elseif ($tab === 'settings'):
@@ -1027,6 +1491,110 @@ $slides = json_load($SLIDER_JSON) ?: [];
             <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800 mt-3">
               <p class="text-slate-500 mb-1 text-[11px]"><i class="fa-solid fa-message text-[#C9A227]"></i> نبذة عن المتقدم</p>
               <p class="text-slate-300 leading-relaxed" style="white-space:pre-line"><?php echo e($a['message']); ?></p>
+            </div>
+            <?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+
+    <!-- ================================================================
+         TAB: CONTACT INQUIRIES
+    ================================================================= -->
+    <?php elseif ($tab === 'inquiries'):
+          $inqs = json_load($INQUIRIES_JSON) ?: [];
+          $inqs = array_reverse($inqs);
+
+          $serviceLabels = [
+              'all'         => 'حلول متكاملة',
+              'cleaning'    => 'خدمات النظافة والتعقيم',
+              'maintenance' => 'الصيانة الفنية والمقاولات',
+              'landscaping' => 'تنسيق المسطحات الخضراء',
+              'supplies'    => 'التوريدات وتوظيف العمالة',
+              'hospitality' => 'خدمات الضيافة والبوفيه',
+              'renovation'  => 'المقاولات والتجديدات',
+              'other'       => 'أخرى',
+          ];
+    ?>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-envelope-open-text text-[#C9A227]"></i> رسائل عملاء الاستفسارات (<?php echo count($inqs); ?>)</h2>
+        <a href="?tab=inquiries" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold border border-slate-700">
+          <i class="fa-solid fa-rotate text-[#C9A227]"></i> تحديث الآن
+        </a>
+      </div>
+
+      <?php if (empty($inqs)): ?>
+        <div class="p-10 rounded-2xl bg-[#111C38] border border-dashed border-slate-700 text-center">
+          <i class="fa-solid fa-inbox text-4xl text-slate-600 mb-3"></i>
+          <p class="text-sm text-slate-400">لا توجد رسائل استفسارات حتى الآن. ستظهر الرسائل هنا فور ملء نموذج "تواصل معنا" على الصفحة الرئيسية، وتصلك نسخة بريدياً على البريد الرسمي.</p>
+        </div>
+      <?php else: ?>
+        <div class="space-y-5">
+          <?php foreach ($inqs as $i):
+            $created = !empty($i['created_at']) ? date('d/m/Y h:i A', strtotime($i['created_at'])) : '';
+            $svc = !empty($i['service']) ? ($serviceLabels[$i['service']] ?? $i['service']) : '';
+          ?>
+          <div class="p-5 rounded-2xl bg-[#111C38] border border-slate-700/80 hover:border-[#C9A227] transition shadow-xl">
+            <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg shrink-0">
+                  <i class="fa-solid fa-building-user"></i>
+                </div>
+                <div class="min-w-0">
+                  <h3 class="text-sm font-bold text-white truncate"><?php echo e($i['name'] ?? ''); ?></h3>
+                  <p class="text-[11px] text-[#C9A227] font-semibold truncate"><?php echo e($i['company'] ?? ''); ?></p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <?php if (!empty($i['phone'])): ?>
+                <a href="https://wa.me/20<?php echo e(ltrim($i['phone'], '0')); ?>" target="_blank" class="px-3 py-1.5 rounded-lg bg-[#25D366]/20 hover:bg-[#25D366]/30 text-white text-[11px] font-bold border border-[#25D366]/40">
+                  <i class="fa-brands fa-whatsapp"></i> واتساب
+                </a>
+                <?php endif; ?>
+                <?php if (!empty($i['email'])): ?>
+                <a href="mailto:<?php echo e($i['email']); ?>" class="px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 text-[11px] font-bold border border-blue-500/30">
+                  <i class="fa-solid fa-reply"></i> رد بالبريد
+                </a>
+                <?php endif; ?>
+                <form method="POST" onsubmit="return confirm('حذف هذه الرسالة نهائياً؟');">
+                  <input type="hidden" name="action" value="delete_inquiry">
+                  <input type="hidden" name="delete_id" value="<?php echo e($i['id'] ?? ''); ?>">
+                  <button class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[11px] font-semibold border border-red-500/30">
+                    <i class="fa-solid fa-trash"></i> حذف
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px]">
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-phone text-[#C9A227]"></i> الهاتف / الواتساب</p>
+                <p class="text-slate-200 font-semibold" dir="ltr"><?php echo e($i['phone'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-envelope text-[#C9A227]"></i> البريد الإلكتروني</p>
+                <p class="text-slate-200 font-semibold truncate" dir="ltr"><?php echo e($i['email'] ?? ''); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-briefcase text-[#C9A227]"></i> الخدمة المطلوبة</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($svc); ?></p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                <p class="text-slate-500 mb-1"><i class="fa-solid fa-calendar-days text-[#C9A227]"></i> تاريخ الاستفسار</p>
+                <p class="text-slate-200 font-semibold"><?php echo e($created); ?></p>
+              </div>
+            </div>
+
+            <?php if (!empty($i['ip'])): ?>
+            <div class="mt-3 text-[10px] text-slate-500">
+              <i class="fa-solid fa-location-dot text-slate-600"></i> عنوان IP المرسل: <span dir="ltr" class="font-mono"><?php echo e($i['ip']); ?></span>
+            </div>
+            <?php endif; ?>
+
+            <?php if (!empty($i['message'])): ?>
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 mt-3">
+              <p class="text-slate-500 mb-2 text-[11px]"><i class="fa-solid fa-message text-[#C9A227]"></i> تفاصيل الرسالة / الاستفسار</p>
+              <p class="text-slate-200 leading-relaxed text-sm" style="white-space:pre-line"><?php echo e($i['message']); ?></p>
             </div>
             <?php endif; ?>
           </div>
@@ -1254,6 +1822,83 @@ $slides = json_load($SLIDER_JSON) ?: [];
     </div>
   </div>
 
+  <!-- Careers Why Join Modal -->
+  <div id="careersWhyModal" class="admin-modal fixed hidden inset-0 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="admin-modal-panel bg-[#0D1733] px-5 py-6 sm:px-6 sm:py-7 max-w-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-700 mb-4">
+        <h3 id="careersWhyModalTitle" class="text-lg font-bold text-white">إضافة / تعديل بطاقة لماذا تنضم</h3>
+        <button onclick="closeCareersWhyModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form method="POST" class="space-y-4">
+        <input type="hidden" name="action" value="save_careers_why">
+        <input type="hidden" name="why_id" id="cWhyId">
+        <div class="field"><label class="lbl">أيقونة FontAwesome</label><input class="inp" id="cWhyIcon" name="icon" list="iconsList"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+            <h4 class="text-xs font-bold text-yellow-400 mb-2">عربي</h4>
+            <div class="field"><label class="lbl">العنوان</label><input class="inp" name="ar_title" id="cw-ar-title" required></div>
+            <div class="field"><label class="lbl">الوصف</label><textarea class="inp" name="ar_desc" id="cw-ar-desc" rows="3"></textarea></div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800" dir="ltr">
+            <h4 class="text-xs font-bold text-yellow-400 mb-2">English</h4>
+            <div class="field"><label class="lbl">Title</label><input class="inp" name="en_title" id="cw-en-title" required></div>
+            <div class="field"><label class="lbl">Description</label><textarea class="inp" name="en_desc" id="cw-en-desc" rows="3"></textarea></div>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-700">
+          <button type="button" onclick="closeCareersWhyModal()" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold">إلغاء</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg">حفظ البطاقة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Careers Vacancy Modal -->
+  <div id="careersVacancyModal" class="admin-modal fixed hidden inset-0 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="admin-modal-panel bg-[#0D1733] px-5 py-6 sm:px-6 sm:py-7 max-w-4xl w-full">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-700 mb-4">
+        <h3 id="careersVacancyModalTitle" class="text-lg font-bold text-white">إضافة / تعديل وظيفة شاغرة</h3>
+        <button onclick="closeCareersVacancyModal()" class="text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form method="POST" class="space-y-4">
+        <input type="hidden" name="action" value="save_careers_vacancy">
+        <input type="hidden" name="vac_id" id="cVacId">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="field"><label class="lbl">أيقونة FontAwesome</label><input class="inp" id="cVacIcon" name="icon" list="iconsList" value="fa-briefcase"></div>
+          <div class="field"><label class="lbl">الموقع (المدينة)</label><input class="inp" id="cVacLocation" name="location" placeholder="القاهرة - نزهة"></div>
+          <div class="field"><label class="lbl">نوع الوظيفة</label>
+            <select class="inp" id="cVacType" name="type">
+              <option value="full-time">دوام كامل</option>
+              <option value="part-time">دوام جزئي</option>
+              <option value="contract">عقد</option>
+              <option value="internship">تدريب</option>
+              <option value="remote">عن بعد</option>
+            </select>
+          </div>
+          <div class="field"><label class="lbl">الراتب (اختياري)</label><input class="inp" id="cVacSalary" name="salary" placeholder="7,000 - 10,000 جنيه"></div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+            <h4 class="text-xs font-bold text-yellow-400 mb-3">عربي</h4>
+            <div class="field"><label class="lbl">المسمى الوظيفي *</label><input class="inp" name="ar_title" id="cv-ar-title" required></div>
+            <div class="field"><label class="lbl">الوصف المختصر / الشعار</label><input class="inp" name="ar_tagline" id="cv-ar-tagline"></div>
+            <div class="field"><label class="lbl">المتطلبات (كل سطر = متطلب)</label><textarea class="inp" name="ar_reqs" id="cv-ar-reqs" rows="7" placeholder="بكالوريوس إدارة أعمال&#10;3 سنوات خبرة على الأقل&#10;إجادة برامج Office"></textarea></div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800" dir="ltr">
+            <h4 class="text-xs font-bold text-yellow-400 mb-3">English</h4>
+            <div class="field"><label class="lbl">Job Title *</label><input class="inp" name="en_title" id="cv-en-title" required></div>
+            <div class="field"><label class="lbl">Short Tagline</label><input class="inp" name="en_tagline" id="cv-en-tagline"></div>
+            <div class="field"><label class="lbl">Requirements (one per line)</label><textarea class="inp" name="en_reqs" id="cv-en-reqs" rows="7" placeholder="Bachelor in Business Admin&#10;Minimum 3 years experience&#10;Proficient in MS Office"></textarea></div>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-700">
+          <button type="button" onclick="closeCareersVacancyModal()" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold">إلغاء</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg">حفظ الوظيفة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     window.CMS = <?php echo json_encode([
         'services' => $content['services']['items'],
@@ -1261,7 +1906,13 @@ $slides = json_load($SLIDER_JSON) ?: [];
         'whyUs' => $content['whyUs']['cards'],
         'whyHeader' => $content['whyUs']['header'],
         'clients' => $content['clients'],
-        'clientsHeader' => $content['clientsHeader']
+        'clientsHeader' => $content['clientsHeader'],
+        'careers' => $content['careers'] ?? [
+            'header'    => ['ar'=>[], 'en'=>[]],
+            'whyJoin'  => [],
+            'vacancies'=> [],
+            'lists'    => ['jobRoles'=>[], 'experiences'=>[], 'governorates'=>[]]
+        ]
       ], JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE); ?>;
 
     /* ---------- generic helpers ---------- */
@@ -1370,10 +2021,54 @@ $slides = json_load($SLIDER_JSON) ?: [];
     }
     function closeSlideModal() { document.getElementById('slideModal').classList.add('hidden'); }
 
+    /* ---------- CAREERS WHY JOIN ---------- */
+    function openCareersWhyModal() {
+      document.getElementById('careersWhyModalTitle').textContent = 'إضافة بطاقة جديدة';
+      sv('cWhyId', ''); sv('cWhyIcon', 'fa-award');
+      ['cw-ar-title','cw-ar-desc','cw-en-title','cw-en-desc'].forEach(i => sv(i,''));
+      document.getElementById('careersWhyModal').classList.remove('hidden');
+    }
+    function editCareersWhy(idx) {
+      var c = (window.CMS.careers && window.CMS.careers.whyJoin) ? window.CMS.careers.whyJoin[idx] : null;
+      if (!c) return;
+      document.getElementById('careersWhyModalTitle').textContent = 'تعديل بطاقة';
+      sv('cWhyId', String(idx + 1)); sv('cWhyIcon', c.icon || 'fa-award');
+      sv('cw-ar-title', c.ar && c.ar.title); sv('cw-ar-desc', c.ar && c.ar.desc);
+      sv('cw-en-title', c.en && c.en.title); sv('cw-en-desc', c.en && c.en.desc);
+      document.getElementById('careersWhyModal').classList.remove('hidden');
+    }
+    function closeCareersWhyModal() { document.getElementById('careersWhyModal').classList.add('hidden'); }
+
+    /* ---------- CAREERS VACANCY ---------- */
+    function openCareersVacancyModal() {
+      document.getElementById('careersVacancyModalTitle').textContent = 'إضافة وظيفة شاغرة جديدة';
+      sv('cVacId', ''); sv('cVacIcon', 'fa-briefcase');
+      sv('cVacLocation', ''); sv('cVacType', 'full-time'); sv('cVacSalary', '');
+      ['cv-ar-title','cv-ar-tagline','cv-ar-reqs','cv-en-title','cv-en-tagline','cv-en-reqs'].forEach(i => sv(i,''));
+      document.getElementById('careersVacancyModal').classList.remove('hidden');
+    }
+    function editCareersVacancy(idx) {
+      var v = (window.CMS.careers && window.CMS.careers.vacancies) ? window.CMS.careers.vacancies[idx] : null;
+      if (!v) return;
+      document.getElementById('careersVacancyModalTitle').textContent = 'تعديل الوظيفة الشاغرة';
+      sv('cVacId', v.id || String(idx + 1));
+      sv('cVacIcon', v.icon || 'fa-briefcase');
+      sv('cVacLocation', v.location || '');
+      sv('cVacType', v.type || 'full-time');
+      sv('cVacSalary', v.salary || '');
+      var a = v.ar || {}, en = v.en || {};
+      sv('cv-ar-title', a.title); sv('cv-ar-tagline', a.tagline);
+      sv('cv-ar-reqs', (a.reqs || []).join('\n'));
+      sv('cv-en-title', en.title); sv('cv-en-tagline', en.tagline);
+      sv('cv-en-reqs', (en.reqs || []).join('\n'));
+      document.getElementById('careersVacancyModal').classList.remove('hidden');
+    }
+    function closeCareersVacancyModal() { document.getElementById('careersVacancyModal').classList.add('hidden'); }
+
     /* ---------- close modals on Escape ---------- */
     document.addEventListener('keydown', function (ev) {
       if (ev.key === 'Escape') {
-        ['serviceModal','whyModal','clientModal','headerModal','slideModal'].forEach(function (id) {
+        ['serviceModal','whyModal','clientModal','headerModal','slideModal','careersWhyModal','careersVacancyModal'].forEach(function (id) {
           var m = document.getElementById(id); if (m) m.classList.add('hidden');
         });
       }

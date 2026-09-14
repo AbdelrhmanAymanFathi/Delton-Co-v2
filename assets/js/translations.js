@@ -9,7 +9,7 @@ const translations = {
     },
     topbar: {
       tagline: "شريكك الموثوق في إدارة المنشآت المتكاملة بمصر",
-      phone: "01102668966 / 01123544717 / 01123545516",
+      phone: "01123544717 / 01102668966 / 01123545516",
       email: "info@delton-eg.com",
       hours: "الأحد - الخميس: 8:30 ص - 5:00 م (دعم الطوارئ 24/7)",
       cta: "طلب استشارة سريعة"
@@ -254,13 +254,15 @@ const translations = {
       badge: "تواصل معنا",
       title: "جاهزون لخدمتكم ومناقشة احتياجات منشأتكم",
       subtitle: "يسعدنا الرد على استفساراتكم وترتيب زيارة معاينة ميدانية لمقر مؤسستكم لتقديم عرض فني ومالي مفصل.",
+      directTitle: "بيانات التواصل المباشر",
       addressTitle: "العنوان الرئيسي:",
       address: "2120 شارع الأرقم، المعراج، زهراء المعادي، القاهرة، مصر",
       phoneTitle: "أرقام الهاتف المباشرة:",
       emailTitle: "البريد الإلكتروني:",
       hoursTitle: "أوقات العمل الرسمية:",
       form: {
-        title: "طلب عرض سعر أو استشارة",
+        title: "طلب تواصل",
+        subtitle: "املأ النموذج وسيتواصل معك مهندس معتمد من قطاع التسويق والمبيعات خلال 24 ساعة.",
         nameLabel: "الاسم بالكامل *",
         namePlaceholder: "مثال: م. أحمد عبد الرحمن",
         companyLabel: "اسم الشركة / المؤسسة *",
@@ -281,7 +283,7 @@ const translations = {
         otherOpt: "أخرى (تُحدد في الرسالة)",
         messageLabel: "تفاصيل الاحتياج أو المشروع *",
         messagePlaceholder: "يرجى توضيح حجم المقر، طبيعة المنشأة، الخدمات المطلوبة والموقع الجغرافي...",
-        submitBtn: "إرسال طلب العرض الفني",
+        submitBtn: "ارسال الطلب",
         submitting: "جاري الإرسال...",
         successMsg: "شكراً لتواصلكم مع شركة ديلتون! تم استلام طلبكم بنجاح، وسيتواصل معكم قطاع التسويق والمبيعات خلال 24 ساعة.",
         errorMsg: "يرجى التأكد من ملء جميع الحقول الإلزامية المطلوبة."
@@ -296,6 +298,12 @@ const translations = {
       formDesc: "أكمل الحقول التالية وجميع البيانات سيتم التعامل معها بسرية تامة وفق سياسة الخصوصية الخاصة بالشركة.",
       directTitle: "أو أرسل سيرتك الذاتية مباشرة",
       directNote: "يمكنك أيضاً إرسال السيرة الذاتية على البريد الإلكتروني الرسمي:",
+      whyBadge: "لماذا تنضم لديلتون",
+      whyTitle: "بيئة عمل محفزة وتطلعات كبيرة",
+      whySubtitle: "نؤمن بأن موظفينا هم الركيزة الأساسية لنجاحنا، ولهذا السبب نقدم لهم كل سبل الدعم والتطوير المهني.",
+      vacBadge: "الوظائف الشاغرة",
+      vacTitle: "انضم إلى فريقنا اليوم",
+      vacSubtitle: "اطلع على الوظائف المتاحة حالياً واختر الأنسب لمهاراتك وخبراتك.",
       successTitle: "تم استلام طلبك بنجاح!",
       successMsg: "شكراً لاهتمامك بالانضمام إلينا، سيقوم فريق الموارد البشرية بمراجعة بياناتك والتواصل معك قريباً.",
       errorTitle: "فشل إرسال الطلب",
@@ -316,7 +324,10 @@ const translations = {
         qualificationLabel: "المؤهل الدراسي",
         qualificationPlaceholder: "مثال: بكالوريوس تجارة",
         cvLabel: "إرفاق السيرة الذاتية (CV) - اختياري",
-        cvNote: "صيغ مسموحة: PDF, DOC, DOCX, JPG, PNG - بحد أقصى 5 ميجابايت",
+        cvPlaceholderText: "انقر لاختيار ملف CV.pdf",
+        cvNote: "صيغة واحدة فقط: PDF · بحد أقصى 5 ميجابايت",
+        cvPdfError: "يجب رفع ملف بصيغة PDF فقط. غير ذلك لن يتم قبول السيرة الذاتية.",
+        cvSizeError: "حجم الملف كبير جداً. الحد الأقصى 5 ميجابايت فقط.",
         messageLabel: "نبذة عن خبراتك (اختياري)",
         messagePlaceholder: "اكتب نبذة مختصرة عن خبراتك السابقة وأي مهارات تميزك...",
         submitBtn: "إرسال طلب التقديم",
@@ -335,9 +346,19 @@ const translations = {
         "القليوبية", "الفيوم", "بني سويف", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر",
         "أسوان", "البحر الأحمر", "بورسعيد", "الإسماعيلية", "السويس", "دمياط", "كفر الشيخ",
         "مطروح", "شمال سيناء", "جنوب سيناء", "الوادي الجديد"
+      ],
+      whyJoin: [
+        { icon: "fa-people-group", title: "فريق عمل متناغم", desc: "بيئة عمل احترافية مبنية على روح الفريق والتعاون البنّاء بين كافة الأقسام والإدارات." },
+        { icon: "fa-chart-line", title: "تطوير مهني مستمر", desc: "برامج تدريب متخصصة ومسارات واضحة للترقي المهني تساعدك على صقل مهاراتك." },
+        { icon: "fa-sack-dollar", title: "مزايا تنافسية", desc: "رواتب مجزية، تذاكر سنوية، تذاكر عائلية، أنظمة تأمين صحية واجتماعية شاملة." },
+        { icon: "fa-shield-halved", title: "استقرار وظيفي", desc: "شركة مساهمة مصرية رائدة وعقود عمل رسمية وفق قانون العمل المصري الجديد." }
+      ],
+      vacancies: [
+        { id: 1, icon: "fa-user-tie", location: "القاهرة - المعادي", type: "full-time", salary: "7,000 - 10,000 جنيه", title: "مشرف موقع صيانة", tagline: "مطلوب مشرف موقع بخبرة 3 سنوات على الأقل", reqs: ["بكالوريوس هندسة ميكانيكا أو كهرباء", "3 سنوات خبرة في الإشراف الفني", "إجادة التعامل مع العقود والمقاولين", "لغة إنجليزية جيدة جداً"] }
       ]
     },
     footer: {
+      aboutText: "شركة مساهمة مصرية متخصصة في تقديم خدمات الإدارة المتكاملة للمنشآت لكافة المؤسسات والشركات في جمهورية مصر العربية.",
       quickLinks: "روابط سريعة",
       ourServices: "خدماتنا الأساسية",
       srvMaintenance: "الإدارة والصيانة الفنية",
@@ -605,13 +626,15 @@ const translations = {
       badge: "Contact Us",
       title: "Ready to Discuss Your Facility Requirements",
       subtitle: "We look forward to addressing your inquiries and scheduling a complimentary technical survey to deliver a comprehensive proposal.",
+      directTitle: "Direct Contact Information",
       addressTitle: "Headquarters Address:",
       address: "2120 St Elarqam, El Meraag, Zahraa Elmaadi, Cairo, Egypt",
       phoneTitle: "Direct Hotlines:",
       emailTitle: "Official Email:",
       hoursTitle: "Business Hours:",
       form: {
-        title: "Request a Technical Consultation or Quote",
+        title: "Contact Request",
+        subtitle: "Fill in the form and a certified engineer from our Sales & Marketing team will contact you within 24 hours.",
         nameLabel: "Full Name *",
         namePlaceholder: "e.g. Eng. Ahmed Abdelrahman",
         companyLabel: "Company / Institution *",
@@ -632,7 +655,7 @@ const translations = {
         otherOpt: "Other (Specified in Message)",
         messageLabel: "Project Details & Scope *",
         messagePlaceholder: "Please share premises size, facility type, requested scope, and location...",
-        submitBtn: "Submit Request for Proposal",
+        submitBtn: "Send Request",
         submitting: "Submitting...",
         successMsg: "Thank you for reaching out to Delton! Your request has been received, and our Commercial Sector team will contact you within 24 hours.",
         errorMsg: "Please ensure all required fields are correctly completed."
@@ -647,6 +670,12 @@ const translations = {
       formDesc: "Complete the fields below. All data is treated with strict confidentiality in line with our privacy policy.",
       directTitle: "Or send your CV directly",
       directNote: "You can also email your resume to our official inbox:",
+      whyBadge: "Why Join Delton",
+      whyTitle: "A Motivating Work Environment with Great Ambitions",
+      whySubtitle: "We believe our employees are the cornerstone of our success, which is why we provide them with every support and professional development opportunity.",
+      vacBadge: "Open Vacancies",
+      vacTitle: "Join Our Team Today",
+      vacSubtitle: "Browse currently available positions and choose the one that best matches your skills and experience.",
       successTitle: "Application Received!",
       successMsg: "Thank you for applying. Our HR team will review your details and contact you soon.",
       errorTitle: "Submission Failed",
@@ -667,7 +696,10 @@ const translations = {
         qualificationLabel: "Academic Qualification",
         qualificationPlaceholder: "e.g. B.Sc. Commerce",
         cvLabel: "Attach Resume (CV) - Optional",
-        cvNote: "Allowed formats: PDF, DOC, DOCX, JPG, PNG - max 5 MB",
+        cvPlaceholderText: "Click to select CV.pdf file",
+        cvNote: "Only one format allowed: PDF · max 5 MB",
+        cvPdfError: "Only PDF files are accepted for the CV. Other formats will be rejected.",
+        cvSizeError: "File is too large. Maximum allowed size is 5 megabytes.",
         messageLabel: "About Your Experience (Optional)",
         messagePlaceholder: "Write a short summary of your experience and key skills...",
         submitBtn: "Submit Application",
@@ -686,6 +718,15 @@ const translations = {
         "Qalyubia", "Faiyum", "Beni Suef", "Minya", "Asyut", "Sohag", "Qena", "Luxor",
         "Aswan", "Red Sea", "Port Said", "Ismailia", "Suez", "Damietta", "Kafr El Sheikh",
         "Matrouh", "North Sinai", "South Sinai", "New Valley"
+      ],
+      whyJoin: [
+        { icon: "fa-people-group", title: "Cohesive Team Spirit", desc: "A professional work environment built on team spirit and constructive collaboration across all departments and divisions." },
+        { icon: "fa-chart-line", title: "Continuous Professional Development", desc: "Specialized training programs and clear career progression paths to help you refine your professional skills." },
+        { icon: "fa-sack-dollar", title: "Competitive Benefits", desc: "Attractive salaries, annual tickets, family tickets, and comprehensive health and social insurance systems." },
+        { icon: "fa-shield-halved", title: "Job Stability", desc: "A leading Egyptian joint-stock company with official employment contracts in accordance with the new Egyptian Labor Law." }
+      ],
+      vacancies: [
+        { id: 1, icon: "fa-user-tie", location: "Cairo - Maadi", type: "full-time", salary: "EGP 7,000 - 10,000", title: "Site Maintenance Supervisor", tagline: "Experienced site supervisor with 3+ years required", reqs: ["Bachelor in Mechanical/Electrical Engineering", "3+ years field supervision experience", "Excellent contractor management skills", "Very good command of English"] }
       ]
     },
     footer: {

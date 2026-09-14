@@ -70,27 +70,48 @@ if ($name === '' || $phone === '' || $email === '' || $position === '' || $city 
     json_result(false, $errorMsg, ['code' => 'validation']);
 }
 
+if (!preg_match('/^01[0125][0-9]{8}$/', $phone)) {
+    json_result(false, $errorMsg, ['code' => 'phone']);
+}
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     json_result(false, $errorMsg, ['code' => 'email']);
 }
+if (strlen($email) > 254 || preg_match('/\s/', $email)) {
+    json_result(false, $errorMsg, ['code' => 'email']);
+}
+$emailDomain = explode('@', $email);
+if (count($emailDomain) !== 2 || strpos($emailDomain[1], '.') === false || strlen($emailDomain[1]) < 3) {
+    json_result(false, $errorMsg, ['code' => 'email']);
+}
 
-// ---- Optional CV upload ----
+// ---- Optional CV upload — PDF ONLY ----
 $cvPath = '';
 if (!empty($_FILES['cv']['name']) && $_FILES['cv']['error'] !== UPLOAD_ERR_NO_FILE) {
     if ($_FILES['cv']['error'] !== UPLOAD_ERR_OK) {
-        json_result(false, $lang === 'en' ? $errorMsg : 'الملف المرفق غير صالح أو يتجاوز الحجم المسموح به (5 ميجابايت).', ['code' => 'cv']);
+        json_result(false, $lang === 'en' ? $errorMsg : 'الملف المرفق غير صالح أو يتجاوز الحجم المسموح به (5 ميجابايت).', ['code' => 'cv_pdf']);
     }
     if ($_FILES['cv']['size'] > $MAX_CV_BYTES) {
-        json_result(false, $lang === 'en' ? $errorMsg : 'الملف المرفق غير صالح أو يتجاوز الحجم المسموح به (5 ميجابايت).', ['code' => 'cv']);
+        json_result(false, $lang === 'en' ? $errorMsg : 'حجم الملف كبير جداً. الحد الأقصى 5 ميجابايت.', ['code' => 'cv_pdf']);
     }
-    $allowedExt = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'];
-    $ext = strtolower(pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION));
-    if (!in_array($ext, $allowedExt, true)) {
-        json_result(false, $lang === 'en' ? $errorMsg : 'الملف المرفق غير صالح أو يتجاوز الحجم المسموح به (5 ميجابايت).', ['code' => 'cv']);
+    $ext = strtolower((string)pathinfo((string)$_FILES['cv']['name'], PATHINFO_EXTENSION));
+    if ($ext !== 'pdf') {
+        json_result(false, $lang === 'en' ? 'Only PDF files are accepted for the CV.' : 'السيرة الذاتية يجب أن تكون بصيغة PDF فقط.', ['code' => 'cv_pdf']);
+    }
+    $finfoMime = '';
+    if (function_exists('finfo_open') && is_uploaded_file((string)$_FILES['cv']['tmp_name'])) {
+        $fi = finfo_open(FILEINFO_MIME_TYPE);
+        if ($fi) {
+            $finfoMime = (string)finfo_file($fi, (string)$_FILES['cv']['tmp_name']);
+            finfo_close($fi);
+        }
+    }
+    if ($finfoMime !== '' && $finfoMime !== 'application/pdf' && $finfoMime !== 'application/octet-stream') {
+        json_result(false, $lang === 'en' ? 'CV file is not a valid PDF.' : 'الملف ليس ملف PDF صالح.', ['code' => 'cv_pdf']);
     }
     if (!is_dir($UPLOAD_DIR)) mkdir($UPLOAD_DIR, 0755, true);
-    $cvName = 'cv_' . date('Ymd_His') . '_' . substr(md5(uniqid('', true)), 0, 6) . '.' . $ext;
-    if (move_uploaded_file($_FILES['cv']['tmp_name'], $UPLOAD_DIR . '/' . $cvName)) {
+    $cvName = 'cv_' . date('Ymd_His') . '_' . substr(md5(uniqid('', true)), 0, 6) . '.pdf';
+    if (move_uploaded_file((string)$_FILES['cv']['tmp_name'], $UPLOAD_DIR . '/' . $cvName)) {
         $cvPath = 'uploads/applications/' . $cvName;
     }
 }
@@ -124,18 +145,23 @@ if (is_writable($APPS_DIR) || !file_exists($APPS_FILE)) {
 }
 
 // ---- Compose & send the email ----
+$host = !empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'delton-eg.com';
+$hostSafe = preg_replace('/[^a-zA-Z0-9\.\-_]/', '', $host);
 $siteBase = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http')
-          . '://' . ($_SERVER['HTTP_HOST'] ?? 'delton-eg.com');
+          . '://' . $host;
 
 $subject = 'طلب توظيف جديد: ' . $position . ' - ' . $name;
 
 $cvLine = $cvPath !== ''
-    ? '<tr><td><strong>السيرة الذاتية / CV:</strong></td><td><a href="' . $siteBase . '/' . $cvPath . '">' . $siteBase . '/' . $cvPath . '</a></td></tr>'
+    ? '<tr><td><strong>السيرة الذاتية / CV:</strong></td><td><a href="' . $siteBase . '/' . htmlspecialchars($cvPath, ENT_QUOTES, 'UTF-8') . '">' . $siteBase . '/' . htmlspecialchars($cvPath, ENT_QUOTES, 'UTF-8') . '</a></td></tr>'
     : '';
+
+$senderIp = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+$uaShort  = !empty($_SERVER['HTTP_USER_AGENT']) ? substr($_SERVER['HTTP_USER_AGENT'], 0, 120) : '';
 
 $body = "<html><body dir='rtl' style='font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#111C38;'>"
       . "<h3 style='color:#C9A227;margin-bottom:4px;'>طلب توظيف جديد / New Job Application</h3>"
-      . "<p style='color:#64748B;margin-top:0;'>" . $record['created_at'] . "</p>"
+      . "<p style='color:#64748B;margin-top:0;'>" . htmlspecialchars($record['created_at']) . " &mdash; IP: " . htmlspecialchars($senderIp) . "</p>"
       . "<table cellpadding='6' style='border-collapse:collapse;width:100%;max-width:640px;'>"
       . "<tr><td style='background:#F1F5F9;font-weight:bold;width:180px;'>الاسم / Name</td><td>" . htmlspecialchars($name) . "</td></tr>"
       . "<tr><td style='background:#F1F5F9;font-weight:bold;'>الهاتف / Phone</td><td dir='ltr'>" . htmlspecialchars($phone) . "</td></tr>"
@@ -148,18 +174,27 @@ $body = "<html><body dir='rtl' style='font-family:Arial,Helvetica,sans-serif;fon
       . ($message !== ''
           ? "<tr><td style='background:#F1F5F9;font-weight:bold;'>نبذة / Message</td><td>" . nl2br(htmlspecialchars($message)) . "</td></tr>"
           : '')
-      . '</table></body></html>';
+      . "</table>"
+      . ($uaShort !== '' ? "<p style='color:#94A3B8;font-size:11px;margin-top:18px;'>UA: " . htmlspecialchars($uaShort) . "</p>" : '')
+      . "</body></html>";
 
-$headers  = "From: Delton Careers <no-reply@{$_SERVER['HTTP_HOST']}>\r\n";
-$headers .= "Reply-To: " . $email . "\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+$replyToEmail = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : $contactEmail;
+
+$headers   = [];
+$headers[] = "From: Delton Careers <no-reply@{$hostSafe}>";
+$headers[] = "Reply-To: " . $replyToEmail;
+$headers[] = "Return-Path: no-reply@{$hostSafe}";
+$headers[] = "MIME-Version: 1.0";
+$headers[] = "Content-Type: text/html; charset=UTF-8";
+$headers[] = "X-Mailer: PHP/" . phpversion();
+$headers[] = "X-Originating-IP: " . $senderIp;
+$headersStr = implode("\r\n", $headers);
 
 $mailSent = @mail(
     $contactEmail,
     '=?UTF-8?B?' . base64_encode($subject) . '?=',
     $body,
-    $headers
+    $headersStr
 );
 
 // ---- Notify admin of the application count (optional lightweight) ----
