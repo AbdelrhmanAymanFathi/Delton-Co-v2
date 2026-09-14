@@ -202,8 +202,8 @@
     // ---- Branding (navbar + footer logos) ----
     if (content.branding) {
       window.__Branding = {
-        navbar: Object.assign({ image: 'assets/images/logo-nav.png', width: '124', height: '50' }, content.branding.navbar || {}),
-        footer: Object.assign({ image: 'assets/images/logo-nav.png', width: '160', height: '64' }, content.branding.footer || {})
+        navbar: Object.assign({ image: 'assets/images/logo2-removebg-preview.png', width: '124', height: '50' }, content.branding.navbar || {}),
+        footer: Object.assign({ image: 'assets/images/logo2-removebg-preview.png', width: '160', height: '64' }, content.branding.footer || {})
       };
       if (window.renderBranding) window.renderBranding();
     }

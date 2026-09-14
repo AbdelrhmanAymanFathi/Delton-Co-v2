@@ -203,14 +203,14 @@ function normalizeBrandSize(value, fallback) {
 
 function renderBranding() {
   const branding = window.__Branding || {
-    navbar: { image: 'assets/images/logo-nav.png', width: '124', height: '50' },
-    footer: { image: 'assets/images/logo-nav.png', width: '160', height: '64' }
+    navbar: { image: 'assets/images/logo2-removebg-preview.png', width: '124', height: '50' },
+    footer: { image: 'assets/images/logo2-removebg-preview.png', width: '160', height: '64' }
   };
 
   document.querySelectorAll('[data-brand-logo]').forEach(el => {
     const role = el.getAttribute('data-brand-logo');
     const config = branding[role] || branding.navbar || {};
-    const src = config.image || 'assets/images/logo-nav.png';
+    const src = config.image || 'assets/images/logo2-removebg-preview.png';
     const width = normalizeBrandSize(config.width, role === 'footer' ? 150 : 140);
     const height = normalizeBrandSize(config.height, role === 'footer' ? 56 : 66);
 
