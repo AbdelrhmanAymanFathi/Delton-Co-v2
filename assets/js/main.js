@@ -822,6 +822,23 @@ function setupContactForm() {
 function setupNavbarScroll() {
   const navbar = document.getElementById('mainNavbar');
   const backToTop = document.getElementById('backToTopBtn');
+  const homeSections = ['home', 'about', 'services', 'why-us', 'clients', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const homeNavLinks = document.querySelectorAll('.section-nav-link');
+
+  const updateActiveHomeLink = () => {
+    const marker = window.scrollY + (navbar ? navbar.offsetHeight : 0) + 24;
+    let activeSection = homeSections[0];
+
+    homeSections.forEach(section => {
+      if (section.offsetTop <= marker) activeSection = section;
+    });
+
+    homeNavLinks.forEach(link => {
+      link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${activeSection.id}`);
+    });
+  };
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
@@ -835,7 +852,11 @@ function setupNavbarScroll() {
     } else {
       if (backToTop) backToTop.classList.remove('show');
     }
+
+    updateActiveHomeLink();
   });
+
+  updateActiveHomeLink();
 
   if (backToTop) {
     backToTop.addEventListener('click', () => {

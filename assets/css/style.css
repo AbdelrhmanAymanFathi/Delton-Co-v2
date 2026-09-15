@@ -46,14 +46,14 @@ html {
 
 body {
   color: var(--text-light);
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
   font-family: 'Cairo', sans-serif;
   line-height: 1.65;
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
@@ -115,6 +115,9 @@ html {
 
 /* Navbar Blur & Scrolled State */
 .navbar-fixed {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   transition: var(--transition-smooth);
   border-bottom: 1px solid rgba(140, 130, 136, 0.1);
 }
@@ -125,6 +128,18 @@ html {
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.36);
   border-bottom: 1px solid rgba(228, 177, 91, 0.24);
+}
+
+#mainNavbar .nav-link-active,
+#mobileDrawer .nav-link-active {
+  color: #E4B15B !important;
+  font-weight: 700;
+}
+
+#mainNavbar .nav-link-active::after,
+#mobileDrawer .nav-link-active::after {
+  width: 100%;
+  background: #E4B15B;
 }
 
 #mainNavbar .container {
