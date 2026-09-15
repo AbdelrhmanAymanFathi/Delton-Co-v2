@@ -190,6 +190,7 @@ function renderVacanciesGrid() {
     en: { 'full-time': 'Full-Time', 'part-time': 'Part-Time', 'contract': 'Contract', 'internship': 'Internship', 'remote': 'Remote' }
   };
   const applyBtn = isRtl ? 'قدّم الآن' : 'Apply Now';
+  const shareBtn = isRtl ? 'شارك الوظيفة' : 'Share Job';
   const reqsTitle = isRtl ? 'المتطلبات' : 'Requirements';
   const locLabel = isRtl ? 'الموقع' : 'Location';
   const typeLabel = isRtl ? 'النوع' : 'Type';
@@ -219,15 +220,62 @@ function renderVacanciesGrid() {
           ${tLabel ? `<span class="text-[11px] text-slate-300 bg-slate-800/70 border border-slate-700 rounded-lg px-2.5 py-1 flex items-center gap-1.5"><i class="fa-solid fa-clock text-[#E4B15B] text-[10px]"></i>${tLabel}</span>` : ''}
         </div>
         ${reqsHtml}
-        <div class="mt-5 pt-4 border-t border-slate-800/70">
-          <button onclick="applyForJob('${(v.title || '').replace(/'/g, "\\'")}')" class="w-full px-5 py-2.5 rounded-xl gold-gradient text-[#0B132B] text-xs font-bold shadow-lg hover:shadow-yellow-500/25 transition-all flex items-center justify-center gap-2 group-hover:scale-[1.02]">
-            <i class="fa-solid fa-paper-plane text-[11px]"></i>
-            <span>${applyBtn}</span>
+        <div class="mt-5 pt-4 border-t border-slate-800/70 grid grid-cols-2 gap-2.5">
+          <button type="button" onclick="shareJob(${i})" class="min-w-0 px-3 py-2.5 rounded-xl bg-slate-800/90 border border-slate-600 text-white text-xs font-bold shadow-lg hover:border-yellow-500/70 hover:text-yellow-300 transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-share-nodes text-[11px] shrink-0"></i>
+            <span class="truncate">${shareBtn}</span>
+          </button>
+          <button type="button" onclick="applyForJob('${(v.title || '').replace(/'/g, "\\'")}')" class="min-w-0 px-3 py-2.5 rounded-xl bg-gradient-gold text-[#0E0C10] text-xs font-extrabold shadow-lg hover:shadow-yellow-500/25 transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-paper-plane text-[11px] shrink-0"></i>
+            <span class="truncate">${applyBtn}</span>
           </button>
         </div>
       </div>
     `;
   }).join('');
+}
+
+/**
+ * Share a vacancy using the phone's native share sheet when available.
+ */
+async function shareJob(index) {
+  const t = translations[currentLanguage] || {};
+  const careers = t.careers || {};
+  const vacancy = Array.isArray(careers.vacancies) ? careers.vacancies[index] : null;
+  if (!vacancy) return;
+
+  const isRtl = isRtlLang();
+  const typeLabels = {
+    ar: { 'full-time': 'دوام كامل', 'part-time': 'دوام جزئي', contract: 'عقد', internship: 'تدريب', remote: 'عن بعد' },
+    en: { 'full-time': 'Full-Time', 'part-time': 'Part-Time', contract: 'Contract', internship: 'Internship', remote: 'Remote' }
+  };
+  const type = typeLabels[currentLanguage][vacancy.type] || vacancy.type || '';
+  const requirements = Array.isArray(vacancy.reqs) && vacancy.reqs.length
+    ? vacancy.reqs.slice(0, 5).map(req => `- ${req}`).join('\n')
+    : '';
+  const pageUrl = new URL('careers.html#open-vacancies', window.location.href).href;
+  const text = isRtl
+    ? `وظيفة متاحة في ديلتون\n\n${vacancy.title || ''}\n${vacancy.tagline || ''}${vacancy.location ? `\nالموقع: ${vacancy.location}` : ''}${type ? `\nالنوع: ${type}` : ''}${vacancy.salary ? `\nالراتب: ${vacancy.salary}` : ''}${requirements ? `\n\nالمتطلبات:\n${requirements}` : ''}\n\nللتقديم: ${pageUrl}`
+    : `Job opening at Delton\n\n${vacancy.title || ''}\n${vacancy.tagline || ''}${vacancy.location ? `\nLocation: ${vacancy.location}` : ''}${type ? `\nType: ${type}` : ''}${vacancy.salary ? `\nSalary: ${vacancy.salary}` : ''}${requirements ? `\n\nRequirements:\n${requirements}` : ''}\n\nApply here: ${pageUrl}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: `${vacancy.title || ''} | Delton Careers`,
+        text
+      });
+      return;
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+    }
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    alert(isRtl ? 'تم نسخ تفاصيل الوظيفة والرابط للمشاركة.' : 'The job details and link were copied for sharing.');
+  } catch (error) {
+    window.prompt(isRtl ? 'انسخ تفاصيل الوظيفة للمشاركة:' : 'Copy the job details to share:', text);
+  }
 }
 
 /**
