@@ -192,7 +192,7 @@ async function initHeroSlider(lang = 'ar') {
   if (typeof Swiper !== 'undefined') {
     heroSwiperInstance = new Swiper('.hero-slider', {
       loop: true,
-      speed: 1100,
+      speed: 700,
       effect: 'fade',
       fadeEffect: {
         crossFade: true
@@ -200,7 +200,8 @@ async function initHeroSlider(lang = 'ar') {
       autoplay: {
         delay: 3000,
         disableOnInteraction: false,
-        pauseOnMouseEnter: true
+        pauseOnMouseEnter: false,
+        waitForTransition: true
       },
       pagination: {
         el: '.hero-pagination',
@@ -214,6 +215,11 @@ async function initHeroSlider(lang = 'ar') {
         enabled: true
       }
     });
+
+    // Start explicitly in case the page was initialized while its tab was hidden.
+    if (heroSwiperInstance.autoplay) {
+      heroSwiperInstance.autoplay.start();
+    }
   }
 }
 
@@ -227,4 +233,10 @@ window.updateSliderLanguage = function(newLang) {
 document.addEventListener('DOMContentLoaded', () => {
   const currentLang = localStorage.getItem('delton_lang') || 'ar';
   initHeroSlider(currentLang);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && heroSwiperInstance && heroSwiperInstance.autoplay) {
+      heroSwiperInstance.autoplay.start();
+    }
+  });
 });

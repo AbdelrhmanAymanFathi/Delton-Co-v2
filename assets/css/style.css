@@ -398,6 +398,27 @@ html {
   font-weight: 800 !important;
 }
 
+/* Keep long Arabic hero slides inside the fixed hero viewport. */
+@media (min-width: 641px) {
+  .hero-slider .swiper-slide > .container {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .hero-slider .hero-slide-title {
+    max-width: 700px;
+    font-size: clamp(2.75rem, 4vw, 3.35rem) !important;
+  }
+
+  [dir="rtl"] .hero-slider .hero-slide-title {
+    line-height: 1.45 !important;
+  }
+
+  .hero-slider .swiper-slide > .container > div {
+    gap: 1rem !important;
+  }
+}
+
 /* Arabic script needs much more vertical room (dots/diacritics sit close to
    the line above) and no negative tracking (it makes connected letterforms
    collide), plus a lighter weight than the Latin title — at this size,

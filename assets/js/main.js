@@ -526,6 +526,15 @@ function renderHomeCareersNotice(lang) {
     return;
   }
 
+  const jobSignature = list.map((job, index) => job.id || job.title || `job-${index}`).join('|');
+  const seenSignature = localStorage.getItem('delton_seen_jobs_signature');
+  if (seenSignature === jobSignature) {
+    notice.hidden = true;
+    const toast = document.getElementById('homeJobsToast');
+    if (toast) toast.hidden = true;
+    return;
+  }
+
   const isRtl = lang === 'ar';
   notice.hidden = false;
   document.getElementById('homeCareersNoticeTitle').textContent = isRtl ? 'لدينا وظائف متاحة الآن' : 'We are hiring';
@@ -560,8 +569,12 @@ function renderHomeJobsToast(lang, vacancies) {
   document.getElementById('homeJobsToastClose').onclick = () => {
     markJobsAsSeen();
     toast.hidden = true;
+    notice.hidden = true;
   };
-  document.getElementById('homeJobsToastLink').onclick = markJobsAsSeen;
+  document.getElementById('homeJobsToastLink').onclick = () => {
+    markJobsAsSeen();
+    notice.hidden = true;
+  };
 }
 
 /**
@@ -609,11 +622,22 @@ function renderClientsSection(lang, filter = 'all') {
       grabCursor: true,
       loop: filtered.length > 1,
       speed: 550,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false,
+        waitForTransition: true
+      },
       pagination: {
         el: '#clientsMobileSlider .clients-mobile-pagination',
         clickable: true
       }
     });
+
+    // Start explicitly in case the page was initialized while its tab was hidden.
+    if (clientsMobileSwiper.autoplay) {
+      clientsMobileSwiper.autoplay.start();
+    }
   }
 
   // Update filter buttons styling
