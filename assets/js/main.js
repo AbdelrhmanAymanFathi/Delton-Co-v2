@@ -521,6 +521,8 @@ function renderHomeCareersNotice(lang) {
   const list = Array.isArray(vacancies) ? vacancies.filter(Boolean) : [];
   if (!list.length) {
     notice.hidden = true;
+    const toast = document.getElementById('homeJobsToast');
+    if (toast) toast.hidden = true;
     return;
   }
 
@@ -531,6 +533,35 @@ function renderHomeCareersNotice(lang) {
     ? `اكتشف فرص العمل المتاحة لدى ديلتون (${list.length} ${list.length === 1 ? 'وظيفة' : 'وظائف'})`
     : `Explore ${list.length} open ${list.length === 1 ? 'position' : 'positions'} at Delton`;
   document.getElementById('homeCareersNoticeAction').textContent = isRtl ? 'شاهد الوظائف' : 'View jobs';
+
+  renderHomeJobsToast(lang, list);
+}
+
+function renderHomeJobsToast(lang, vacancies) {
+  const toast = document.getElementById('homeJobsToast');
+  if (!toast || !vacancies.length) return;
+
+  const jobSignature = vacancies.map((job, index) => job.id || job.title || `job-${index}`).join('|');
+  const seenSignature = localStorage.getItem('delton_seen_jobs_signature');
+  if (seenSignature === jobSignature) return;
+
+  const isRtl = lang === 'ar';
+  const title = isRtl ? 'وظائف متاحة جديدة' : 'New jobs available';
+  const text = isRtl
+    ? `تم إضافة وظائف جديدة إلى ديلتون (${vacancies.length} ${vacancies.length === 1 ? 'وظيفة' : 'وظائف'})`
+    : `${vacancies.length} new ${vacancies.length === 1 ? 'job is' : 'jobs are'} available at Delton`;
+  document.getElementById('homeJobsToastTitle').textContent = title;
+  document.getElementById('homeJobsToastText').textContent = text;
+  document.getElementById('homeJobsToastLink').textContent = isRtl ? 'اعرف أكثر' : 'View jobs';
+  document.getElementById('homeJobsToastLink').setAttribute('aria-label', isRtl ? 'عرض الوظائف المتاحة' : 'View available jobs');
+  toast.hidden = false;
+
+  const markJobsAsSeen = () => localStorage.setItem('delton_seen_jobs_signature', jobSignature);
+  document.getElementById('homeJobsToastClose').onclick = () => {
+    markJobsAsSeen();
+    toast.hidden = true;
+  };
+  document.getElementById('homeJobsToastLink').onclick = markJobsAsSeen;
 }
 
 /**
