@@ -515,6 +515,54 @@ html {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(228, 177, 91, 0.15);
 }
 
+/* The mobile slider reuses the same client cards as the desktop grid. */
+.clients-mobile-slider {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  #clientsGrid {
+    display: none;
+  }
+
+  .clients-mobile-slider {
+    display: block;
+    width: calc(100% + 2rem);
+    margin-inline: -1rem;
+    padding: 0.25rem 0 2.75rem;
+    overflow: hidden;
+  }
+
+  .clients-mobile-slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .clients-mobile-slider .client-card {
+    height: auto;
+    min-height: 12.5rem;
+    box-sizing: border-box;
+    animation: none;
+  }
+
+  .clients-mobile-slider .swiper-pagination {
+    bottom: 0.25rem;
+  }
+
+  .clients-mobile-slider .swiper-pagination-bullet {
+    width: 0.45rem;
+    height: 0.45rem;
+    background: rgba(228, 177, 91, 0.45);
+    opacity: 1;
+    transition: var(--transition-smooth);
+  }
+
+  .clients-mobile-slider .swiper-pagination-bullet-active {
+    width: 1.35rem;
+    border-radius: 999px;
+    background: var(--gold-primary);
+  }
+}
+
 /* Modal Popup Styling */
 .modal-backdrop {
   background: rgba(10, 8, 12, 0.85);

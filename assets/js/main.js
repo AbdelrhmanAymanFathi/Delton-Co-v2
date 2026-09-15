@@ -509,17 +509,19 @@ function renderWhyUsSection(lang) {
  * Render Clients Section with Filter
  */
 let currentClientFilter = 'all';
+let clientsMobileSwiper = null;
 
 function renderClientsSection(lang, filter = 'all') {
   currentClientFilter = filter;
   const container = document.getElementById('clientsGrid');
-  if (!container) return;
+  const mobileWrapper = document.getElementById('clientsMobileWrapper');
+  if (!container || !mobileWrapper) return;
 
   const isRtl = lang === 'ar';
   const filtered = clientData.filter(c => filter === 'all' || c.sector === filter);
 
-  container.innerHTML = filtered.map((c, idx) => `
-    <div class="client-card p-4 sm:p-5 flex flex-col justify-between items-center text-center group cursor-pointer" data-aos="fade-up" data-aos-delay="${(idx % 6) * 60}">
+  const renderClientCard = (c, idx, isMobile = false) => `
+    <div class="client-card ${isMobile ? 'swiper-slide' : ''} p-4 sm:p-5 flex flex-col justify-between items-center text-center group cursor-pointer" data-aos="fade-up" data-aos-delay="${(idx % 6) * 60}">
       <div class="w-full h-24 mb-3 p-3 bg-white rounded-xl shadow-sm flex items-center justify-center overflow-hidden group-hover:scale-[1.02] transition duration-300">
         <img src="${resolveClientImage(c)}" alt="${isRtl ? c.ar : c.en}" class="max-h-full max-w-full object-contain filter transition duration-300" loading="lazy" onerror="this.onerror=null;this.src='assets/images/clientLogo/client-fallback.svg';">
       </div>
@@ -530,7 +532,30 @@ function renderClientsSection(lang, filter = 'all') {
         ${c.sector === 'banking' ? (isRtl ? 'قطاع مصرفي ومالي' : 'Banking & Finance') : (isRtl ? 'مؤسسات كبرى وصناعية' : 'Corporate & Industrial')}
       </span>
     </div>
-  `).join('');
+  `;
+
+  if (clientsMobileSwiper) {
+    clientsMobileSwiper.destroy(true, true);
+    clientsMobileSwiper = null;
+  }
+
+  container.innerHTML = filtered.map((c, idx) => renderClientCard(c, idx)).join('');
+  mobileWrapper.innerHTML = filtered.map((c, idx) => renderClientCard(c, idx, true)).join('');
+
+  if (typeof Swiper !== 'undefined') {
+    clientsMobileSwiper = new Swiper('#clientsMobileSlider', {
+      slidesPerView: 1.15,
+      spaceBetween: 14,
+      centeredSlides: true,
+      grabCursor: true,
+      loop: filtered.length > 1,
+      speed: 550,
+      pagination: {
+        el: '#clientsMobileSlider .clients-mobile-pagination',
+        clickable: true
+      }
+    });
+  }
 
   // Update filter buttons styling
   document.querySelectorAll('.client-filter-btn').forEach(btn => {
