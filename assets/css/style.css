@@ -142,6 +142,16 @@ html {
   background: #E4B15B;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-navbar-brand {
+    display: none !important;
+  }
+
+  .tablet-navbar-controls {
+    display: flex !important;
+  }
+}
+
 #mainNavbar .container {
   min-height: 72px;
   padding-top: 0.45rem;
