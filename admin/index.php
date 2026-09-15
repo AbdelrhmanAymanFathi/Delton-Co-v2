@@ -590,7 +590,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             if (!$found) $vac[] = $item;
             $content['careers']['vacancies'] = array_values($vac);
             $ok = json_save($CONTENT_JSON, $content);
-            $msg = $ok ? "تم حفظ الوظيفة الشاغرة بنجاح!" : "خطأ في الحفظ";
+            $msg = $ok ? "تم حفظ الوظيفة متاحةة بنجاح!" : "خطأ في الحفظ";
         }
 
         if ($_POST['action'] === 'delete_careers_vacancy') {
@@ -1098,9 +1098,9 @@ $slides = json_load($SLIDER_JSON) ?: [];
               'whyBadge'    => 'وسم / البادج أعلى قسم "لماذا تنضم إلينا"',
               'whyTitle'    => 'عنوان قسم "لماذا تنضم إلينا"',
               'whySubtitle' => 'الوصف تحت عنوان "لماذا تنضم إلينا"',
-              'vacBadge'    => 'وسم / البادج أعلى قسم "الوظائف الشاغرة"',
-              'vacTitle'    => 'عنوان قسم "الوظائف الشاغرة"',
-              'vacSubtitle' => 'الوصف تحت عنوان "الوظائف الشاغرة"',
+              'vacBadge'    => 'وسم / البادج أعلى قسم "الوظائف متاحةة"',
+              'vacTitle'    => 'عنوان قسم "الوظائف متاحةة"',
+              'vacSubtitle' => 'الوصف تحت عنوان "الوظائف متاحةة"',
               'formTitle'   => 'عنوان نموذج التقديم على وظيفة',
               'formDesc'    => 'وصف نموذج التقديم على وظيفة',
               'directTitle' => 'عنوان بطاقة "أو أرسل سيرتك مباشرة"',
@@ -1191,10 +1191,10 @@ $slides = json_load($SLIDER_JSON) ?: [];
         <?php endif; ?>
       </div>
 
-      <!-- ========== الجزء الثالث: الوظائف الشاغرة (Open Vacancies) ========== -->
+      <!-- ========== الجزء الثالث: الوظائف متاحةة (Open Vacancies) ========== -->
       <div class="space-y-4">
         <div class="flex items-center justify-between">
-          <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> 3. الوظائف الشاغرة المعروضة على الصفحة / Open Vacancies (<?php echo count($vacs); ?>)</h3>
+          <h3 class="text-sm font-bold text-[#C9A227] border-b border-slate-700 pb-2 flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> 3. الوظائف متاحةة المعروضة على الصفحة / Open Vacancies (<?php echo count($vacs); ?>)</h3>
           <button onclick="openCareersVacancyModal()" class="px-4 py-2 rounded-xl gold-gradient text-[#0B132B] font-bold text-xs shadow-lg">+ إضافة وظيفة شاغرة</button>
         </div>
         <?php if (empty($vacs)): ?>
@@ -2034,7 +2034,7 @@ $slides = json_load($SLIDER_JSON) ?: [];
     function editCareersVacancy(idx) {
       var v = (window.CMS.careers && window.CMS.careers.vacancies) ? window.CMS.careers.vacancies[idx] : null;
       if (!v) return;
-      document.getElementById('careersVacancyModalTitle').textContent = 'تعديل الوظيفة الشاغرة';
+      document.getElementById('careersVacancyModalTitle').textContent = 'تعديل الوظيفة متاحةة';
       sv('cVacId', v.id || String(idx + 1));
       sv('cVacIcon', v.icon || 'fa-briefcase');
       sv('cVacLocation', v.location || '');

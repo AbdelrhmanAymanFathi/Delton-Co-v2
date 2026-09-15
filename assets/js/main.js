@@ -161,6 +161,9 @@ function setLanguage(lang) {
   // Re-render Clients Cards
   renderClientsSection(lang, currentClientFilter);
 
+  // Update homepage jobs notice
+  renderHomeCareersNotice(lang);
+
   // Update dynamic contact info + branding + service dropdown options
   renderDynamicContact();
   renderBranding();
@@ -503,6 +506,31 @@ function renderWhyUsSection(lang) {
       </p>
     </div>
   `).join('');
+}
+
+/**
+ * Show a homepage notice when vacancies are available.
+ */
+function renderHomeCareersNotice(lang) {
+  const notice = document.getElementById('homeCareersNotice');
+  if (!notice) return;
+
+  const vacancies = translations[lang] && translations[lang].careers
+    ? translations[lang].careers.vacancies
+    : [];
+  const list = Array.isArray(vacancies) ? vacancies.filter(Boolean) : [];
+  if (!list.length) {
+    notice.hidden = true;
+    return;
+  }
+
+  const isRtl = lang === 'ar';
+  notice.hidden = false;
+  document.getElementById('homeCareersNoticeTitle').textContent = isRtl ? 'لدينا وظائف متاحة الآن' : 'We are hiring';
+  document.getElementById('homeCareersNoticeText').textContent = isRtl
+    ? `اكتشف فرص العمل المتاحة لدى ديلتون (${list.length} ${list.length === 1 ? 'وظيفة' : 'وظائف'})`
+    : `Explore ${list.length} open ${list.length === 1 ? 'position' : 'positions'} at Delton`;
+  document.getElementById('homeCareersNoticeAction').textContent = isRtl ? 'شاهد الوظائف' : 'View jobs';
 }
 
 /**
