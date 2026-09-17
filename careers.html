@@ -33,6 +33,31 @@
 </head>
 <body class="bg-[#0E0C10] ash-ember-surface text-slate-100 selection:bg-[#E4B15B] selection:text-[#0E0C10]">
 
+  <div id="pageLoader" class="page-loader" aria-live="polite" aria-label="Loading website">
+    <div class="page-loader__inner">
+      <img src="newlogo.jpeg" alt="Delton" class="page-loader__logo">
+      <div class="page-loader__spinner" aria-hidden="true"></div>
+      <div class="page-loader__text">Loading</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const loader = document.getElementById('pageLoader');
+      if (!loader) return;
+
+      const hideLoader = () => {
+        loader.classList.add('is-hidden');
+      };
+
+      window.addEventListener('load', () => {
+        setTimeout(hideLoader, 350);
+      }, { once: true });
+
+      setTimeout(hideLoader, 1800);
+    })();
+  </script>
+
   <!-- Top Bar (Pre-Header) -->
   <div class="bg-[#0A080C] border-b border-slate-800/80 text-xs py-2.5 px-4 hidden md:block">
     <div class="container mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between">

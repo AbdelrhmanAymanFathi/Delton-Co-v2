@@ -97,12 +97,17 @@ function applyClientOverrides(overrides) {
  */
 function setLanguage(lang) {
   if (!translations[lang]) return;
-  currentLanguage = lang;
-  localStorage.setItem('delton_lang', lang);
 
-  const isRtl = lang === 'ar';
-  document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-  document.documentElement.lang = lang;
+  const body = document.body;
+  body.classList.add('lang-switching');
+
+  const applyLanguage = () => {
+    currentLanguage = lang;
+    localStorage.setItem('delton_lang', lang);
+
+    const isRtl = lang === 'ar';
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
 
   // Toggle body font classes
   if (isRtl) {
@@ -181,10 +186,17 @@ function setLanguage(lang) {
   if (langToggleBtn) langToggleBtn.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
   if (langToggleBtnMobile) langToggleBtnMobile.innerHTML = `<i class="fa-solid fa-globe text-yellow-500 mr-1.5 ml-1.5"></i> ${toggleText}`;
 
-  // Refresh AOS if available
-  if (typeof AOS !== 'undefined') {
-    AOS.refresh();
-  }
+    // Refresh AOS if available
+    if (typeof AOS !== 'undefined') {
+      AOS.refresh();
+    }
+
+    setTimeout(() => {
+      body.classList.remove('lang-switching');
+    }, 180);
+  };
+
+  requestAnimationFrame(applyLanguage);
 }
 
 /**
@@ -907,6 +919,22 @@ document.addEventListener('keydown', (e) => {
  * App Initialization
  */
 document.addEventListener('DOMContentLoaded', async () => {
+  const pageLoader = document.getElementById('pageLoader');
+  if (pageLoader) {
+    const hideLoader = () => {
+      pageLoader.classList.add('is-hidden');
+      document.body.classList.add('page-loaded');
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(hideLoader, 350);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(hideLoader, 350);
+      }, { once: true });
+    }
+  }
+
   // Wait for admin content (services/whyUs/clients/stats/settings) to merge
   if (window.ContentManager && window.ContentManager.ready) {
     await window.ContentManager.ready;
